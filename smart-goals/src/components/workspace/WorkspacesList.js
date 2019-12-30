@@ -10,7 +10,7 @@ const WorkspaceList = props => {
     return (
         <div className='workspace-list'>
             <h3>All the Workspaces listed here</h3>
-            {/* //map over list of workspaces passing down workspace id and name*/}
+            {/* map over list of workspaces passing down workspace id and name*/}
             <WorkspaceCard />
         </div>
     );
