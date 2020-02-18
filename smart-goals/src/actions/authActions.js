@@ -38,9 +38,10 @@ export const login = creds => dispatch => {
             });
         })
         .catch(err => {
+            console.log('ERR****', { err });
             dispatch({
                 type: LOGIN_FAILURE,
-                payload: err.message
+                payload: err
             });
         });
 };
