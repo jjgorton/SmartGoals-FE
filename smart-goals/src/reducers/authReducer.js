@@ -8,10 +8,10 @@ import {
 } from '../actions/authActions';
 
 const initialState = {
-    username: '',
     userID: '',
+    username: '',
     email: '',
-    workspaces: [],
+    created_at: '',
     loading: false,
     error: null
 };
@@ -42,6 +42,10 @@ export default (state = initialState, action) => {
         case LOGIN_SUCCESS:
             return {
                 ...state,
+                userID: action.payload.user_id,
+                username: action.payload.username,
+                email: action.payload.email,
+                created_at: action.payload.created_at,
                 loading: false
             };
         case LOGIN_FAILURE:

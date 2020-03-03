@@ -15,13 +15,13 @@ export const register = user => dispatch => {
             localStorage.setItem('token', res.data.token);
             dispatch({
                 type: REGISTER_SUCCESS,
-                payload: res.data.message
+                payload: res.data
             });
         })
         .catch(err => {
             dispatch({
                 type: REGISTER_FAILURE,
-                payload: err.message
+                payload: err
             });
         });
 };
@@ -34,7 +34,7 @@ export const login = creds => dispatch => {
             localStorage.setItem('token', res.data.token);
             dispatch({
                 type: LOGIN_SUCCESS,
-                payload: res.data.message
+                payload: res.data
             });
         })
         .catch(err => {

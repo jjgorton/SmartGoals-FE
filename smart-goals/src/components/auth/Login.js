@@ -5,12 +5,12 @@ import { login } from '../../actions/authActions';
 
 const Login = props => {
     const state = useSelector(state => state.auth);
+    const dispatch = useDispatch();
     const [credentials, setCredentials] = useState({
         username: '',
         password: ''
     });
     const [errorMessage, setErrorMessage] = useState('');
-    const dispatch = useDispatch();
 
     const handleChanges = e => {
         setCredentials({
