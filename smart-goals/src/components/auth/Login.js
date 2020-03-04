@@ -27,16 +27,10 @@ const Login = props => {
         });
     };
 
-    // const errorMessage =
-    //     state.error !== null && state.error.response
-    //         ? state.error.response.data.message
-    //         : state.error;
     useEffect(() => {
         if (state.error && state.error.response) {
-            console.log('IFFFFF', state);
             setErrorMessage(state.error.response.data.message);
         } else if (state.error) {
-            console.log('EEEELLSEEE', state);
             setErrorMessage(state.error.message);
         }
     }, [state.error]);
@@ -68,7 +62,7 @@ const Login = props => {
                     required
                 />
                 <button>Login</button>
-                {/* {state.error && <p>{state.error.message}</p>} */}
+
                 {errorMessage && <p>{errorMessage}</p>}
             </form>
         </>
