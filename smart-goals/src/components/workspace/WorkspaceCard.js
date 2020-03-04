@@ -1,16 +1,20 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 const WorkspaceCard = props => {
     const { ws } = props;
     //UPDATE and DELETE functions to be in the _Actual_ Workspace component
 
-    //Go to workspace funtion  OOOOOOORRRRR just use a NavLink!!!
     const goToWorkSpace = id => {
-        props.history.push(`/:${id}`);
+        console.log(props);
+        props.history.push(`/workspace/${id}`);
     };
 
     return (
-        <div className='workspace' onClick={() => goToWorkSpace(props.id)}>
+        <div
+            className='workspace'
+            onClick={() => goToWorkSpace(ws.workspace_id)}
+        >
             <h4>{ws.name}</h4>
             <h5>{ws.roles}</h5>
             <p>{ws.description}</p>
@@ -19,4 +23,4 @@ const WorkspaceCard = props => {
     );
 };
 
-export default WorkspaceCard;
+export default withRouter(WorkspaceCard);
