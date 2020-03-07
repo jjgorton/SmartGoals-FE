@@ -23,9 +23,9 @@ const Workspace = props => {
             })
         );
         // dispatch(getWorkspaces(userID));
-    }, []);
+    }, [workspaces]);
     console.log(ws);
-    if (workspaces.loading) {
+    if (!ws || workspaces.loading) {
         return (
             <Loader
                 type='Triangle'
