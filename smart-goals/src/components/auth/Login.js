@@ -23,7 +23,7 @@ const Login = props => {
         e.preventDefault();
         localStorage.clear();
         dispatch(login(credentials)).then(() => {
-            props.history.push('/workspaces');
+            props.history.push('/user/workspaces');
         });
     };
 

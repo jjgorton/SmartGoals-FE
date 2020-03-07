@@ -7,7 +7,7 @@ const WorkspaceCard = props => {
 
     const goToWorkSpace = id => {
         console.log(props);
-        props.history.push(`/workspace/${id}`);
+        props.history.push(`/user/workspaces/${id}`);
     };
 
     return (

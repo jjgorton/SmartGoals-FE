@@ -7,14 +7,14 @@ import WorkspaceCard from './WorkspaceCard';
 import { getWorkspaces } from '../../actions/workspaceActions';
 
 const WorkspaceList = props => {
-    const userID = localStorage.getItem('userID');
+    // const userID = localStorage.getItem('userID');
     const workspaces = useSelector(state => state.workspaces);
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
-    //get list of all workspaces
-    useEffect(() => {
-        dispatch(getWorkspaces(userID));
-    }, []);
+    // //get list of all workspaces
+    // useEffect(() => {
+    //     dispatch(getWorkspaces(userID));
+    // }, []);
 
     //create a new workspace button to pull open create new modal? new component
     console.log(workspaces);
