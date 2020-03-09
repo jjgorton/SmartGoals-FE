@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import WorkspaceCard from './WorkspaceCard';
+import WorkspaceForm from './WorkspaceForm';
 
 import { getWorkspaces } from '../../actions/workspaceActions';
 
@@ -31,6 +32,7 @@ const WorkspaceList = props => {
     }
     return (
         <div className='workspace-list'>
+            <WorkspaceForm />
             <h3>All the Workspaces listed here</h3>
             {workspaces.list.map((ws, i) => (
                 <WorkspaceCard key={i} ws={ws} />

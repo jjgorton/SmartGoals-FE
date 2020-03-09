@@ -1,7 +1,10 @@
 import {
     GET_WORKSPACE_START,
     GET_WORKSPACE_SUCCESS,
-    GET_WORKSPACE_FAILURE
+    GET_WORKSPACE_FAILURE,
+    ADD_WORKSPACE_START,
+    ADD_WORKSPACE_SUCCESS,
+    ADD_WORKSPACE_FAILURE
 } from '../actions/workspaceActions';
 
 const initialState = {
@@ -28,6 +31,17 @@ export default (state = initialState, action) => {
                 ...state,
                 loading: false,
                 error: action.payload
+            };
+        case ADD_WORKSPACE_START:
+            return {
+                ...state,
+                loading: true
+            };
+        case ADD_WORKSPACE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                list: [...state.list, action.payload]
             };
         default:
             return state;
