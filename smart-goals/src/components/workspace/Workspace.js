@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
-import { getWorkspaces } from '../../actions/workspaceActions';
+import { deleteWorkspace } from '../../actions/workspaceActions';
 
 const Workspace = props => {
     const userID = localStorage.getItem('userID');
@@ -11,20 +11,22 @@ const Workspace = props => {
     const dispatch = useDispatch();
     const [ws, setWs] = useState({});
 
-    // complete redux state not persisted so may need to do another http req. instead to handle refreshes
-    // const ws = workspaces.list.find(data => {
-    //     return data.workspace_id == props.match.params.id;
-    // });
-
     useEffect(() => {
         setWs(
             workspaces.list.find(data => {
                 return data.workspace_id == props.match.params.id;
             })
         );
-        // dispatch(getWorkspaces(userID));
     }, [workspaces]);
-    console.log(ws);
+
+    const del = e => {
+        dispatch(deleteWorkspace(props.match.params.id))
+            .then(res => {
+                props.history.push('/user/workspaces');
+            })
+            .catch(err => console.log(err));
+    };
+
     if (!ws || workspaces.loading) {
         return (
             <Loader
@@ -39,6 +41,7 @@ const Workspace = props => {
     return (
         <div>
             <h1>Workspace Info and Goal Lists here</h1>
+            <button onClick={() => del()}>Delete Workspace</button>
             <h4>{ws.name}</h4>
             <h5>{ws.roles}</h5>
             <p>{ws.description}</p>

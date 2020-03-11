@@ -8,6 +8,10 @@ export const ADD_WORKSPACE_START = 'ADD_WORKSPACE_START';
 export const ADD_WORKSPACE_SUCCESS = 'ADD_WORKSPACE_SUCCESS';
 export const ADD_WORKSPACE_FAILURE = 'ADD_WORKSPACE_FAILURE';
 
+export const DELETE_WORKSPACE_START = 'DELETE_WORKSPACE_START';
+export const DELETE_WORKSPACE_SUCCESS = 'DELETE_WORKSPACE_SUCCESS';
+export const DELETE_WORKSPACE_FAILURE = 'DELETE_WORKSPACE_FAILURE';
+
 export const getWorkspaces = user_id => dispatch => {
     dispatch({ type: GET_WORKSPACE_START });
     return axiosWithAuth()
@@ -45,6 +49,24 @@ export const addWorkspace = wsInfo => dispatch => {
             console.log('ADD_actio_ERR', err);
             dispatch({
                 type: ADD_WORKSPACE_FAILURE,
+                payload: err
+            });
+        });
+};
+
+export const deleteWorkspace = wsID => dispatch => {
+    dispatch({ type: DELETE_WORKSPACE_START });
+    return axiosWithAuth()
+        .delete(`http://localhost:5000/workspace/${wsID}`)
+        .then(res => {
+            dispatch({
+                type: DELETE_WORKSPACE_SUCCESS,
+                payload: res.data
+            });
+        })
+        .catch(err => {
+            dispatch({
+                type: DELETE_WORKSPACE_FAILURE,
                 payload: err
             });
         });
