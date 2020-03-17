@@ -13,7 +13,6 @@ export const register = user => dispatch => {
         .post('http://localhost:5000/user/register', user)
         .then(res => {
             localStorage.setItem('token', res.data.token);
-            localStorage.setItem('userID', res.data.user_id);
             dispatch({
                 type: REGISTER_SUCCESS,
                 payload: res.data
@@ -33,7 +32,6 @@ export const login = creds => dispatch => {
         .post('http://localhost:5000/user/login', creds)
         .then(res => {
             localStorage.setItem('token', res.data.token);
-            localStorage.setItem('userID', res.data.user_id);
             dispatch({
                 type: LOGIN_SUCCESS,
                 payload: res.data

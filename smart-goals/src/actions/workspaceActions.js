@@ -12,10 +12,10 @@ export const DELETE_WORKSPACE_START = 'DELETE_WORKSPACE_START';
 export const DELETE_WORKSPACE_SUCCESS = 'DELETE_WORKSPACE_SUCCESS';
 export const DELETE_WORKSPACE_FAILURE = 'DELETE_WORKSPACE_FAILURE';
 
-export const getWorkspaces = user_id => dispatch => {
+export const getWorkspaces = () => dispatch => {
     dispatch({ type: GET_WORKSPACE_START });
     return axiosWithAuth()
-        .get(`http://localhost:5000/workspace/workspaceList/${user_id}`)
+        .get(`http://localhost:5000/workspace/workspaceList`)
         .then(res => {
             dispatch({
                 type: GET_WORKSPACE_SUCCESS,
@@ -31,13 +31,9 @@ export const getWorkspaces = user_id => dispatch => {
 };
 
 export const addWorkspace = wsInfo => dispatch => {
-    const userID = localStorage.getItem('userID');
     dispatch({ type: ADD_WORKSPACE_START });
     return axiosWithAuth()
-        .post(
-            `http://localhost:5000/workspace/createWorkspace/${userID}`,
-            wsInfo
-        )
+        .post(`http://localhost:5000/workspace/createWorkspace`, wsInfo)
         .then(res => {
             console.log('ADD_action', res);
             dispatch({

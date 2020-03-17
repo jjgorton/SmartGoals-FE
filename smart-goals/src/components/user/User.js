@@ -8,12 +8,11 @@ import Workspace from '../workspace/Workspace';
 import { getWorkspaces } from '../../actions/workspaceActions';
 
 const User = () => {
-    const userID = localStorage.getItem('userID');
     const dispatch = useDispatch();
 
     //get list of all workspaces
     useEffect(() => {
-        dispatch(getWorkspaces(userID));
+        dispatch(getWorkspaces());
     }, []);
 
     return (
