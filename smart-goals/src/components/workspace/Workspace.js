@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
+import GoalList from '../goal/GoalList';
+
 import { deleteWorkspace } from '../../actions/workspaceActions';
+import { getGoals } from '../../actions/goalActions';
 
 const Workspace = props => {
-    const userID = localStorage.getItem('userID');
     const workspaces = useSelector(state => state.workspaces);
     const dispatch = useDispatch();
     const [ws, setWs] = useState({});
@@ -18,6 +20,10 @@ const Workspace = props => {
             })
         );
     }, [workspaces]);
+
+    useEffect(() => {
+        dispatch(getGoals(props.match.params.id));
+    }, []);
 
     const del = e => {
         dispatch(deleteWorkspace(props.match.params.id))
@@ -46,6 +52,7 @@ const Workspace = props => {
             <h5>{ws.roles}</h5>
             <p>{ws.description}</p>
             <p>{ws.created_at}</p>
+            <GoalList />
         </div>
     );
 };
