@@ -4,6 +4,7 @@ import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 import GoalList from '../goal/GoalList';
+import GoalForm from '../goal/GoalForm';
 
 import { deleteWorkspace } from '../../actions/workspaceActions';
 import { getGoals } from '../../actions/goalActions';
@@ -52,6 +53,7 @@ const Workspace = props => {
             <h5>{ws.roles}</h5>
             <p>{ws.description}</p>
             <p>{ws.created_at}</p>
+            <GoalForm wsID={props.match.params.id} />
             <GoalList />
         </div>
     );

@@ -35,6 +35,42 @@ export default (state = initialState, action) => {
                 loading: false,
                 error: action.payload
             };
+        case ADD_GOAL_START:
+            return {
+                ...state,
+                loading: true
+            };
+        case ADD_GOAL_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                list: [...state.list, action.payload]
+            };
+        case ADD_GOAL_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            };
+        case DELETE_GOAL_START:
+            return {
+                ...state,
+                loading: true
+            };
+        case DELETE_GOAL_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                list: state.list.filter(
+                    goal => goal.id !== parseInt(action.payload.goalID)
+                )
+            };
+        case DELETE_GOAL_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            };
         default:
             return state;
     }

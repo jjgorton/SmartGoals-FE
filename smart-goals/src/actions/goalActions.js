@@ -1,4 +1,5 @@
 import axiosWithAuth from '../utils/axiosWithAuth';
+import { DELETE_WORKSPACE_FAILURE } from './workspaceActions';
 
 export const GET_GOALS_START = 'GET_GOALS_START';
 export const GET_GOALS_SUCCESS = 'GET_GOALS_SUCCESS';
@@ -23,5 +24,32 @@ export const getGoals = wsID => dispatch => {
         .catch(err => {
             console.log(err);
             dispatch({ type: GET_GOALS_FAILURE, payload: err });
+        });
+};
+
+export const addGoal = goalInfo => dispatch => {
+    dispatch({ type: ADD_GOAL_START });
+    return axiosWithAuth()
+        .post('http://localhost:5000/goals/', goalInfo)
+        .then(res => {
+            dispatch({
+                type: ADD_GOAL_SUCCESS,
+                payload: res.data.goal
+            });
+        })
+        .catch(err => {
+            dispatch({ type: ADD_GOAL_FAILURE, payload: err });
+        });
+};
+
+export const deleteGoal = goalID => dispatch => {
+    dispatch({ type: DELETE_GOAL_START });
+    return axiosWithAuth()
+        .delete(`http://localhost:5000/goals/${goalID}`)
+        .then(res => {
+            dispatch({ type: DELETE_GOAL_SUCCESS, payload: res.data });
+        })
+        .catch(err => {
+            dispatch({ type: DELETE_WORKSPACE_FAILURE, payload: err });
         });
 };
