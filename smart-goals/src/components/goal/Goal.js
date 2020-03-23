@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { deleteGoal } from '../../actions/goalActions';
+import { updateGoal, deleteGoal } from '../../actions/goalActions';
 
 const Goal = props => {
     const dispatch = useDispatch();
+    const [newInfo, setNewInfo] = useState({});
+    const [done, setDone] = useState(false);
+
+    const completed = e => {
+        e.preventDefault();
+        setDone(!done);
+        dispatch(
+            updateGoal({
+                id: props.goal.id,
+                completed: !props.goal.completed
+            })
+        );
+    };
 
     const removeGoal = () => {
         dispatch(deleteGoal(props.goal.id));
@@ -12,7 +25,9 @@ const Goal = props => {
 
     return (
         <div>
-            <h6>{props.goal.name}</h6>
+            <h3>{props.goal.name}</h3>
+            {props.goal.completed && <p>Completed</p>}
+            <button onClick={e => completed(e)}>Done</button>
             <button onClick={() => removeGoal()}>X</button>
         </div>
     );

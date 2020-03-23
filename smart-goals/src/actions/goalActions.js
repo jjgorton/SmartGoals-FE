@@ -13,6 +13,10 @@ export const DELETE_GOAL_START = 'DELETE_GOAL_START';
 export const DELETE_GOAL_SUCCESS = 'DELETE_GOAL_SUCCESS';
 export const DELETE_GOAL_FAILURE = 'DELETE_GOAL_FAILURE';
 
+export const UPDATE_GOAL_START = 'UPDATE_GOAL_START';
+export const UPDATE_GOAL_SUCCESS = 'UPDATE_GOAL_SUCCESS';
+export const UPDATE_GOAL_FAILURE = 'UPDATE_GOAL_FAILURE';
+
 export const getGoals = wsID => dispatch => {
     dispatch({ type: GET_GOALS_START });
     return axiosWithAuth()
@@ -39,6 +43,22 @@ export const addGoal = goalInfo => dispatch => {
         })
         .catch(err => {
             dispatch({ type: ADD_GOAL_FAILURE, payload: err });
+        });
+};
+
+export const updateGoal = newInfo => dispatch => {
+    dispatch({ type: UPDATE_GOAL_START });
+    return axiosWithAuth()
+        .put('http://localhost:5000/goals/', newInfo)
+        .then(res => {
+            console.log('updateGoal', res.data);
+            dispatch({
+                type: UPDATE_GOAL_SUCCESS,
+                payload: res.data
+            });
+        })
+        .catch(err => {
+            dispatch({ type: UPDATE_GOAL_FAILURE, payload: err });
         });
 };
 

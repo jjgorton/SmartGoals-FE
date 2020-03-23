@@ -5,6 +5,9 @@ import {
     ADD_GOAL_START,
     ADD_GOAL_SUCCESS,
     ADD_GOAL_FAILURE,
+    UPDATE_GOAL_START,
+    UPDATE_GOAL_SUCCESS,
+    UPDATE_GOAL_FAILURE,
     DELETE_GOAL_START,
     DELETE_GOAL_SUCCESS,
     DELETE_GOAL_FAILURE
@@ -47,6 +50,28 @@ export default (state = initialState, action) => {
                 list: [...state.list, action.payload]
             };
         case ADD_GOAL_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            };
+        case UPDATE_GOAL_START:
+            return {
+                ...state,
+                loading: true
+            };
+        case UPDATE_GOAL_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                list: state.list.map(goal => {
+                    // this won't work for a deep copy (steps obj)
+                    return goal.id === action.payload.id
+                        ? Object.assign(goal, action.payload)
+                        : goal;
+                })
+            };
+        case UPDATE_GOAL_FAILURE:
             return {
                 ...state,
                 loading: false,
