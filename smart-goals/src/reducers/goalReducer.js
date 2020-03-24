@@ -66,6 +66,7 @@ export default (state = initialState, action) => {
                 loading: false,
                 list: state.list.map(goal => {
                     // this won't work for a deep copy (steps obj)
+                    // possibly create separate reducer
                     return goal.id === action.payload.id
                         ? Object.assign(goal, action.payload)
                         : goal;
