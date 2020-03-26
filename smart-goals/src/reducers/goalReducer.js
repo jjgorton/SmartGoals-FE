@@ -67,6 +67,7 @@ export default (state = initialState, action) => {
                 list: state.list.map(goal => {
                     // this won't work for a deep copy (steps obj)
                     // possibly create separate reducer
+                    // change this to not update here but rather use componenent state to avoid a rerender of the entire list
                     return goal.id === action.payload.id
                         ? Object.assign(goal, action.payload)
                         : goal;
