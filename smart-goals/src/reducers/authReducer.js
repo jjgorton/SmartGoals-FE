@@ -8,8 +8,8 @@ import {
 } from '../actions/authActions';
 
 const initialState = {
-    userID: '',
-    username: '',
+    userID: null,
+    username: null,
     email: '',
     created_at: '',
     loading: false,
