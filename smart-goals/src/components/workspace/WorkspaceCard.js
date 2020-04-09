@@ -1,6 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
+import './workspaceCard.scss';
+
 const WorkspaceCard = props => {
     const { ws } = props;
     //UPDATE and DELETE functions to be in the _Actual_ Workspace component

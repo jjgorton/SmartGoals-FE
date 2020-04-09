@@ -7,6 +7,8 @@ import './nav.scss';
 
 const Nav = () => {
     const user = useSelector(state => state.auth);
+
+    //if user.username is null GET user infor from BE (need to build a GET for this)
     console.log(user);
     return (
         <div className='nav'>
@@ -17,7 +19,9 @@ const Nav = () => {
                     <button>Login</button>
                 </div>
             )}
-            {user.username && <h2>Hi, {user.username}!</h2>}
+            {user.username && (
+                <h2 className='username'>Hi, {user.username}!</h2>
+            )}
             {user.username && (
                 <div className='nav-buttons'>
                     <button>Logout</button>

@@ -7,6 +7,8 @@ import WorkspaceForm from './WorkspaceForm';
 
 import { getWorkspaces } from '../../actions/workspaceActions';
 
+import './workspacesList.scss';
+
 const WorkspaceList = props => {
     // const userID = localStorage.getItem('userID');
     const workspaces = useSelector(state => state.workspaces);
@@ -31,13 +33,15 @@ const WorkspaceList = props => {
         );
     }
     return (
-        <div className='workspace-list'>
-            <WorkspaceForm />
-            <h3>All the Workspaces listed here</h3>
-            {workspaces.list.map((ws, i) => (
-                <WorkspaceCard key={i} ws={ws} />
-            ))}
-        </div>
+        <>
+            <h3 className='ws-list-title'>Your Workspaces</h3>
+            <div className='workspace-list'>
+                <WorkspaceForm />
+                {workspaces.list.map((ws, i) => (
+                    <WorkspaceCard key={i} ws={ws} />
+                ))}
+            </div>
+        </>
     );
 };
 

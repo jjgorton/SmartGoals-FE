@@ -11,7 +11,6 @@ import Workspace from './workspace/Workspace';
 const Routes = props => {
     return (
         <>
-            <h2>Routes</h2>
             <Route exact path='/' component={Welcome} />
             <Route path='/register' component={Register} />
             <Route path='/login' component={Login} />

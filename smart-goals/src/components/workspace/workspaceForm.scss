@@ -1,0 +1,57 @@
+.new-ws {
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 90%;
+    background: lightpink;
+    border: 1px solid purple;
+}
+
+.new-ws-button {
+    display: flex;
+    align-items: baseline;
+    width: 90%;
+    padding: 1rem;
+
+    label {
+        margin-left: 1rem;
+        font-size: 2rem;
+        color: red;
+    }
+}
+
+.ws-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 90%;
+    border: 1px solid blue;
+    margin: 1rem;
+    padding: 1rem;
+
+    label {
+        margin-top: 1rem;
+        font-size: 1.5rem;
+    }
+
+    input {
+        height: 3rem;
+        padding: 1rem;
+    }
+
+    .new-ws-btns {
+        display: flex;
+
+        button {
+            margin: 1rem;
+            width: 45%;
+            height: 3rem;
+        }
+    }
+}
+
+.hide {
+    display: none;
+}
