@@ -19,8 +19,13 @@
     display: flex;
     justify-content: space-around;
 
-    button {
+    .link {
         margin: 0.5rem;
         color: blue;
+        text-decoration: none;
+        font-size: 2rem;
+    }
+    .active {
+        text-decoration: underline;
     }
 }

@@ -1,0 +1,46 @@
+.auth-container {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 90vw;
+    height: 50vh;
+    padding-top: 20%;
+    // border: 1px solid red;
+
+    h2 {
+        font-size: 4rem;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        height: 100%;
+        padding-top: 10%;
+        // border: 1px solid blue;
+
+        .input {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            // align-items: center;
+            // border: 1px solid red;
+            margin: 10px 0;
+
+            label {
+                font-size: 3rem;
+                margin: 5px 0;
+            }
+            input {
+                font-size: 2.5rem;
+            }
+        }
+
+        button {
+            font-size: 2rem;
+        }
+    }
+}
