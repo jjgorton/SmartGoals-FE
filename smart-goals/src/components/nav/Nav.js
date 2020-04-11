@@ -1,13 +1,16 @@
 //register and login navlinks should be here
 
 //possibly separate nav bar once logged in for switching workspaces and other potential settings.
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import './nav.scss';
 
-const Nav = (props) => {
+import { userInfo } from '../../actions/authActions';
+
+const Nav = () => {
     const user = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
 
     const history = useHistory();
 
@@ -17,6 +20,11 @@ const Nav = (props) => {
     };
 
     //if user.username is null GET user infor from BE (need to build a GET for this)
+
+    useEffect(() => {
+        dispatch(userInfo());
+    }, []);
+
     console.log(user);
     return (
         <div className='nav'>

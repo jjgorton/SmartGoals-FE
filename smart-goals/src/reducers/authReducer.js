@@ -4,7 +4,10 @@ import {
     REGISTER_FAILURE,
     LOGIN_START,
     LOGIN_SUCCESS,
-    LOGIN_FAILURE
+    LOGIN_FAILURE,
+    GET_USER_START,
+    GET_USER_SUCCESS,
+    GET_USER_FAILURE,
 } from '../actions/authActions';
 
 const initialState = {
@@ -13,7 +16,7 @@ const initialState = {
     email: '',
     created_at: '',
     loading: false,
-    error: null
+    error: null,
 };
 
 export default (state = initialState, action) => {
@@ -22,23 +25,23 @@ export default (state = initialState, action) => {
         case REGISTER_START:
             return {
                 ...state,
-                loading: true
+                loading: true,
             };
         case REGISTER_SUCCESS:
             return {
                 ...state,
-                loading: false
+                loading: false,
             };
         case REGISTER_FAILURE:
             return {
                 ...state,
                 loading: false,
-                error: action.payload
+                error: action.payload,
             };
         case LOGIN_START:
             return {
                 ...state,
-                loading: true
+                loading: true,
             };
         case LOGIN_SUCCESS:
             return {
@@ -47,13 +50,33 @@ export default (state = initialState, action) => {
                 username: action.payload.username,
                 email: action.payload.email,
                 created_at: action.payload.created_at,
-                loading: false
+                loading: false,
             };
         case LOGIN_FAILURE:
             return {
                 ...state,
                 loading: false,
-                error: action.payload
+                error: action.payload,
+            };
+        case GET_USER_START:
+            return {
+                ...state,
+                loading: true,
+            };
+        case GET_USER_SUCCESS:
+            return {
+                ...state,
+                userID: action.payload.user_id,
+                username: action.payload.username,
+                email: action.payload.email,
+                created_at: action.payload.created_at,
+                loading: false,
+            };
+        case GET_USER_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
             };
         default:
             return state;
