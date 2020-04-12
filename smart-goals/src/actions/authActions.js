@@ -11,6 +11,8 @@ export const GET_USER_START = 'GET_USER_START';
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
 export const GET_USER_FAILURE = 'GET_USER_FAILURE';
 
+export const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
+
 export const register = (user) => (dispatch) => {
     dispatch({ type: REGISTER_START });
     return axios
@@ -66,4 +68,8 @@ export const userInfo = () => (dispatch) => {
                 payload: err,
             });
         });
+};
+
+export const clearStore = () => (dispatch) => {
+    dispatch({ type: USER_LOGGED_OUT });
 };

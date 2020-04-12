@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import './nav.scss';
 
-import { userInfo } from '../../actions/authActions';
+import { userInfo, clearStore } from '../../actions/authActions';
 
 const Nav = () => {
     const user = useSelector((state) => state.auth);
@@ -16,6 +16,7 @@ const Nav = () => {
 
     const logout = () => {
         localStorage.clear();
+        dispatch(clearStore());
         history.push('/login');
     };
 
