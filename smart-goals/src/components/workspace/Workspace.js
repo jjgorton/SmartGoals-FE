@@ -9,14 +9,16 @@ import GoalForm from '../goal/GoalForm';
 import { deleteWorkspace } from '../../actions/workspaceActions';
 import { getGoals } from '../../actions/goalActions';
 
-const Workspace = props => {
-    const workspaces = useSelector(state => state.workspaces);
+import './workspace.scss';
+
+const Workspace = (props) => {
+    const workspaces = useSelector((state) => state.workspaces);
     const dispatch = useDispatch();
     const [ws, setWs] = useState({});
 
     useEffect(() => {
         setWs(
-            workspaces.list.find(data => {
+            workspaces.list.find((data) => {
                 return data.workspace_id == props.match.params.id;
             })
         );
@@ -26,12 +28,12 @@ const Workspace = props => {
         dispatch(getGoals(props.match.params.id));
     }, []);
 
-    const del = e => {
+    const del = (e) => {
         dispatch(deleteWorkspace(props.match.params.id))
-            .then(res => {
+            .then((res) => {
                 props.history.push('/user/workspaces');
             })
-            .catch(err => console.log(err));
+            .catch((err) => console.log(err));
     };
 
     if (!ws || workspaces.loading) {
@@ -46,13 +48,16 @@ const Workspace = props => {
         );
     }
     return (
-        <div>
-            <h1>Workspace Info and Goal Lists here</h1>
-            <button onClick={() => del()}>Delete Workspace</button>
-            <h4>{ws.name}</h4>
-            <h5>{ws.roles}</h5>
-            <p>{ws.description}</p>
-            <p>{ws.created_at}</p>
+        <div className='ws-container'>
+            <header className='ws-header'>
+                {/* <button onClick={() => del()}>Delete Workspace</button> */}
+                <div className='ws-title-container'>
+                    <h4 className='ws-name'>{ws.name}</h4>
+                    <h5 className='ws-role'>({ws.roles})</h5>
+                </div>
+                <p className='ws-desc'>{ws.description}</p>
+                <p className='ws-date'>{ws.created_at}</p>
+            </header>
             <GoalForm wsID={props.match.params.id} />
             <GoalList />
         </div>

@@ -1,0 +1,39 @@
+.ws-container {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.ws-header {
+    display: flex;
+    justify-content: space-around;
+    background: skyblue;
+    padding: 1rem;
+    width: 100%;
+
+    .ws-title-container {
+        .ws-name {
+            font-size: 2rem;
+        }
+        .ws-role {
+            font-size: 1.2rem;
+        }
+    }
+
+    .ws-desc {
+        width: 40%;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: flex-end;
+        padding: 0 1rem;
+    }
+
+    .ws-date {
+        font-size: 1.2rem;
+        display: flex;
+        align-items: flex-end;
+        padding: 0 1rem;
+    }
+}
