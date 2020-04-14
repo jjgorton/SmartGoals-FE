@@ -26,11 +26,13 @@ const Goal = (props) => {
     };
 
     return (
-        <div>
+        <div className='goal'>
             <h3>{props.goal.name}</h3>
             {props.goal.completed && <p>Completed</p>}
-            <button onClick={(e) => completed(e)}>Done</button>
-            <button onClick={() => removeGoal()}>X</button>
+            <div className='btn'>
+                <button onClick={(e) => completed(e)}>Done</button>
+                <button onClick={() => removeGoal()}>X</button>
+            </div>
         </div>
     );
 };

@@ -13,8 +13,7 @@ const GoalList = () => {
         return <Loader type='Triangle' color='blue' height={50} width={50} />;
     }
     return (
-        <div>
-            <h5>List of Goals</h5>
+        <div className='goal-list'>
             {goals.list.map((goal, i) => (
                 <Goal key={i} goal={goal} />
             ))}

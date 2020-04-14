@@ -3,8 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { addGoal } from '../../actions/goalActions';
 
-const GoalForm = props => {
-    const goals = useSelector(state => state.goals);
+// currently inheriting from workspaceForm.scss
+import './goalForm.scss';
+
+const GoalForm = (props) => {
+    const goals = useSelector((state) => state.goals);
     const dispatch = useDispatch();
     const [goalObj, setGoalObj] = useState({
         name: '',
@@ -12,17 +15,19 @@ const GoalForm = props => {
         est_time: 0,
         due: '',
         completed: false,
-        workspace_id: props.wsID
+        workspace_id: props.wsID,
     });
 
-    const handleChanges = e => {
+    const [show, setShow] = useState(false);
+
+    const handleChanges = (e) => {
         setGoalObj({
             ...goalObj,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
         });
     };
 
-    const newGoal = e => {
+    const newGoal = (e) => {
         e.preventDefault();
         dispatch(addGoal(goalObj));
         setGoalObj({
@@ -31,14 +36,34 @@ const GoalForm = props => {
             est_time: 0,
             due: '',
             completed: false,
-            workspace_id: props.wsID
+            workspace_id: props.wsID,
+        });
+    };
+
+    const cancel = () => {
+        setShow(!show);
+        setGoalObj({
+            name: '',
+            description: '',
+            est_time: 0,
+            due: '',
+            completed: false,
+            workspace_id: props.wsID,
         });
     };
 
     return (
         <div>
-            <h3>Create a new Goal</h3>
-            <form onSubmit={newGoal}>
+            <div className='new-ws-button'>
+                <button id='new-ws' onClick={() => setShow(!show)}>
+                    {show ? '-' : '+'}
+                </button>
+                <label htmlFor='new-ws'>Start a new Goal</label>
+            </div>
+            <form
+                className={show ? 'ws-form show' : 'ws-form hide'}
+                onSubmit={newGoal}
+            >
                 <label htmlFor='name'>Goal Title: </label>
                 <input
                     type='text'
@@ -59,7 +84,12 @@ const GoalForm = props => {
                     onChange={handleChanges}
                 />
 
-                <button>Create</button>
+                <div className='new-ws-btns'>
+                    <button>Create</button>
+                    <button type='button' onClick={() => cancel()}>
+                        Cancel
+                    </button>
+                </div>
             </form>
         </div>
     );
