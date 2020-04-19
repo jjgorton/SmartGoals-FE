@@ -9,9 +9,9 @@ import { getWorkspaces } from '../../actions/workspaceActions';
 
 import './workspacesList.scss';
 
-const WorkspaceList = props => {
+const WorkspaceList = (props) => {
     // const userID = localStorage.getItem('userID');
-    const workspaces = useSelector(state => state.workspaces);
+    const workspaces = useSelector((state) => state.workspaces);
     // const dispatch = useDispatch();
 
     // //get list of all workspaces
@@ -21,17 +21,17 @@ const WorkspaceList = props => {
 
     //create a new workspace button to pull open create new modal? new component
     console.log(workspaces);
-    if (workspaces.loading) {
-        return (
-            <Loader
-                type='Triangle'
-                color='blue'
-                height={100}
-                width={100}
-                timeout={2000}
-            />
-        );
-    }
+    // if (workspaces.loading) {
+    //     return (
+    //         <Loader
+    //             type='Triangle'
+    //             color='blue'
+    //             height={100}
+    //             width={100}
+    //             timeout={2000}
+    //         />
+    //     );
+    // }
     return (
         <>
             <h3 className='ws-list-title'>Your Workspaces</h3>
