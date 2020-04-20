@@ -12,8 +12,8 @@ const GoalForm = (props) => {
     const [goalObj, setGoalObj] = useState({
         name: '',
         description: '',
-        est_time: 0,
-        due: '',
+        est_time: null,
+        due: null,
         completed: false,
         workspace_id: props.wsID,
     });
@@ -33,8 +33,8 @@ const GoalForm = (props) => {
         setGoalObj({
             name: '',
             description: '',
-            est_time: 0,
-            due: '',
+            est_time: null,
+            due: null,
             completed: false,
             workspace_id: props.wsID,
         });
@@ -45,8 +45,8 @@ const GoalForm = (props) => {
         setGoalObj({
             name: '',
             description: '',
-            est_time: 0,
-            due: '',
+            est_time: null,
+            due: null,
             completed: false,
             workspace_id: props.wsID,
         });
