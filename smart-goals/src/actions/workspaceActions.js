@@ -12,58 +12,61 @@ export const DELETE_WORKSPACE_START = 'DELETE_WORKSPACE_START';
 export const DELETE_WORKSPACE_SUCCESS = 'DELETE_WORKSPACE_SUCCESS';
 export const DELETE_WORKSPACE_FAILURE = 'DELETE_WORKSPACE_FAILURE';
 
-export const getWorkspaces = () => dispatch => {
+export const getWorkspaces = () => (dispatch) => {
     dispatch({ type: GET_WORKSPACE_START });
     return axiosWithAuth()
-        .get(`http://localhost:5000/workspace/workspaceList`)
-        .then(res => {
+        .get(`${process.env.REACT_APP_BACK_END_URL}/workspace/workspaceList`)
+        .then((res) => {
             dispatch({
                 type: GET_WORKSPACE_SUCCESS,
-                payload: res.data
+                payload: res.data,
             });
         })
-        .catch(err => {
+        .catch((err) => {
             dispatch({
                 type: GET_WORKSPACE_FAILURE,
-                payload: err
+                payload: err,
             });
         });
 };
 
-export const addWorkspace = wsInfo => dispatch => {
+export const addWorkspace = (wsInfo) => (dispatch) => {
     dispatch({ type: ADD_WORKSPACE_START });
     return axiosWithAuth()
-        .post(`http://localhost:5000/workspace/createWorkspace`, wsInfo)
-        .then(res => {
+        .post(
+            `${process.env.REACT_APP_BACK_END_URL}/workspace/createWorkspace`,
+            wsInfo
+        )
+        .then((res) => {
             console.log('ADD_action', res);
             dispatch({
                 type: ADD_WORKSPACE_SUCCESS,
-                payload: res.data
+                payload: res.data,
             });
         })
-        .catch(err => {
+        .catch((err) => {
             console.log('ADD_actio_ERR', err);
             dispatch({
                 type: ADD_WORKSPACE_FAILURE,
-                payload: err
+                payload: err,
             });
         });
 };
 
-export const deleteWorkspace = wsID => dispatch => {
+export const deleteWorkspace = (wsID) => (dispatch) => {
     dispatch({ type: DELETE_WORKSPACE_START });
     return axiosWithAuth()
-        .delete(`http://localhost:5000/workspace/${wsID}`)
-        .then(res => {
+        .delete(`${process.env.REACT_APP_BACK_END_URL}/workspace/${wsID}`)
+        .then((res) => {
             dispatch({
                 type: DELETE_WORKSPACE_SUCCESS,
-                payload: res.data
+                payload: res.data,
             });
         })
-        .catch(err => {
+        .catch((err) => {
             dispatch({
                 type: DELETE_WORKSPACE_FAILURE,
-                payload: err
+                payload: err,
             });
         });
 };

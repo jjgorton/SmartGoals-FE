@@ -16,7 +16,7 @@ export const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
 export const register = (user) => (dispatch) => {
     dispatch({ type: REGISTER_START });
     return axios
-        .post('http://localhost:5000/user/register', user)
+        .post(`${process.env.REACT_APP_BACK_END_URL}/user/register`, user)
         .then((res) => {
             localStorage.setItem('token', res.data.token);
             dispatch({
@@ -35,7 +35,7 @@ export const register = (user) => (dispatch) => {
 export const login = (creds) => (dispatch) => {
     dispatch({ type: LOGIN_START });
     return axios
-        .post('http://localhost:5000/user/login', creds)
+        .post(`${process.env.REACT_APP_BACK_END_URL}/user/login`, creds)
         .then((res) => {
             localStorage.setItem('token', res.data.token);
             dispatch({
@@ -55,7 +55,7 @@ export const login = (creds) => (dispatch) => {
 export const userInfo = () => (dispatch) => {
     dispatch({ type: GET_USER_START });
     return axiosWithAuth()
-        .get('http://localhost:5000/user/')
+        .get(`${process.env.REACT_APP_BACK_END_URL}/user/`)
         .then((res) => {
             dispatch({
                 type: GET_USER_SUCCESS,
