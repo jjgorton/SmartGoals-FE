@@ -53,7 +53,7 @@ const GoalForm = (props) => {
     };
 
     return (
-        <div>
+        <div className='new-ws'>
             <div className='new-ws-button'>
                 <button id='new-ws' onClick={() => setShow(!show)}>
                     {show ? '-' : '+'}
