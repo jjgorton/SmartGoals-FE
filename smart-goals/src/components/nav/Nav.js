@@ -1,24 +1,30 @@
 //register and login navlinks should be here
 
 //possibly separate nav bar once logged in for switching workspaces and other potential settings.
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import './nav.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 
 import { userInfo, clearStore } from '../../actions/authActions';
+
+import NavMenu from './NavMenu';
 
 const Nav = () => {
     const user = useSelector((state) => state.auth);
     const dispatch = useDispatch();
 
-    const history = useHistory();
+    const [show, setShow] = useState(false);
 
-    const logout = () => {
-        localStorage.clear();
-        dispatch(clearStore());
-        history.push('/login');
-    };
+    // const history = useHistory();
+
+    // const logout = () => {
+    //     localStorage.clear();
+    //     dispatch(clearStore());
+    //     history.push('/login');
+    // };
 
     //if user.username is null GET user infor from BE (need to build a GET for this)
 
@@ -43,11 +49,16 @@ const Nav = () => {
             {user.username && (
                 <h2 className='username'>Hi, {user.username}!</h2>
             )}
+
             {user.username && (
-                <div className='nav-buttons'>
-                    <button onClick={() => logout()}>Logout</button>
-                    <button>Settings</button>
-                </div>
+                <>
+                    <FontAwesomeIcon
+                        icon={faEllipsisV}
+                        className='menu-icon'
+                        onClick={() => setShow(true)}
+                    />
+                    <NavMenu show={show} setShow={setShow} />
+                </>
             )}
         </div>
     );
