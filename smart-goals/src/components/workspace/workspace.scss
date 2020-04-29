@@ -8,32 +8,48 @@
 
 .ws-header {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     background: skyblue;
     padding: 1rem;
     width: 100%;
 
-    .ws-title-container {
-        .ws-name {
+    .back-container {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: black;
+
+        .back-icon {
+            font-size: 2.5rem;
+            margin-right: 5px;
+        }
+
+        .back-title {
             font-size: 2rem;
         }
+    }
+
+    .ws-title-container {
+        .ws-name {
+            font-size: 4rem;
+        }
         .ws-role {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
         }
     }
 
     .ws-desc {
         width: 40%;
-        font-size: 1.2rem;
+        font-size: 1.8rem;
         display: flex;
         align-items: flex-end;
         padding: 0 1rem;
     }
 
-    .ws-date {
-        font-size: 1.2rem;
-        display: flex;
-        align-items: flex-end;
-        padding: 0 1rem;
-    }
+    // .ws-date {
+    //     font-size: 1.2rem;
+    //     display: flex;
+    //     align-items: flex-end;
+    //     padding: 0 1rem;
+    // }
 }
