@@ -41,10 +41,6 @@ const Workspace = (props) => {
             .catch((err) => console.log(err));
     };
 
-    const toWorkspacesList = () => {
-        props.history.push('./user/workspaces');
-    };
-
     if (!ws || workspaces.loading) {
         return (
             <Loader
