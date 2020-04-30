@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSquare, faCheckSquare } from '@fortawesome/free-regular-svg-icons';
+
 import { updateGoal, deleteGoal } from '../../actions/goalActions';
 
 import './goal.scss';
@@ -10,8 +13,7 @@ const Goal = (props) => {
     const [newInfo, setNewInfo] = useState({});
     const [done, setDone] = useState(false);
 
-    const completed = (e) => {
-        e.preventDefault();
+    const completed = () => {
         setDone(!done);
         dispatch(
             updateGoal({
@@ -27,12 +29,12 @@ const Goal = (props) => {
 
     return (
         <div className='goal'>
+            <FontAwesomeIcon
+                icon={props.goal.completed ? faCheckSquare : faSquare}
+                className='done-icon'
+                onClick={() => completed()}
+            />
             <h3>{props.goal.name}</h3>
-            {props.goal.completed && <p>Completed</p>}
-            <div className='btn'>
-                <button onClick={(e) => completed(e)}>Done</button>
-                <button onClick={() => removeGoal()}>X</button>
-            </div>
         </div>
     );
 };
