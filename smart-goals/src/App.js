@@ -7,10 +7,12 @@ import Routes from './components/Routes';
 
 function App() {
     return (
-        <Router className='App'>
-            <Nav />
-            <Routes />
-        </Router>
+        <div className='App'>
+            <Router>
+                <Nav />
+                <Routes />
+            </Router>
+        </div>
     );
 }
 
