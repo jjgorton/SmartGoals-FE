@@ -51,6 +51,7 @@ const Login = (props) => {
                         autoComplete='username'
                         value={credentials.username}
                         onChange={handleChanges}
+                        autoFocus
                         required
                     />
                 </div>
