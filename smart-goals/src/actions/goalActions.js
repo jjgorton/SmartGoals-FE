@@ -1,5 +1,4 @@
 import axiosWithAuth from '../utils/axiosWithAuth';
-import { DELETE_WORKSPACE_FAILURE } from './workspaceActions';
 
 export const GET_GOALS_START = 'GET_GOALS_START';
 export const GET_GOALS_SUCCESS = 'GET_GOALS_SUCCESS';
@@ -9,14 +8,29 @@ export const ADD_GOAL_START = 'ADD_GOAL_START';
 export const ADD_GOAL_SUCCESS = 'ADD_GOAL_SUCCESS';
 export const ADD_GOAL_FAILURE = 'ADD_GOAL_FAILURE';
 
-export const DELETE_GOAL_START = 'DELETE_GOAL_START';
-export const DELETE_GOAL_SUCCESS = 'DELETE_GOAL_SUCCESS';
-export const DELETE_GOAL_FAILURE = 'DELETE_GOAL_FAILURE';
-
 export const UPDATE_GOAL_START = 'UPDATE_GOAL_START';
 export const UPDATE_GOAL_SUCCESS = 'UPDATE_GOAL_SUCCESS';
 export const UPDATE_GOAL_FAILURE = 'UPDATE_GOAL_FAILURE';
 
+export const DELETE_GOAL_START = 'DELETE_GOAL_START';
+export const DELETE_GOAL_SUCCESS = 'DELETE_GOAL_SUCCESS';
+export const DELETE_GOAL_FAILURE = 'DELETE_GOAL_FAILURE';
+
+//GET STEPS not necessary as getGoals includes steps
+
+export const ADD_STEP_START = 'ADD_STEP_START';
+export const ADD_STEP_SUCCESS = 'ADD_STEP_SUCCESS';
+export const ADD_STEP_FAILURE = 'ADD_STEP_FAILURE';
+
+export const DELETE_STEP_START = 'DELETE_STEP_START';
+export const DELETE_STEP_SUCCESS = 'DELETE_STEP_SUCCESS';
+export const DELETE_STEP_FAILURE = 'DELETE_STEP_FAILURE';
+
+export const UPDATE_STEP_START = 'UPDATE_STEP_START';
+export const UPDATE_STEP_SUCCESS = 'UPDATE_STEP_SUCCESS';
+export const UPDATE_STEP_FAILURE = 'UPDATE_STEP_FAILURE';
+
+//the response includes an array of steps in each goal object
 export const getGoals = (wsID) => (dispatch) => {
     dispatch({ type: GET_GOALS_START });
     return axiosWithAuth()
@@ -46,6 +60,21 @@ export const addGoal = (goalInfo) => (dispatch) => {
         });
 };
 
+export const addStep = (stepInfo) => (dispatch) => {
+    dispatch({ type: ADD_STEP_START });
+    return axiosWithAuth()
+        .post(`${process.env.REACT_APP_BACK_END_URL}/goals/step`, stepInfo)
+        .then((res) => {
+            dispatch({
+                type: ADD_STEP_SUCCESS,
+                payload: res.data.step,
+            });
+        })
+        .catch((err) => {
+            dispatch({ type: ADD_STEP_FAILURE, payload: err });
+        });
+};
+
 export const updateGoal = (newInfo) => (dispatch) => {
     dispatch({ type: UPDATE_GOAL_START });
     return axiosWithAuth()
@@ -70,6 +99,6 @@ export const deleteGoal = (goalID) => (dispatch) => {
             dispatch({ type: DELETE_GOAL_SUCCESS, payload: res.data });
         })
         .catch((err) => {
-            dispatch({ type: DELETE_WORKSPACE_FAILURE, payload: err });
+            dispatch({ type: DELETE_GOAL_FAILURE, payload: err });
         });
 };
