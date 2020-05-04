@@ -7,6 +7,8 @@ import { faSquare, faCheckSquare } from '@fortawesome/free-regular-svg-icons';
 import { updateGoal, deleteGoal } from '../../actions/goalActions';
 
 import './goal.scss';
+import StepForm from '../step/StepForm';
+import Step from '../step/Step';
 
 const Goal = (props) => {
     const dispatch = useDispatch();
@@ -35,6 +37,9 @@ const Goal = (props) => {
                 onClick={() => completed()}
             />
             <h3>{props.goal.name}</h3>
+            {props.goal.steps &&
+                props.goal.steps.map((step) => <Step info={step} />)}
+            <StepForm goalID={props.goal.id} />
         </div>
     );
 };

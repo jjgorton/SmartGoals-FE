@@ -11,6 +11,15 @@ import {
     DELETE_GOAL_START,
     DELETE_GOAL_SUCCESS,
     DELETE_GOAL_FAILURE,
+    ADD_STEP_START,
+    ADD_STEP_SUCCESS,
+    ADD_STEP_FAILURE,
+    DELETE_STEP_START,
+    DELETE_STEP_SUCCESS,
+    DELETE_STEP_FAILURE,
+    UPDATE_STEP_START,
+    UPDATE_STEP_SUCCESS,
+    UPDATE_STEP_FAILURE,
 } from '../actions/goalActions';
 
 const initialState = {
@@ -93,6 +102,28 @@ export default (state = initialState, action) => {
                 ),
             };
         case DELETE_GOAL_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            };
+        case ADD_STEP_START:
+            return {
+                ...state,
+                loading: true,
+            };
+        case ADD_STEP_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                list: state.list.map((goal) => {
+                    if (goal.id === action.payload.goal_id) {
+                        goal.steps.push(action.payload);
+                    }
+                    return goal;
+                }),
+            };
+        case ADD_STEP_FAILURE:
             return {
                 ...state,
                 loading: false,
