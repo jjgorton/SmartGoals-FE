@@ -31,15 +31,19 @@ const Goal = (props) => {
 
     return (
         <div className='goal'>
-            <FontAwesomeIcon
-                icon={props.goal.completed ? faCheckSquare : faSquare}
-                className='done-icon'
-                onClick={() => completed()}
-            />
-            <h3>{props.goal.name}</h3>
-            {props.goal.steps &&
-                props.goal.steps.map((step) => <Step info={step} />)}
-            <StepForm goalID={props.goal.id} />
+            <div className='goal-title'>
+                <FontAwesomeIcon
+                    icon={props.goal.completed ? faCheckSquare : faSquare}
+                    className='done-icon'
+                    onClick={() => completed()}
+                />
+                <h3>{props.goal.name}</h3>
+            </div>
+            <div className='steps-container'>
+                {props.goal.steps &&
+                    props.goal.steps.map((step) => <Step info={step} />)}
+                <StepForm goalID={props.goal.id} />
+            </div>
         </div>
     );
 };
