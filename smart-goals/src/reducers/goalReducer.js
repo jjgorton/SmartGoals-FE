@@ -20,6 +20,7 @@ import {
     UPDATE_STEP_START,
     UPDATE_STEP_SUCCESS,
     UPDATE_STEP_FAILURE,
+    updateGoal,
 } from '../actions/goalActions';
 
 const initialState = {
@@ -74,9 +75,6 @@ export default (state = initialState, action) => {
                 ...state,
                 loading: false,
                 list: state.list.map((goal) => {
-                    // this won't work for a deep copy (steps obj)
-                    // possibly create separate reducer
-                    // change this to not update here but rather use componenent state to avoid a rerender of the entire list
                     return goal.id === action.payload.id
                         ? Object.assign(goal, action.payload)
                         : goal;
@@ -124,6 +122,37 @@ export default (state = initialState, action) => {
                 }),
             };
         case ADD_STEP_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            };
+        case UPDATE_STEP_START:
+            return {
+                ...state,
+                loading: true,
+            };
+        case UPDATE_STEP_SUCCESS:
+            //find goal with matching goalID
+            const updatedGoal = state.list.filter((goal) => {
+                return goal.id === action.payload.goal_id;
+            })[0];
+            //copy goal.steps array replacing the updated step
+            updatedGoal.steps = updatedGoal.steps.map((step) => {
+                return step.id === action.payload.id
+                    ? Object.assign(step, action.payload)
+                    : step;
+            });
+            return {
+                ...state,
+                loading: false,
+                list: state.list.map((goal) => {
+                    return goal.id === action.payload.goal_id
+                        ? updatedGoal
+                        : goal;
+                }),
+            };
+        case UPDATE_STEP_FAILURE:
             return {
                 ...state,
                 loading: false,

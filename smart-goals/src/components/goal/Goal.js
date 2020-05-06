@@ -13,10 +13,8 @@ import Step from '../step/Step';
 const Goal = (props) => {
     const dispatch = useDispatch();
     const [newInfo, setNewInfo] = useState({});
-    const [done, setDone] = useState(false);
 
     const completed = () => {
-        setDone(!done);
         dispatch(
             updateGoal({
                 id: props.goal.id,
@@ -31,15 +29,21 @@ const Goal = (props) => {
 
     return (
         <div className='goal'>
-            <FontAwesomeIcon
-                icon={props.goal.completed ? faCheckSquare : faSquare}
-                className='done-icon'
-                onClick={() => completed()}
-            />
-            <h3>{props.goal.name}</h3>
-            {props.goal.steps &&
-                props.goal.steps.map((step) => <Step info={step} />)}
-            <StepForm goalID={props.goal.id} />
+            <div className='goal-title'>
+                {!props.goal.steps.length > 0 && (
+                    <FontAwesomeIcon
+                        icon={props.goal.completed ? faCheckSquare : faSquare}
+                        className='done-icon'
+                        onClick={() => completed()}
+                    />
+                )}
+                <h3>{props.goal.name}</h3>
+            </div>
+            <div className='steps-container'>
+                {props.goal.steps &&
+                    props.goal.steps.map((step) => <Step info={step} />)}
+                <StepForm goalID={props.goal.id} />
+            </div>
         </div>
     );
 };

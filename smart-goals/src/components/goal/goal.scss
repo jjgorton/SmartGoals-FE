@@ -1,11 +1,24 @@
 .goal {
     display: flex;
+    flex-direction: column;
     border: 1px solid green;
     width: 95%;
-    justify-content: space-between;
 
     padding: 1rem;
     margin: 5%;
 
-    font-size: 3rem;
+    .goal-title {
+        display: flex;
+        align-items: center;
+        font-size: 3rem;
+        // border: 1px solid red;
+
+        h3 {
+            margin-left: 1.5rem;
+        }
+    }
+
+    .steps-container {
+        font-size: 2rem;
+    }
 }
