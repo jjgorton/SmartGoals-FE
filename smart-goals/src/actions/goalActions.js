@@ -91,6 +91,21 @@ export const updateGoal = (newInfo) => (dispatch) => {
         });
 };
 
+export const updateStep = (newInfo) => (dispatch) => {
+    dispatch({ type: UPDATE_STEP_START });
+    return axiosWithAuth()
+        .put(`${process.env.REACT_APP_BACK_END_URL}/goals/step`, newInfo)
+        .then((res) => {
+            dispatch({
+                type: UPDATE_STEP_SUCCESS,
+                payload: res.data,
+            });
+        })
+        .catch((err) => {
+            dispatch({ type: UPDATE_STEP_FAILURE, payload: err });
+        });
+};
+
 export const deleteGoal = (goalID) => (dispatch) => {
     dispatch({ type: DELETE_GOAL_START });
     return axiosWithAuth()
