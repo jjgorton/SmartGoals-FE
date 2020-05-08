@@ -1,5 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 .App {
     max-width: 500px;
     margin: auto;
+    font-family: 'Roboto', sans-serif;
+    background: #e1faf9;
+    height: 100vh;
     /* border: 1px solid red; */
 }

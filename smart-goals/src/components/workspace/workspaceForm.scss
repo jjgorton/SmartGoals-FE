@@ -1,3 +1,5 @@
+@import '../../utils/variables.scss';
+
 .new-ws {
     margin: 1rem auto;
     display: flex;
@@ -5,8 +7,9 @@
     justify-content: space-around;
     align-items: center;
     width: 90%;
-    background: lightpink;
-    border: 1px solid purple;
+    background: $mid-green;
+    border: 3px solid $mid-green;
+    border-radius: 15px;
 
     .new-ws-button {
         display: flex;
@@ -17,7 +20,7 @@
         label {
             margin-left: 1rem;
             font-size: 2rem;
-            color: red;
+            color: $dark;
         }
     }
 
