@@ -53,15 +53,15 @@ const GoalForm = (props) => {
     };
 
     return (
-        <div className='new-ws'>
-            <div className='new-ws-button'>
-                <button id='new-ws' onClick={() => setShow(!show)}>
+        <div className='new-goal'>
+            <div className='new-goal-button'>
+                <button id='new-goal' onClick={() => setShow(!show)}>
                     {show ? '-' : '+'}
                 </button>
-                <label htmlFor='new-ws'>Start a new Goal</label>
+                <label htmlFor='new-goal'>Start a new Goal</label>
             </div>
             <form
-                className={show ? 'ws-form show' : 'ws-form hide'}
+                className={show ? 'goal-form show' : 'goal-form hide'}
                 onSubmit={newGoal}
             >
                 <label htmlFor='name'>Goal Title: </label>

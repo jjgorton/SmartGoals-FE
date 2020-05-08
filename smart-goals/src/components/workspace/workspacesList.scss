@@ -1,4 +1,23 @@
-.workspace-list {
-    display: flex;
-    flex-wrap: wrap;
+@import '../../utils/variables.scss';
+
+.ws-list-container {
+    margin: auto;
+    width: 100vw;
+    height: 100vh;
+    // border: 1px solid red;
+
+    .ws-list-title {
+        font-size: 2rem;
+        margin: 1rem;
+        color: $dark;
+    }
+
+    .workspace-list {
+        display: flex;
+        flex-wrap: wrap;
+        // min-height: 75%;
+        // justify-content: space-around;
+        // align-content: space-around;
+        // border: 1px solid red;
+    }
 }
