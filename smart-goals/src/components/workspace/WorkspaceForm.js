@@ -37,12 +37,13 @@ const WorkspaceForm = () => {
     return (
         <div className='new-ws'>
             <div className='new-ws-button'>
+                <h4>Create</h4>
                 <FontAwesomeIcon
                     icon={faPlusSquare}
                     className='add-ws-icon'
                     onClick={() => setShow(!show)}
                 />
-                {/* <label htmlFor='new-ws'>Create a new Workspace</label> */}
+                <h4>Workspace</h4>
             </div>
             <div
                 className={
@@ -59,22 +60,29 @@ const WorkspaceForm = () => {
                             type='text'
                             id='name'
                             name='name'
-                            placeholder='Name your new workspace'
+                            placeholder='Name...'
                             value={wsObj.name}
                             onChange={handleChanges}
                             required
+                            autoFocus
                         />
                     </div>
                     <div className='input-container'>
                         <label htmlFor='desc'>Workspace Description:</label>
-                        <textarea
-                            type='area'
-                            id='desc'
-                            name='description'
-                            placeholder='Describe the purpose of this workspace'
-                            value={wsObj.description}
-                            onChange={handleChanges}
-                        />
+                        <div className='textarea-lines'>
+                            <textarea
+                                type='area'
+                                id='desc'
+                                name='description'
+                                placeholder='Describe the purpose of this workspace'
+                                value={wsObj.description}
+                                onChange={handleChanges}
+                                maxLength='50'
+                            />
+                            {[...Array(5)].map((l) => (
+                                <div className='line'></div>
+                            ))}
+                        </div>
                     </div>
                     <div className='new-ws-btns'>
                         <button>Create</button>

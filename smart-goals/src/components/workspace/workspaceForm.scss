@@ -31,18 +31,20 @@
 
     .new-ws-button {
         display: flex;
-        align-items: baseline;
+        flex-direction: column;
+        align-items: center;
         width: 90%;
-        padding: 1rem;
+        // padding: 1rem;
 
-        label {
-            margin-left: 1rem;
-            font-size: 2rem;
+        h4 {
+            font-size: 2.5rem;
             color: $dark;
+            opacity: 0.5;
         }
         .add-ws-icon {
-            width: 100%;
-            font-size: 15rem;
+            // width: 100%;
+            font-size: 9rem;
+            color: $dark;
             opacity: 0.5;
         }
     }
@@ -62,8 +64,8 @@
             display: flex;
             flex-direction: column;
             justify-content: space-around;
-            width: 80%;
-            height: 70%;
+            width: 85vw;
+            height: 85vw;
             background: $light;
             // border: 5px solid $dark;
             border-radius: 15px;
@@ -80,21 +82,47 @@
                 }
 
                 input {
-                    width: 100%;
+                    width: 90%;
                     height: 5rem;
-                    font-size: 2rem;
-                    padding: 1rem;
-                    border-radius: 15px;
+                    font-size: 5rem;
+                    // padding-top: 2rem;
+                    // border-radius: 15px;
                     margin: 1rem 0;
+                    background: none;
+                    border: none;
+                    border-bottom: 3px solid $dark;
+                    // display: flex;
+                    // align-items: flex-end;
                 }
 
-                textarea {
+                .textarea-lines {
+                    position: relative;
+                    overflow: hidden;
                     width: 100%;
-                    height: 28rem;
-                    font-size: 2.3rem;
-                    padding: 1rem;
-                    border-radius: 15px;
-                    margin: 1rem 0;
+                    height: 7rem;
+                    // border: 1px solid red;
+                    textarea {
+                        position: absolute;
+                        top: 0;
+                        width: 90%;
+                        height: 7rem;
+                        font-size: 2.5rem;
+                        line-height: normal;
+                        // padding: 1rem;
+                        // margin: 1rem 0;
+                        resize: none;
+                        background: none;
+                        border: none;
+                        // border: 1px solid red;
+                        z-index: 2;
+                    }
+
+                    .line {
+                        border-bottom: 3px solid $dark;
+                        width: 90%;
+                        height: 2.5rem;
+                        opacity: 0.5;
+                    }
                 }
             }
 
@@ -104,7 +132,17 @@
                 button {
                     margin: 1rem;
                     width: 45%;
-                    height: 3rem;
+                    height: 5rem;
+                    border-radius: 15px;
+                    font-size: 2.5rem;
+                    color: $dark;
+                    font-weight: bold;
+                }
+                button:first-child {
+                    background: $mid-green;
+                }
+                button:last-child {
+                    background: $mid-red;
                 }
             }
         }
