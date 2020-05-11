@@ -1,15 +1,33 @@
 @import '../../utils/variables.scss';
 
 .new-ws {
-    margin: 1rem auto;
+    // margin: 1rem auto;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: space-around;
+    // align-items: center;
+    // width: 90%;
+    // background: $mid-green;
+    // border: 3px solid $mid-green;
+    // border-radius: 15px;
+
+    width: 39.5vw;
+    height: 39.5vw;
+
+    max-width: 15rem;
+    max-height: 15rem;
+
+    margin: 7vw 0 0 7vw;
+    padding: 3%;
+    border-radius: 15px;
+
+    background: $mid-green;
+    color: $dark;
+
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
-    width: 90%;
-    background: $mid-green;
-    border: 3px solid $mid-green;
-    border-radius: 15px;
 
     .new-ws-button {
         display: flex;
@@ -22,38 +40,75 @@
             font-size: 2rem;
             color: $dark;
         }
+        .add-ws-icon {
+            width: 100%;
+            font-size: 15rem;
+            opacity: 0.5;
+        }
     }
 
-    .ws-form {
+    .ws-form-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 102vw;
+        height: 102vh;
+        background: rgba(0, 0, 0, 0.4);
         display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        width: 90%;
-        border: 1px solid blue;
-        margin: 1rem;
-        padding: 1rem;
+        justify-content: center;
+        align-items: center;
 
-        label {
-            margin-top: 1rem;
-            font-size: 1.5rem;
-        }
-
-        input {
-            height: 3rem;
-            padding: 1rem;
-        }
-
-        .new-ws-btns {
+        .ws-form {
             display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 80%;
+            height: 70%;
+            background: $light;
+            // border: 5px solid $dark;
+            border-radius: 15px;
+            // margin: 1rem;
+            padding: 1rem;
 
-            button {
-                margin: 1rem;
-                width: 45%;
-                height: 3rem;
+            .input-container {
+                margin: auto;
+                width: 90%;
+                // min-height: 25%;
+                label {
+                    font-size: 2.5rem;
+                    font-weight: bold;
+                }
+
+                input {
+                    width: 100%;
+                    height: 5rem;
+                    font-size: 2rem;
+                    padding: 1rem;
+                    border-radius: 15px;
+                    margin: 1rem 0;
+                }
+
+                textarea {
+                    width: 100%;
+                    height: 28rem;
+                    font-size: 2.3rem;
+                    padding: 1rem;
+                    border-radius: 15px;
+                    margin: 1rem 0;
+                }
+            }
+
+            .new-ws-btns {
+                display: flex;
+
+                button {
+                    margin: 1rem;
+                    width: 45%;
+                    height: 3rem;
+                }
             }
         }
     }
-
     .hide {
         display: none;
     }
