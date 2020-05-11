@@ -3,26 +3,30 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { addWorkspace } from '../../actions/workspaceActions';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+
 import './workspaceForm.scss';
 
 const WorkspaceForm = () => {
-    const user = useSelector(state => state.auth);
-    const workspaces = useSelector(state => state.workspaces);
+    const user = useSelector((state) => state.auth);
+    const workspaces = useSelector((state) => state.workspaces);
     const dispatch = useDispatch();
     const [wsObj, setWsObj] = useState({ name: '', description: '' });
     const [show, setShow] = useState(false);
 
-    const handleChanges = e => {
+    const handleChanges = (e) => {
         setWsObj({
             ...wsObj,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
         });
     };
 
-    const addWS = e => {
+    const addWS = (e) => {
         e.preventDefault();
         dispatch(addWorkspace(wsObj));
         setWsObj({ name: '', description: '' });
+        setShow(!show);
     };
 
     const cancel = () => {
@@ -33,41 +37,61 @@ const WorkspaceForm = () => {
     return (
         <div className='new-ws'>
             <div className='new-ws-button'>
-                <button id='new-ws' onClick={() => setShow(!show)}>
-                    {show ? '-' : '+'}
-                </button>
-                <label htmlFor='new-ws'>Create a new Workspace</label>
+                <h4>Create</h4>
+                <FontAwesomeIcon
+                    icon={faPlusSquare}
+                    className='add-ws-icon'
+                    onClick={() => setShow(!show)}
+                />
+                <h4>Workspace</h4>
             </div>
-            <form
-                className={show ? 'ws-form show' : 'ws-form hide'}
-                onSubmit={addWS}
+            <div
+                className={
+                    show ? 'ws-form-container show' : 'ws-form-container hide'
+                }
             >
-                <label htmlFor='name'>Workspace Name:</label>
-                <input
-                    type='text'
-                    id='name'
-                    name='name'
-                    placeholder='Name your new workspace'
-                    value={wsObj.name}
-                    onChange={handleChanges}
-                    required
-                />
-                <label htmlFor='desc'>Workspace Description:</label>
-                <textarea
-                    type='area'
-                    id='desc'
-                    name='description'
-                    placeholder='Describe the purpose of this workspace'
-                    value={wsObj.description}
-                    onChange={handleChanges}
-                />
-                <div className='new-ws-btns'>
-                    <button>Create</button>
-                    <button type='button' onClick={() => cancel()}>
-                        Cancel
-                    </button>
-                </div>
-            </form>
+                <form
+                    className={show ? 'ws-form show' : 'ws-form hide'}
+                    onSubmit={addWS}
+                >
+                    <div className='input-container'>
+                        <label htmlFor='name'>Workspace Name:</label>
+                        <input
+                            type='text'
+                            id='name'
+                            name='name'
+                            placeholder='Name...'
+                            value={wsObj.name}
+                            onChange={handleChanges}
+                            required
+                            autoFocus
+                        />
+                    </div>
+                    <div className='input-container'>
+                        <label htmlFor='desc'>Workspace Description:</label>
+                        <div className='textarea-lines'>
+                            <textarea
+                                type='area'
+                                id='desc'
+                                name='description'
+                                placeholder='Describe the purpose of this workspace'
+                                value={wsObj.description}
+                                onChange={handleChanges}
+                                maxLength='50'
+                            />
+                            {[...Array(5)].map((l) => (
+                                <div className='line'></div>
+                            ))}
+                        </div>
+                    </div>
+                    <div className='new-ws-btns'>
+                        <button>Create</button>
+                        <button type='button' onClick={() => cancel()}>
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 };

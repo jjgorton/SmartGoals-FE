@@ -35,11 +35,11 @@ const WorkspaceList = (props) => {
     return (
         <div className='ws-list-container'>
             <h3 className='ws-list-title'>Your Workspaces</h3>
-            <WorkspaceForm />
             <div className='workspace-list'>
                 {workspaces.list.map((ws, i) => (
                     <WorkspaceCard key={i} ws={ws} />
                 ))}
+                <WorkspaceForm />
             </div>
         </div>
     );
