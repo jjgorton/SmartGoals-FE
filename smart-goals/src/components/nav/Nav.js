@@ -12,7 +12,7 @@ import { userInfo, clearStore } from '../../actions/authActions';
 
 import NavMenu from './NavMenu';
 
-const Nav = () => {
+const Nav = ({ loggedIn, center, left }) => {
     const user = useSelector((state) => state.auth);
     const dispatch = useDispatch();
 
@@ -26,17 +26,18 @@ const Nav = () => {
     //     history.push('/login');
     // };
 
-    //if user.username is null GET user infor from BE (need to build a GET for this)
-
+    //if user.username is null GET user info from BE (incase of browser refresh causes redux state loss)
     useEffect(() => {
-        dispatch(userInfo());
+        if (loggedIn) {
+            dispatch(userInfo());
+        }
     }, []);
 
     console.log(user);
     return (
         <div className='nav'>
-            <h1 className='app-title'>Smart Goals</h1>
-            {!user.username && (
+            {<h1 className='app-title'>Smart Goals</h1>}
+            {!loggedIn && (
                 <div className='nav-buttons'>
                     <NavLink to='/register' className='link'>
                         Register
@@ -46,11 +47,9 @@ const Nav = () => {
                     </NavLink>
                 </div>
             )}
-            {user.username && (
-                <h2 className='username'>Hi, {user.username}!</h2>
-            )}
+            {loggedIn && <h2 className='username'>{center}</h2>}
 
-            {user.username && (
+            {loggedIn && (
                 <>
                     <FontAwesomeIcon
                         icon={faEllipsisV}

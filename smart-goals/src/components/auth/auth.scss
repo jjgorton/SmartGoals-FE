@@ -1,12 +1,12 @@
 .auth-container {
-    margin: auto;
+    // margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     // width: 90vw;
-    height: 50vh;
-    padding: 20% 2rem;
+    // height: 50vh;
+    margin: 20% 2rem;
     // border: 1px solid red;
 
     h2 {
@@ -19,7 +19,7 @@
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
-        height: 100%;
+        // height: 100%;
         padding-top: 10%;
         // border: 1px solid blue;
 

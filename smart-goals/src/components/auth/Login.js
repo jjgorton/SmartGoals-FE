@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { login } from '../../actions/authActions';
 
+import Nav from '../nav/Nav';
+
 import './auth.scss';
 
 const Login = (props) => {
@@ -38,41 +40,44 @@ const Login = (props) => {
     }, [state.error]);
 
     return (
-        <div className='auth-container'>
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                <div className='input'>
-                    <label htmlFor='username'>Username:</label>
-                    <input
-                        type='text'
-                        id='username'
-                        name='username'
-                        placeholder='Username'
-                        autoComplete='username'
-                        value={credentials.username}
-                        onChange={handleChanges}
-                        autoFocus
-                        required
-                    />
-                </div>
-                <div className='input'>
-                    <label htmlFor='password'>Password:</label>
-                    <input
-                        type='password'
-                        id='password'
-                        name='password'
-                        placeholder='Password'
-                        autoComplete='current-password'
-                        value={credentials.password}
-                        onChange={handleChanges}
-                        required
-                    />
-                </div>
-                <button>Login</button>
+        <>
+            <Nav loggedIn={false} />
+            <div className='auth-container'>
+                <h2>Login</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className='input'>
+                        <label htmlFor='username'>Username:</label>
+                        <input
+                            type='text'
+                            id='username'
+                            name='username'
+                            placeholder='Username'
+                            autoComplete='username'
+                            value={credentials.username}
+                            onChange={handleChanges}
+                            autoFocus
+                            required
+                        />
+                    </div>
+                    <div className='input'>
+                        <label htmlFor='password'>Password:</label>
+                        <input
+                            type='password'
+                            id='password'
+                            name='password'
+                            placeholder='Password'
+                            autoComplete='current-password'
+                            value={credentials.password}
+                            onChange={handleChanges}
+                            required
+                        />
+                    </div>
+                    <button>Login</button>
 
-                {errorMessage && <p>{errorMessage}</p>}
-            </form>
-        </div>
+                    {errorMessage && <p>{errorMessage}</p>}
+                </form>
+            </div>
+        </>
     );
 };
 
