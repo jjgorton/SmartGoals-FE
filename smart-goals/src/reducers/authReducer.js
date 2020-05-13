@@ -12,7 +12,7 @@ import {
 
 const initialState = {
     userID: null,
-    username: null,
+    username: '',
     email: '',
     created_at: '',
     loading: false,

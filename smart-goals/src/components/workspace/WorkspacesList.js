@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+
+import Nav from '../nav/Nav';
 import WorkspaceCard from './WorkspaceCard';
 import WorkspaceForm from './WorkspaceForm';
 
@@ -11,6 +13,7 @@ import './workspacesList.scss';
 
 const WorkspaceList = (props) => {
     // const userID = localStorage.getItem('userID');
+    const user = useSelector((state) => state.auth);
     const workspaces = useSelector((state) => state.workspaces);
     // const dispatch = useDispatch();
 
@@ -19,7 +22,6 @@ const WorkspaceList = (props) => {
     //     dispatch(getWorkspaces(userID));
     // }, []);
 
-    //create a new workspace button to pull open create new modal? new component
     console.log(workspaces);
     // if (workspaces.loading) {
     //     return (
@@ -33,15 +35,18 @@ const WorkspaceList = (props) => {
     //     );
     // }
     return (
-        <div className='ws-list-container'>
-            <h3 className='ws-list-title'>Your Workspaces</h3>
-            <div className='workspace-list'>
-                {workspaces.list.map((ws, i) => (
-                    <WorkspaceCard key={i} ws={ws} />
-                ))}
-                <WorkspaceForm />
+        <>
+            <Nav loggedIn={true} center={`Hi, ${user.username}!`} />
+            <div className='ws-list-container'>
+                <h3 className='ws-list-title'>Your Workspaces</h3>
+                <div className='workspace-list'>
+                    {workspaces.list.map((ws, i) => (
+                        <WorkspaceCard key={i} ws={ws} />
+                    ))}
+                    <WorkspaceForm />
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

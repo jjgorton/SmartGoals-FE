@@ -12,9 +12,15 @@ const WorkspaceCard = (props) => {
         props.history.push(`/user/workspaces/${id}`);
     };
 
+    //forces word wrap for long titles and limits char count
+    const name = ws.name.split(' ').some((s) => s.length > 7)
+        ? ws.name.slice(0, 7) + '- ' + ws.name.slice(7, 14)
+        : ws.name.slice(0, 14);
+
+    // limits char count displayed
     const desc =
         ws.description.length > 33
-            ? ws.description.slice(0, 30) + '...'
+            ? ws.description.slice(0, 35) + '...'
             : ws.description;
 
     return (
@@ -23,7 +29,7 @@ const WorkspaceCard = (props) => {
             onClick={() => goToWorkSpace(ws.workspace_id)}
         >
             <div>
-                <h4 className='ws-card-title'>{ws.name}</h4>
+                <h4 className='ws-card-title'>{name}</h4>
                 <h5 className='ws-card-role'>({ws.roles})</h5>
             </div>
             <p className='ws-card-desc'>{desc}</p>
