@@ -60,7 +60,6 @@ const WorkspaceForm = () => {
                             type='text'
                             id='name'
                             name='name'
-                            placeholder='Name...'
                             value={wsObj.name}
                             onChange={handleChanges}
                             required
@@ -75,10 +74,9 @@ const WorkspaceForm = () => {
                                 type='area'
                                 id='desc'
                                 name='description'
-                                placeholder='Describe the purpose of this workspace'
                                 value={wsObj.description}
                                 onChange={handleChanges}
-                                maxLength='50'
+                                maxLength='150'
                             />
                             {[...Array(5)].map((l) => (
                                 <div className='line'></div>
