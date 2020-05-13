@@ -65,6 +65,7 @@ const WorkspaceForm = () => {
                             onChange={handleChanges}
                             required
                             autoFocus
+                            maxLength='16'
                         />
                     </div>
                     <div className='input-container'>
