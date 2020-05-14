@@ -28,12 +28,22 @@
         }
     }
 
-    .ws-desc {
+    .desc-container {
+        display: flex;
+        justify-content: center;
         width: 90%;
         font-size: 1.8rem;
-        display: flex;
-        align-items: flex-end;
         padding: 1rem;
+        .ws-desc {
+            // display: flex;
+            // align-items: flex-end;
+        }
+        .show-desc {
+            font-style: italic;
+            text-decoration: underline;
+            color: $dark-blue;
+            margin-left: 5px;
+        }
     }
 
     // .ws-date {

@@ -19,6 +19,7 @@ const Workspace = (props) => {
     const workspaces = useSelector((state) => state.workspaces);
     const dispatch = useDispatch();
     const [ws, setWs] = useState({});
+    const [showDesc, setShowDesc] = useState(false);
 
     useEffect(() => {
         setWs(
@@ -43,9 +44,12 @@ const Workspace = (props) => {
     //adjust displayed length of description
     const desc = () => {
         if (ws.description) {
-            return ws.description.length > 33
-                ? ws.description.slice(0, 35) + '...'
-                : ws.description;
+            let description =
+                ws.description.length > 62 && !showDesc
+                    ? ws.description.slice(0, 62) + '...'
+                    : ws.description;
+
+            return description;
         }
     };
 
@@ -75,8 +79,21 @@ const Workspace = (props) => {
                         <h4 className='ws-name'>{ws.name}</h4>
                         <h5 className='ws-role'>({ws.roles})</h5>
                     </div>
-
-                    <p className='ws-desc'>{desc()}</p>
+                    <div className='desc-container'>
+                        <p className='ws-desc'>
+                            {desc()}
+                            <span
+                                className='show-desc'
+                                onClick={() => setShowDesc(!showDesc)}
+                            >
+                                {ws.description && ws.description.length > 62
+                                    ? showDesc
+                                        ? 'show less'
+                                        : 'show all'
+                                    : null}
+                            </span>
+                        </p>
+                    </div>
                 </header>
                 <GoalForm wsID={props.match.params.id} />
                 <GoalList />
