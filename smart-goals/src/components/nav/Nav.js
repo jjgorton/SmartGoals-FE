@@ -3,16 +3,16 @@
 //possibly separate nav bar once logged in for switching workspaces and other potential settings.
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, useHistory } from 'react-router-dom';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 import './nav.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisV, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 import { userInfo, clearStore } from '../../actions/authActions';
 
 import NavMenu from './NavMenu';
 
-const Nav = ({ loggedIn, center, left }) => {
+const Nav = ({ loggedIn, center, left, back }) => {
     const user = useSelector((state) => state.auth);
     const dispatch = useDispatch();
 
@@ -36,7 +36,17 @@ const Nav = ({ loggedIn, center, left }) => {
     console.log(user);
     return (
         <div className='nav'>
-            {<h1 className='app-title'>Smart Goals</h1>}
+            <div className='left'>
+                {back && (
+                    <Link to={back} className='back-container'>
+                        <FontAwesomeIcon
+                            icon={faArrowLeft}
+                            className='back-icon'
+                        />
+                    </Link>
+                )}
+                <h1 className='app-title'>Smart Goals</h1>
+            </div>
             {!loggedIn && (
                 <div className='nav-buttons'>
                     <NavLink to='/register' className='link'>
@@ -47,7 +57,7 @@ const Nav = ({ loggedIn, center, left }) => {
                     </NavLink>
                 </div>
             )}
-            {loggedIn && <h2 className='username'>{center}</h2>}
+            {loggedIn && <h2 className='center'>{center}</h2>}
 
             {loggedIn && (
                 <>
