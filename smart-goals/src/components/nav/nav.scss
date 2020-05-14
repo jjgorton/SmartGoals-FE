@@ -7,36 +7,57 @@
     background: $mid-blue;
     color: $dark;
     width: 100%;
-}
+    // position: fixed;
 
-.app-title {
-    font-size: 2.5rem;
-    padding: 0.5rem;
-}
+    .left {
+        display: flex;
+        .back-container {
+            align-self: flex-start;
+            display: flex;
+            align-items: flex-start;
+            text-decoration: none;
+            color: $dark;
+            // border: 1px solid red;
 
-.username {
-    font-size: 2rem;
-    padding: 0.5rem;
-    color: $dark;
-}
+            .back-icon {
+                font-size: 2.5rem;
+                margin: 5px;
+            }
 
-.menu-icon {
-    font-size: 2.5rem;
-    color: $dark;
-    margin: 10px;
-}
-
-.nav-buttons {
-    display: flex;
-    justify-content: space-around;
-
-    .link {
-        margin: 0.5rem;
-        color: blue;
-        text-decoration: none;
-        font-size: 2rem;
+            // .back-title {
+            //     font-size: 2rem;
+            // }
+        }
+        .app-title {
+            font-size: 2.5rem;
+            padding: 0.5rem;
+        }
     }
-    .active {
-        text-decoration: underline;
+
+    .center {
+        font-size: 2rem;
+        padding: 0.5rem;
+        color: $dark;
+    }
+
+    .menu-icon {
+        font-size: 2.5rem;
+        color: $dark;
+        margin: 10px;
+    }
+
+    .nav-buttons {
+        display: flex;
+        justify-content: space-around;
+
+        .link {
+            margin: 0.5rem;
+            color: blue;
+            text-decoration: none;
+            font-size: 2rem;
+        }
+        .active {
+            text-decoration: underline;
+        }
     }
 }

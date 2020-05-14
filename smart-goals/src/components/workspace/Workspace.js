@@ -5,9 +5,6 @@ import { Link } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-
 import GoalList from '../goal/GoalList';
 import GoalForm from '../goal/GoalForm';
 import Nav from '../nav/Nav';
@@ -22,6 +19,7 @@ const Workspace = (props) => {
     const workspaces = useSelector((state) => state.workspaces);
     const dispatch = useDispatch();
     const [ws, setWs] = useState({});
+    const [showDesc, setShowDesc] = useState(false);
 
     useEffect(() => {
         setWs(
@@ -43,6 +41,18 @@ const Workspace = (props) => {
             .catch((err) => console.log(err));
     };
 
+    //adjust displayed length of description
+    const desc = () => {
+        if (ws.description) {
+            let description =
+                ws.description.length > 62 && !showDesc
+                    ? ws.description.slice(0, 62) + '...'
+                    : ws.description;
+
+            return description;
+        }
+    };
+
     if (!ws || workspaces.loading) {
         return (
             <Loader
@@ -56,23 +66,34 @@ const Workspace = (props) => {
     }
     return (
         <>
-            <Nav loggedIn={true} center={`Hi, ${user.username}!`} />
+            <Nav
+                loggedIn={true}
+                center={`Hi, ${user.username}!`}
+                back={'/user/workspaces'}
+            />
             <div className='ws-container'>
                 <header className='ws-header'>
                     {/* <button onClick={() => del()}>Delete Workspace</button> */}
-                    <Link to='/user/workspaces' className='back-container'>
-                        <FontAwesomeIcon
-                            icon={faArrowLeft}
-                            className='back-icon'
-                            // onClick={() => toWorkspacesList()}
-                        />
-                        <p className='back-title'>Workspaces</p>
-                    </Link>
+
                     <div className='ws-title-container'>
                         <h4 className='ws-name'>{ws.name}</h4>
                         <h5 className='ws-role'>({ws.roles})</h5>
                     </div>
-                    <p className='ws-desc'>{ws.description}</p>
+                    <div className='desc-container'>
+                        <p className='ws-desc'>
+                            {desc()}
+                            <span
+                                className='show-desc'
+                                onClick={() => setShowDesc(!showDesc)}
+                            >
+                                {ws.description && ws.description.length > 62
+                                    ? showDesc
+                                        ? 'show less'
+                                        : 'show all'
+                                    : null}
+                            </span>
+                        </p>
+                    </div>
                 </header>
                 <GoalForm wsID={props.match.params.id} />
                 <GoalList />

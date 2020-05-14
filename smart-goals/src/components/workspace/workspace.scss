@@ -1,3 +1,5 @@
+@import '../../utils/variables.scss';
+
 .ws-container {
     margin: auto;
     display: flex;
@@ -7,43 +9,41 @@
 }
 
 .ws-header {
-    display: flex;
-    justify-content: space-between;
-    background: skyblue;
     padding: 1rem;
     width: 100%;
 
-    .back-container {
-        display: flex;
-        align-items: center;
-        text-decoration: none;
-        color: black;
-
-        .back-icon {
-            font-size: 2.5rem;
-            margin-right: 5px;
-        }
-
-        .back-title {
-            font-size: 2rem;
-        }
-    }
+    // border: 1px solid red;
 
     .ws-title-container {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
         .ws-name {
-            font-size: 4rem;
+            font-size: 3rem;
+            margin-right: 5px;
         }
         .ws-role {
             font-size: 1.4rem;
+            font-style: italic;
         }
     }
 
-    .ws-desc {
-        width: 40%;
-        font-size: 1.8rem;
+    .desc-container {
         display: flex;
-        align-items: flex-end;
-        padding: 0 1rem;
+        justify-content: center;
+        width: 90%;
+        font-size: 1.8rem;
+        padding: 1rem;
+        .ws-desc {
+            // display: flex;
+            // align-items: flex-end;
+        }
+        .show-desc {
+            font-style: italic;
+            text-decoration: underline;
+            color: $dark-blue;
+            margin-left: 5px;
+        }
     }
 
     // .ws-date {
