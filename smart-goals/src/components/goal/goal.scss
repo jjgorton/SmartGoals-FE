@@ -1,16 +1,22 @@
+@import '../../utils/variables.scss';
+
 .goal {
     display: flex;
     flex-direction: column;
-    border: 1px solid green;
-    width: 95%;
+    border-radius: 10px;
+    background: $dark-blue;
+    width: 100%;
 
     padding: 1rem;
-    margin: 5%;
+    margin: 5% 0;
+
+    color: $dark;
 
     .goal-title {
         display: flex;
         align-items: center;
         font-size: 3rem;
+        margin: 5px;
         // border: 1px solid red;
 
         h3 {
@@ -18,7 +24,21 @@
         }
     }
 
+    .show-steps {
+        display: flex;
+        font-size: 1.2rem;
+        color: $dark;
+        margin: 5px 0 0 8%;
+        .show-steps-icon {
+            margin-left: 5px;
+        }
+    }
+
     .steps-container {
         font-size: 2rem;
+        background: $mid-blue;
+        padding: 1rem;
+        margin-top: 1rem;
+        border-radius: 10px;
     }
 }
