@@ -76,8 +76,10 @@ const Workspace = (props) => {
                     {/* <button onClick={() => del()}>Delete Workspace</button> */}
 
                     <div className='ws-title-container'>
-                        <h4 className='ws-name'>{ws.name}</h4>
-                        <h5 className='ws-role'>({ws.roles})</h5>
+                        <h4 className='ws-name'>
+                            {ws.name}
+                            <span className='ws-role'>({ws.roles})</span>
+                        </h4>
                     </div>
                     <div className='desc-container'>
                         <p className='ws-desc'>

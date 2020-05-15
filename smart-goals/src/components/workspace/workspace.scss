@@ -21,11 +21,11 @@
         align-items: baseline;
         .ws-name {
             font-size: 3rem;
-            margin-right: 5px;
         }
         .ws-role {
             font-size: 1.4rem;
             font-style: italic;
+            margin-left: 5px;
         }
     }
 
@@ -38,6 +38,7 @@
         .ws-desc {
             // display: flex;
             // align-items: flex-end;
+            width: 100%;
         }
         .show-desc {
             font-style: italic;
