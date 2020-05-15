@@ -1,3 +1,9 @@
 .step {
     display: flex;
+
+    margin-bottom: 10px;
+
+    .done-icon {
+        margin-right: 5px;
+    }
 }

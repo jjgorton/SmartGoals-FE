@@ -1,0 +1,78 @@
+@import '../../utils/variables.scss';
+
+// .steps-container {
+//     font-size: 2rem;
+//     background: $mid-blue;
+//     padding: 1rem;
+//     margin-top: 1rem;
+//     border-radius: 10px;
+// }
+
+.add-steps {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 2rem;
+    color: $dark;
+    margin: 5px 0 0 15%;
+    .add-step-icon {
+        margin-right: 5px;
+    }
+}
+
+.step-form {
+    font-size: 2rem;
+    // background: $mid-blue;
+    margin-top: 1rem;
+    border-radius: 10px;
+    color: $dark;
+    .done-icon {
+        margin-right: 5px;
+    }
+    .step-input {
+        display: flex;
+
+        .input-container {
+            display: flex;
+            flex-direction: column;
+
+            label {
+                font-size: 1.5rem;
+                font-weight: bold;
+            }
+
+            input {
+                color: $dark;
+                width: 60%;
+                height: 2rem;
+                font-size: 2rem;
+                margin: 0.5rem 0 1rem 0;
+                background: none;
+                border: none;
+                border-bottom: 1px solid $dark;
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+    }
+
+    .btn-container {
+        display: flex;
+        justify-content: flex-end;
+        button {
+            margin: 0.5rem;
+            width: 23%;
+            height: 2.5rem;
+            border-radius: 5px;
+            font-size: 1.5rem;
+            color: $dark;
+            font-weight: bold;
+        }
+        button:first-child {
+            background: $mid-green;
+        }
+        button:last-child {
+            background: $mid-red;
+        }
+    }
+}

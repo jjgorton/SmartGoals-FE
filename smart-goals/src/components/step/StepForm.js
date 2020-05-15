@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { faSquare } from '@fortawesome/free-regular-svg-icons';
+
+import './stepForm.scss';
+
 import { addStep } from '../../actions/goalActions';
 
 const StepForm = (props) => {
@@ -14,7 +20,7 @@ const StepForm = (props) => {
         goal_id: props.goalID,
     });
 
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(true);
 
     const handleChanges = (e) => {
         setStepObj({
@@ -37,15 +43,41 @@ const StepForm = (props) => {
 
     return (
         <div>
-            <form onSubmit={newStep}>
-                <input
-                    type='text'
-                    name='name'
-                    value={stepObj.name}
-                    onChange={handleChanges}
-                />
-                <button>add Step</button>
-            </form>
+            {show ? (
+                <div className='add-steps' onClick={() => setShow(!show)}>
+                    <FontAwesomeIcon
+                        icon={faPlusSquare}
+                        className='add-step-icon'
+                    />
+                    <p>Add a Step</p>
+                </div>
+            ) : (
+                <form onSubmit={newStep} className='step-form'>
+                    <div className='step-input'>
+                        <FontAwesomeIcon
+                            icon={faSquare}
+                            className='done-icon'
+                        />
+                        <div className='input-container'>
+                            <label htmlFor='step-name'>Step Name:</label>
+                            <input
+                                type='text'
+                                id='step-name'
+                                name='name'
+                                value={stepObj.name}
+                                onChange={handleChanges}
+                                required
+                                autoFocus
+                                maxLength='20'
+                            />
+                        </div>
+                    </div>
+                    <div className='btn-container'>
+                        <button>Save</button>
+                        <button onClick={() => setShow(!show)}>Cancel</button>
+                    </div>
+                </form>
+            )}
         </div>
     );
 };

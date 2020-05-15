@@ -3,6 +3,11 @@ import { useDispatch } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquare, faCheckSquare } from '@fortawesome/free-regular-svg-icons';
+import {
+    faPlusSquare,
+    faChevronUp,
+    faChevronDown,
+} from '@fortawesome/free-solid-svg-icons';
 
 import { updateGoal, deleteGoal } from '../../actions/goalActions';
 
@@ -13,6 +18,8 @@ import Step from '../step/Step';
 const Goal = (props) => {
     const dispatch = useDispatch();
     const [newInfo, setNewInfo] = useState({});
+    const [noSteps, setNoSteps] = useState(false);
+    const [showSteps, setShowSteps] = useState(false);
 
     const completed = () => {
         dispatch(
@@ -39,11 +46,30 @@ const Goal = (props) => {
                 )}
                 <h3>{props.goal.name}</h3>
             </div>
-            <div className='steps-container'>
-                {props.goal.steps &&
-                    props.goal.steps.map((step) => <Step info={step} />)}
-                <StepForm goalID={props.goal.id} />
-            </div>
+            {props.goal.steps.length > 0 ? (
+                <div
+                    className='show-steps'
+                    onClick={() => setShowSteps(!showSteps)}
+                >
+                    <p>{showSteps ? 'Hide Steps' : 'Show Steps'}</p>
+                    <FontAwesomeIcon
+                        icon={showSteps ? faChevronUp : faChevronDown}
+                        className='show-steps-icon'
+                    />
+                </div>
+            ) : (
+                <div className='steps-container'>
+                    <StepForm goalID={props.goal.id} />
+                </div>
+            )}
+            {showSteps && (
+                <div className='steps-container'>
+                    {props.goal.steps.map((step) => (
+                        <Step info={step} />
+                    ))}
+                    <StepForm goalID={props.goal.id} />
+                </div>
+            )}
         </div>
     );
 };
