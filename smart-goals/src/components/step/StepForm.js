@@ -29,7 +29,8 @@ const StepForm = (props) => {
         });
     };
 
-    const newStep = () => {
+    const newStep = (e) => {
+        e.preventDefault();
         dispatch(addStep(stepObj));
         setStepObj({
             name: '',
@@ -59,7 +60,7 @@ const StepForm = (props) => {
                             className='done-icon'
                         />
                         <div className='input-container'>
-                            <label htmlFor='step-name'>Step Name:</label>
+                            {/* <label htmlFor='step-name'>Step Name:</label> */}
                             <input
                                 type='text'
                                 id='step-name'
@@ -68,7 +69,8 @@ const StepForm = (props) => {
                                 onChange={handleChanges}
                                 required
                                 autoFocus
-                                maxLength='20'
+                                maxLength='30'
+                                autocomplete='off'
                             />
                         </div>
                     </div>

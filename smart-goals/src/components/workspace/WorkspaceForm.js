@@ -53,6 +53,7 @@ const WorkspaceForm = () => {
                 <form
                     className={show ? 'ws-form show' : 'ws-form hide'}
                     onSubmit={addWS}
+                    autocomplete='off'
                 >
                     <div className='input-container'>
                         <label htmlFor='name'>Workspace Name:</label>
