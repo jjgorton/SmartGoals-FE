@@ -33,6 +33,7 @@ const GoalForm = (props) => {
     const newGoal = (e) => {
         e.preventDefault();
         dispatch(addGoal(goalObj));
+        setShow(!show);
         setGoalObj({
             name: '',
             description: '',
@@ -83,6 +84,7 @@ const GoalForm = (props) => {
                         required
                         autoFocus
                         maxLength='20'
+                        autocomplete='off'
                     />
                 </div>
                 {/* <label htmlFor='desc'>Goal Description:</label>

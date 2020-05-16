@@ -15,7 +15,7 @@ import './goal.scss';
 import StepForm from '../step/StepForm';
 import Step from '../step/Step';
 
-const Goal = (props) => {
+const Goal = ({ goal }) => {
     const dispatch = useDispatch();
     const [newInfo, setNewInfo] = useState({});
     const [noSteps, setNoSteps] = useState(false);
@@ -24,29 +24,27 @@ const Goal = (props) => {
     const completed = () => {
         dispatch(
             updateGoal({
-                id: props.goal.id,
-                completed: !props.goal.completed,
+                id: goal.id,
+                completed: !goal.completed,
             })
         );
     };
 
     const removeGoal = () => {
-        dispatch(deleteGoal(props.goal.id));
+        dispatch(deleteGoal(goal.id));
     };
 
     return (
         <div className='goal'>
             <div className='goal-title'>
-                {!props.goal.steps.length > 0 && (
-                    <FontAwesomeIcon
-                        icon={props.goal.completed ? faCheckSquare : faSquare}
-                        className='done-icon'
-                        onClick={() => completed()}
-                    />
-                )}
-                <h3>{props.goal.name}</h3>
+                <FontAwesomeIcon
+                    icon={goal.completed ? faCheckSquare : faSquare}
+                    className='done-icon'
+                    onClick={() => completed()}
+                />
+                <h3>{goal.name}</h3>
             </div>
-            {props.goal.steps.length > 0 ? (
+            {goal.steps && goal.steps.length > 0 ? (
                 <div
                     className='show-steps'
                     onClick={() => setShowSteps(!showSteps)}
@@ -59,15 +57,15 @@ const Goal = (props) => {
                 </div>
             ) : (
                 <div className='steps-container'>
-                    <StepForm goalID={props.goal.id} />
+                    <StepForm goalID={goal.id} />
                 </div>
             )}
             {showSteps && (
                 <div className='steps-container'>
-                    {props.goal.steps.map((step) => (
+                    {goal.steps.map((step) => (
                         <Step info={step} />
                     ))}
-                    <StepForm goalID={props.goal.id} />
+                    <StepForm goalID={goal.id} />
                 </div>
             )}
         </div>

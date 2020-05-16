@@ -10,10 +10,10 @@
 
 .add-steps {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     font-size: 2rem;
     color: $dark;
-    margin: 5px 0 0 15%;
+    // margin: 5px 0 0 15%;
     .add-step-icon {
         margin-right: 5px;
     }
