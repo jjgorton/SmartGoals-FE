@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { addGoal } from '../../actions/goalActions';
 
-// currently inheriting from workspaceForm.scss
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { faSquare } from '@fortawesome/free-regular-svg-icons';
+
 import './goalForm.scss';
 
 const GoalForm = (props) => {
@@ -54,27 +57,35 @@ const GoalForm = (props) => {
 
     return (
         <div className='new-goal'>
-            <div className='new-goal-button'>
-                <button id='new-goal' onClick={() => setShow(!show)}>
-                    {show ? '-' : '+'}
-                </button>
-                <label htmlFor='new-goal'>Start a new Goal</label>
+            <div
+                className={!show ? 'new-goal-button' : 'hide'}
+                onClick={() => setShow(!show)}
+            >
+                <FontAwesomeIcon
+                    icon={faPlusSquare}
+                    className='add-goal-icon'
+                />
+                <p>Start a new Goal</p>
             </div>
             <form
                 className={show ? 'goal-form show' : 'goal-form hide'}
                 onSubmit={newGoal}
             >
-                <label htmlFor='name'>Goal Title: </label>
-                <input
-                    type='text'
-                    id='name'
-                    name='name'
-                    placeholder="Enter Goal's title here"
-                    value={goalObj.name}
-                    onChange={handleChanges}
-                    required
-                />
-                <label htmlFor='desc'>Goal Description:</label>
+                {/* <label htmlFor='name'>Goal Title: </label> */}
+                <div className='goal-title'>
+                    <FontAwesomeIcon icon={faSquare} className='goal-icon' />
+                    <input
+                        type='text'
+                        id='name'
+                        name='name'
+                        value={goalObj.name}
+                        onChange={handleChanges}
+                        required
+                        autoFocus
+                        maxLength='20'
+                    />
+                </div>
+                {/* <label htmlFor='desc'>Goal Description:</label>
                 <textarea
                     type='area'
                     id='desc'
@@ -82,7 +93,7 @@ const GoalForm = (props) => {
                     placeholder='Describe what you want to achieve'
                     value={goalObj.description}
                     onChange={handleChanges}
-                />
+                /> */}
 
                 <div className='new-ws-btns'>
                     <button>Create</button>

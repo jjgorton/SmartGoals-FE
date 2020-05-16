@@ -1,23 +1,34 @@
+@import '../../utils/variables.scss';
+
 .new-goal {
     margin: 1rem auto;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    align-items: center;
+    align-items: flex-start;
     width: 90%;
-    background: lightpink;
-    border: 1px solid purple;
+    background: $dark-blue;
+    border-radius: 10px;
 
     .new-goal-button {
         display: flex;
-        align-items: baseline;
-        width: 90%;
-        padding: 1rem;
+        // justify-content: flex-start;
+        font-size: 3rem;
+        color: $dark;
+        margin: 5px;
+        width: 100%;
+        // align-items: baseline;
+        // width: 90%;
+        // padding: 1rem;
 
-        label {
-            margin-left: 1rem;
-            font-size: 2rem;
-            color: red;
+        // .add-goal-icon {
+        //     margin-right: 5px;
+        // }
+        p {
+            margin-left: 1.5rem;
+            // font-size: 2rem;
+            // color: $dark;
         }
     }
 
@@ -25,28 +36,51 @@
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        width: 90%;
-        border: 1px solid blue;
-        margin: 1rem;
-        padding: 1rem;
+        // width: 90%;
+        // border: 1px solid blue;
+        // margin: 1rem;
+        // padding: 1rem;
 
         label {
             margin-top: 1rem;
             font-size: 1.5rem;
         }
 
-        input {
-            height: 3rem;
-            padding: 1rem;
+        .goal-title {
+            font-size: 3rem;
+            color: $dark;
+            input {
+                color: $dark;
+                width: 70%;
+                height: 3rem;
+                font-size: 3rem;
+                margin: 0.5rem 0 1rem 1.5rem;
+                background: none;
+                border: none;
+                border-bottom: 1px solid $dark;
+                &:focus {
+                    outline: none;
+                }
+            }
         }
 
-        .new-goal-btns {
+        .new-ws-btns {
             display: flex;
-
+            justify-content: flex-end;
             button {
-                margin: 1rem;
-                width: 45%;
-                height: 3rem;
+                margin: 0.5rem;
+                width: 23%;
+                height: 2.5rem;
+                border-radius: 5px;
+                font-size: 1.5rem;
+                color: $dark;
+                font-weight: bold;
+            }
+            button:first-child {
+                background: $mid-green;
+            }
+            button:last-child {
+                background: $mid-red;
             }
         }
     }
