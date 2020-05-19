@@ -14,6 +14,7 @@ import { updateGoal, deleteGoal } from '../../actions/goalActions';
 import './goal.scss';
 import StepForm from '../step/StepForm';
 import Step from '../step/Step';
+import ProgressBar from './ProgressBar';
 
 const Goal = ({ goal }) => {
     const dispatch = useDispatch();
@@ -44,6 +45,7 @@ const Goal = ({ goal }) => {
                 />
                 <h3>{goal.name}</h3>
             </div>
+            <ProgressBar goal={goal} />
             {goal.steps && goal.steps.length > 0 ? (
                 <div
                     className='show-steps'

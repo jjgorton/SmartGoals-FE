@@ -1,0 +1,25 @@
+@import '../../utils/variables.scss';
+
+.progress-bar-container {
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .bar {
+        width: 100%;
+        height: 20px;
+        background: lightgrey;
+        border-radius: 8px;
+        overflow: hidden;
+
+        .progress {
+            height: 100%;
+            width: 1%;
+            transform-origin: left;
+            border-radius: 8px;
+            background: $mid-green;
+            transition: transform ease-in 0.5s;
+        }
+    }
+}
