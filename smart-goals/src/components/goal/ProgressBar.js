@@ -5,10 +5,13 @@ import './progressBar.scss';
 const ProgressBar = ({ goal }) => {
     const [percent, setPercent] = useState(5);
     useEffect(() => {
-        setPercent(
-            (goal.steps.filter((s) => s.completed).length / goal.steps.length) *
-                100
-        );
+        if (goal.steps) {
+            setPercent(
+                (goal.steps.filter((s) => s.completed).length /
+                    goal.steps.length) *
+                    100
+            );
+        }
         console.log(percent);
     }, [goal.steps]);
 
