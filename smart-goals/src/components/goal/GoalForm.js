@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { DateRangePicker } from 'react-date-range';
+import { InputMoment } from 'input-moment';
+import moment from 'moment';
+
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
 
 import { addGoal } from '../../actions/goalActions';
 
@@ -22,12 +28,22 @@ const GoalForm = (props) => {
     });
 
     const [show, setShow] = useState(false);
+    // const [m, setM] = useState({ m: 'moment()' });
 
     const handleChanges = (e) => {
         setGoalObj({
             ...goalObj,
             [e.target.name]: e.target.value,
         });
+    };
+
+    const handleSelect = (m) => {
+        console.log(m);
+        // setSelectionRange({
+        //     startDate: ranges.selection.startDate,
+        //     endDate: ranges.selection.endDate,
+        //     key: 'selection',
+        // });
     };
 
     const newGoal = (e) => {
@@ -55,6 +71,12 @@ const GoalForm = (props) => {
             workspace_id: props.wsID,
         });
     };
+
+    const [selectionRange, setSelectionRange] = useState({
+        startDate: new Date(),
+        endDate: new Date(),
+        key: 'selection',
+    });
 
     return (
         <div className='new-goal'>
@@ -84,9 +106,15 @@ const GoalForm = (props) => {
                         required
                         autoFocus
                         maxLength='20'
-                        autocomplete='off'
+                        autoComplete='off'
                     />
                 </div>
+                {/* <DateRangePicker
+                    ranges={[selectionRange]}
+                    onChange={handleSelect}
+                    dateDisplayFormat='MM d, yyyy hh:mm a..aaa'
+                /> */}
+                {/* <InputMoment onChange={handleSelect} /> */}
                 {/* <label htmlFor='desc'>Goal Description:</label>
                 <textarea
                     type='area'
