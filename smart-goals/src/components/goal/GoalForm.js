@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { DateRangePicker } from 'react-date-range';
-import { InputMoment } from 'input-moment';
-import moment from 'moment';
 
-import 'react-date-range/dist/styles.css'; // main style file
-import 'react-date-range/dist/theme/default.css'; // theme css file
+import Calendar from '@lls/react-light-calendar';
+// import '@lls/react-light-calendar/dist/index.css';
 
 import { addGoal } from '../../actions/goalActions';
 
@@ -14,6 +11,7 @@ import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { faSquare } from '@fortawesome/free-regular-svg-icons';
 
 import './goalForm.scss';
+import '../../utils/calendar.scss';
 
 const GoalForm = (props) => {
     const goals = useSelector((state) => state.goals);
@@ -28,7 +26,14 @@ const GoalForm = (props) => {
     });
 
     const [show, setShow] = useState(false);
-    // const [m, setM] = useState({ m: 'moment()' });
+
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    console.log(tz);
+
+    const [date, setDate] = useState({
+        startDate: Date.now(),
+        endDate: Date.now(),
+    });
 
     const handleChanges = (e) => {
         setGoalObj({
@@ -37,13 +42,11 @@ const GoalForm = (props) => {
         });
     };
 
-    const handleSelect = (m) => {
-        console.log(m);
-        // setSelectionRange({
-        //     startDate: ranges.selection.startDate,
-        //     endDate: ranges.selection.endDate,
-        //     key: 'selection',
-        // });
+    const dateChange = (startDate, endDate) => {
+        const start = new Date(startDate).toLocaleString();
+        const end = new Date(endDate).toLocaleString();
+        console.log({ start, end });
+        setDate({ startDate, endDate });
     };
 
     const newGoal = (e) => {
@@ -71,12 +74,6 @@ const GoalForm = (props) => {
             workspace_id: props.wsID,
         });
     };
-
-    const [selectionRange, setSelectionRange] = useState({
-        startDate: new Date(),
-        endDate: new Date(),
-        key: 'selection',
-    });
 
     return (
         <div className='new-goal'>
@@ -109,21 +106,14 @@ const GoalForm = (props) => {
                         autoComplete='off'
                     />
                 </div>
-                {/* <DateRangePicker
-                    ranges={[selectionRange]}
-                    onChange={handleSelect}
-                    dateDisplayFormat='MM d, yyyy hh:mm a..aaa'
-                /> */}
-                {/* <InputMoment onChange={handleSelect} /> */}
-                {/* <label htmlFor='desc'>Goal Description:</label>
-                <textarea
-                    type='area'
-                    id='desc'
-                    name='description'
-                    placeholder='Describe what you want to achieve'
-                    value={goalObj.description}
-                    onChange={handleChanges}
-                /> */}
+                <Calendar
+                    startDate={date.startDate}
+                    endDate={date.endDate}
+                    onChange={dateChange}
+                    range
+                    displayTime
+                    timeZone={Intl.DateTimeFormat().resolvedOptions().timeZone}
+                />
 
                 <div className='new-ws-btns'>
                     <button>Create</button>
