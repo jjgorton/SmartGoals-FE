@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Calendar from '@lls/react-light-calendar';
+// import Calendar from '@lls/react-light-calendar';
 // import '@lls/react-light-calendar/dist/index.css';
+
+import Calendar from '../../utils/react-light-calendar/components/Calendar';
 
 import { addGoal } from '../../actions/goalActions';
 
@@ -11,7 +13,7 @@ import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { faSquare } from '@fortawesome/free-regular-svg-icons';
 
 import './goalForm.scss';
-import '../../utils/calendar.scss';
+// import '../../utils/calendar.scss';
 
 const GoalForm = (props) => {
     const goals = useSelector((state) => state.goals);
@@ -27,8 +29,8 @@ const GoalForm = (props) => {
 
     const [show, setShow] = useState(false);
 
-    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    console.log(tz);
+    // const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    // console.log(tz);
 
     const [date, setDate] = useState({
         startDate: Date.now(),
@@ -43,8 +45,8 @@ const GoalForm = (props) => {
     };
 
     const dateChange = (startDate, endDate) => {
-        const start = new Date(startDate).toLocaleString();
-        const end = new Date(endDate).toLocaleString();
+        const start = new Date(startDate).toString();
+        const end = new Date(endDate).toString();
         console.log({ start, end });
         setDate({ startDate, endDate });
     };
@@ -112,7 +114,7 @@ const GoalForm = (props) => {
                     onChange={dateChange}
                     range
                     displayTime
-                    timeZone={Intl.DateTimeFormat().resolvedOptions().timeZone}
+                    // timeZone={Intl.DateTimeFormat().resolvedOptions().timeZone}
                 />
 
                 <div className='new-ws-btns'>

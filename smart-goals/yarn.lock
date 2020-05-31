@@ -10256,7 +10256,7 @@ timers-browserify@^2.0.4:
   dependencies:
     setimmediate "^1.0.4"
 
-timestamp-utils@2.1.0:
+timestamp-utils@2.1.0, timestamp-utils@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/timestamp-utils/-/timestamp-utils-2.1.0.tgz#6034c743982f40d82d547c5a2015771ba037f7ac"
   integrity sha512-IW6C0N2u/QF+tq+Plji9b5HUQu326m7QAgZD3H/BO46XgAEJCfPRsT6SvDJESoajR5kHB5Mji1TDZfgdYgEHuQ==
