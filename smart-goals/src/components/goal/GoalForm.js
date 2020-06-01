@@ -110,9 +110,9 @@ const GoalForm = (props) => {
                 </div>
                 <Calendar
                     startDate={date.startDate}
-                    endDate={date.endDate}
+                    // endDate={date.endDate}
                     onChange={dateChange}
-                    range
+                    // range
                     displayTime
                     // timeZone={Intl.DateTimeFormat().resolvedOptions().timeZone}
                 />
