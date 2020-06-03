@@ -1,0 +1,11 @@
+@import '../../utils/variables.scss';
+
+@mixin input($thick: 2px) {
+    color: $dark;
+    background: none;
+    border: none;
+    border-bottom: $thick solid $dark;
+    &:focus {
+        outline: none;
+    }
+}

@@ -44,8 +44,9 @@ const Register = (props) => {
         <>
             <Nav loggedIn={false} />
             <div className='auth-container'>
-                <h2>Login</h2>
+                <h2>Register</h2>
                 <form onSubmit={handleSubmit}>
+                    {errorMessage && <p class='error'>{errorMessage}</p>}
                     <div className='input'>
                         <label htmlFor='username'>Username:</label>
                         <input
@@ -57,6 +58,17 @@ const Register = (props) => {
                             value={credentials.username}
                             onChange={handleChanges}
                             required
+                        />
+                    </div>
+                    <div className='input'>
+                        <label htmlFor='email'>Email:</label>
+                        <input
+                            type='email'
+                            id='email'
+                            name='email'
+                            placeholder='Email - Optional'
+                            value={credentials.email}
+                            onChange={handleChanges}
                         />
                     </div>
                     <div className='input'>
@@ -72,20 +84,8 @@ const Register = (props) => {
                             required
                         />
                     </div>
-                    <div className='input'>
-                        <label htmlFor='email'>Email*:</label>
-                        <input
-                            type='email'
-                            id='email'
-                            name='email'
-                            placeholder='Email - Optional'
-                            value={credentials.email}
-                            onChange={handleChanges}
-                        />
-                    </div>
-                    <button>Login</button>
 
-                    {errorMessage && <p>{errorMessage}</p>}
+                    <button>Login</button>
                 </form>
             </div>
         </>

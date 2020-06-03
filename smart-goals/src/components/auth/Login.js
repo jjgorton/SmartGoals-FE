@@ -45,6 +45,7 @@ const Login = (props) => {
             <div className='auth-container'>
                 <h2>Login</h2>
                 <form onSubmit={handleSubmit}>
+                    {errorMessage && <p class='error'>{errorMessage}</p>}
                     <div className='input'>
                         <label htmlFor='username'>Username:</label>
                         <input
@@ -73,8 +74,6 @@ const Login = (props) => {
                         />
                     </div>
                     <button>Login</button>
-
-                    {errorMessage && <p>{errorMessage}</p>}
                 </form>
             </div>
         </>

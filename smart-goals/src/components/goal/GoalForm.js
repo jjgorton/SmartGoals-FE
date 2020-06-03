@@ -18,24 +18,27 @@ import './goalForm.scss';
 const GoalForm = (props) => {
     const goals = useSelector((state) => state.goals);
     const dispatch = useDispatch();
+    const time = new Date();
+    const tz = time.getTimezoneOffset() * 60 * 1000;
+    const localTimeStamp = time.getTime() - tz;
+
     const [goalObj, setGoalObj] = useState({
         name: '',
         description: '',
-        est_time: null,
-        due: null,
+        start_time: localTimeStamp,
+        end_time: null,
         completed: false,
         workspace_id: props.wsID,
     });
 
     const [show, setShow] = useState(false);
 
-    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    console.log(tz);
+    console.log('tx', tz);
 
-    const [date, setDate] = useState({
-        startDate: new Date(),
-        endDate: '',
-    });
+    // const [time, setTime] = useState({
+    //     start: goalObj.start_time.getTime() - tz,
+    //     end: goalObj.end_time ? goalObj.end_time.getTime() - tz : null,
+    // });
 
     const handleChanges = (e) => {
         setGoalObj({
@@ -45,13 +48,19 @@ const GoalForm = (props) => {
     };
 
     const dateChange = (startDate, endDate) => {
-        const start = new Date(startDate).toUTCString();
-        // const startTZ = new Date(
-        //     start.UTC() + start.getTimezoneOffset() * 60 * 1000
-        // ).toString();
-        const end = new Date(endDate).toString();
+        const start = new Date(startDate);
+        const end = new Date(endDate);
         console.log({ start, end });
-        setDate({ startDate, endDate });
+        // setTime({
+        //     ...time,
+        //     start: start.getTime() - tz,
+        //     end: endDate ? end.getTime() - tz : null,
+        // });
+        setGoalObj({
+            ...goalObj,
+            start_time: startDate,
+            end_time: endDate,
+        });
     };
 
     const newGoal = (e) => {
@@ -112,13 +121,10 @@ const GoalForm = (props) => {
                     />
                 </div>
                 <Calendar
-                    startDate={date.startDate}
-                    endDate={date.endDate}
+                    startDate={goalObj.start_time}
+                    endDate={goalObj.end_time}
                     onChange={dateChange}
-                    range={false}
                     displayTime
-                    // timezone='EDT'
-                    // timezone={Intl.DateTimeFormat().resolvedOptions().timeZone}
                 />
 
                 <div className='new-ws-btns'>
