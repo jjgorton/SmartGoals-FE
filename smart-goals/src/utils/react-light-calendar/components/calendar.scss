@@ -164,15 +164,29 @@
 
 .rlc-date-time-selects {
     padding: 0px 10px;
-    // input {
-    //     width: 3rem;
-    //     font-size: 2rem;
-    //     color: $dark;
-    //     text-align: center;
-    //     // background: none;
-    //     border: none;
-    //     border-bottom: 2px solid $dark;
-    // }
+    input {
+        width: 3rem;
+        font-size: 2rem;
+        color: $dark;
+        text-align: center;
+        // background: none;
+        border: none;
+        border-bottom: 2px solid $dark;
+    }
+
+    select {
+        // width: 3rem;
+        font-size: 1.5rem;
+        color: $dark;
+        text-align: center;
+        // background: none;
+        border: none;
+
+        // option {
+        //     display: none;
+        //     // visibility: hidden;
+        // }
+    }
 }
 
 .rlc-time-separator {

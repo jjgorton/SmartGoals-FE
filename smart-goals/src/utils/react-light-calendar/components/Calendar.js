@@ -27,7 +27,7 @@ class Calendar extends Component {
 
     componentDidUpdate = (prevProps) => {
         const { timezone, startDate, endDate } = this.props;
-        if (timezone !== prevProps.timezone) t.setTimezone(timezone);
+        // if (timezone !== prevProps.timezone) t.setTimezone(timezone);
         if (startDate !== prevProps.startDate || endDate !== prevProps.endDate)
             this.setState(this.getInitialState(this.props));
     };
@@ -40,7 +40,8 @@ class Calendar extends Component {
     onClickDay = (day) => {
         const { startDate, endDate } = this.state;
         if (!startDate) this.update({ startDate: day });
-        else if (startDate && !endDate) this.update(parseRange(startDate, day));
+        else if (startDate && !endDate && this.props.range)
+            this.update(parseRange(startDate, day));
         else this.update({ startDate: day, endDate: null });
     };
 
@@ -92,6 +93,8 @@ class Calendar extends Component {
     };
 
     render = () => {
+        // console.log(t);
+        // console.log(this.props.timezone);
         const {
             firstDayToDisplay,
             startDate: sDate,
@@ -174,6 +177,7 @@ Calendar.defaultProps = {
     onChange: () => {},
     disableDates: () => false,
     displayTime: false,
+    range: true,
     dayLabels: [
         'Monday',
         'Tuesday',
@@ -213,6 +217,7 @@ Calendar.propTypes = {
     timezone: string,
     markedDays: oneOfType([arrayOf(number), func]),
     onClickDate: func,
+    range: bool,
 };
 
 export default Calendar;

@@ -13,7 +13,7 @@ import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { faSquare } from '@fortawesome/free-regular-svg-icons';
 
 import './goalForm.scss';
-// import '../../utils/calendar.scss';
+// import '../../utils/react-light-calendar/components/calendar.scss';
 
 const GoalForm = (props) => {
     const goals = useSelector((state) => state.goals);
@@ -29,12 +29,12 @@ const GoalForm = (props) => {
 
     const [show, setShow] = useState(false);
 
-    // const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    // console.log(tz);
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    console.log(tz);
 
     const [date, setDate] = useState({
-        startDate: Date.now(),
-        endDate: Date.now(),
+        startDate: new Date(),
+        endDate: '',
     });
 
     const handleChanges = (e) => {
@@ -45,7 +45,10 @@ const GoalForm = (props) => {
     };
 
     const dateChange = (startDate, endDate) => {
-        const start = new Date(startDate).toString();
+        const start = new Date(startDate).toUTCString();
+        // const startTZ = new Date(
+        //     start.UTC() + start.getTimezoneOffset() * 60 * 1000
+        // ).toString();
         const end = new Date(endDate).toString();
         console.log({ start, end });
         setDate({ startDate, endDate });
@@ -110,11 +113,12 @@ const GoalForm = (props) => {
                 </div>
                 <Calendar
                     startDate={date.startDate}
-                    // endDate={date.endDate}
+                    endDate={date.endDate}
                     onChange={dateChange}
-                    // range
+                    range={false}
                     displayTime
-                    // timeZone={Intl.DateTimeFormat().resolvedOptions().timeZone}
+                    // timezone='EDT'
+                    // timezone={Intl.DateTimeFormat().resolvedOptions().timeZone}
                 />
 
                 <div className='new-ws-btns'>
