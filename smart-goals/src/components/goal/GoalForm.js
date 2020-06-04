@@ -70,8 +70,8 @@ const GoalForm = (props) => {
         setGoalObj({
             name: '',
             description: '',
-            est_time: null,
-            due: null,
+            start_time: null,
+            end_time: null,
             completed: false,
             workspace_id: props.wsID,
         });
@@ -82,8 +82,8 @@ const GoalForm = (props) => {
         setGoalObj({
             name: '',
             description: '',
-            est_time: null,
-            due: null,
+            start_time: null,
+            end_time: null,
             completed: false,
             workspace_id: props.wsID,
         });
