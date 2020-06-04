@@ -8,7 +8,6 @@ const WorkspaceCard = (props) => {
     //UPDATE and DELETE functions to be in the _Actual_ Workspace component
 
     const goToWorkSpace = (id) => {
-        console.log(props);
         props.history.push(`/user/workspaces/${id}`);
     };
 
@@ -28,7 +27,7 @@ const WorkspaceCard = (props) => {
             className='workspace'
             onClick={() => goToWorkSpace(ws.workspace_id)}
         >
-            <div>
+            <div className='ws-card-title-container'>
                 <h4 className='ws-card-title'>{name}</h4>
                 <h5 className='ws-card-role'>({ws.roles})</h5>
             </div>

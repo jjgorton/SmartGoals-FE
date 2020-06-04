@@ -6,16 +6,17 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Calendar from '../../utils/react-light-calendar/components/Calendar';
 
-import { addGoal } from '../../actions/goalActions';
+import { updateGoal, deleteGoal } from '../../actions/goalActions';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { faPlusSquare, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faSquare } from '@fortawesome/free-regular-svg-icons';
 
-import './goalForm.scss';
+import './goalEdit.scss';
+import Goal from './Goal';
 // import '../../utils/react-light-calendar/components/calendar.scss';
 
-const GoalForm = (props) => {
+const GoalForm = ({ goal, edit, setEdit }) => {
     const goals = useSelector((state) => state.goals);
     const dispatch = useDispatch();
     const time = new Date();
@@ -23,17 +24,19 @@ const GoalForm = (props) => {
     const localTimeStamp = time.getTime() - tz;
 
     const [goalObj, setGoalObj] = useState({
-        name: '',
-        description: '',
-        start_time: localTimeStamp,
-        end_time: null,
-        completed: false,
-        workspace_id: props.wsID,
+        name: goal.name,
+        description: goal.description,
+        start_time: goal.start_time,
+        end_time: goal.end_time,
+        completed: goal.completed,
+        id: goal.id,
     });
 
-    const [show, setShow] = useState(false);
+    const [confirmDel, setConfirmDel] = useState(false);
 
-    console.log('tx', tz);
+    // const [show, setShow] = useState(false);
+
+    // console.log('tx', tz);
 
     // const [time, setTime] = useState({
     //     start: goalObj.start_time.getTime() - tz,
@@ -63,48 +66,25 @@ const GoalForm = (props) => {
         });
     };
 
-    const newGoal = (e) => {
+    const editGoal = (e) => {
         e.preventDefault();
-        dispatch(addGoal(goalObj));
-        setShow(!show);
-        setGoalObj({
-            name: '',
-            description: '',
-            est_time: null,
-            due: null,
-            completed: false,
-            workspace_id: props.wsID,
-        });
+        dispatch(updateGoal(goalObj));
+        setEdit(false);
+    };
+
+    const removeGoal = () => {
+        dispatch(deleteGoal(goal.id));
+        setConfirmDel(false);
+        setEdit(false);
     };
 
     const cancel = () => {
-        setShow(!show);
-        setGoalObj({
-            name: '',
-            description: '',
-            est_time: null,
-            due: null,
-            completed: false,
-            workspace_id: props.wsID,
-        });
+        setEdit(false);
     };
 
     return (
-        <div className='new-goal'>
-            <div
-                className={!show ? 'new-goal-button' : 'hide'}
-                onClick={() => setShow(!show)}
-            >
-                <FontAwesomeIcon
-                    icon={faPlusSquare}
-                    className='add-goal-icon'
-                />
-                <p>Start a new Goal</p>
-            </div>
-            <form
-                className={show ? 'goal-form show' : 'goal-form hide'}
-                onSubmit={newGoal}
-            >
+        <div className='edit-goal'>
+            <form className='goal-form' onSubmit={editGoal}>
                 {/* <label htmlFor='name'>Goal Title: </label> */}
                 <div className='goal-title'>
                     <FontAwesomeIcon icon={faSquare} className='goal-icon' />
@@ -127,13 +107,44 @@ const GoalForm = (props) => {
                     displayTime
                 /> */}
 
-                <div className='new-ws-btns'>
-                    <button>Create</button>
-                    <button type='button' onClick={() => cancel()}>
-                        Cancel
-                    </button>
+                <div className='edit-goal-bottom-container'>
+                    <FontAwesomeIcon
+                        className='delete-icon'
+                        title='Delete Goal'
+                        icon={faTrashAlt}
+                        onClick={() => setConfirmDel(true)}
+                    />
+                    <span className='screen-reader-only'>Delete Goal</span>
+
+                    <div className='new-ws-btns'>
+                        <button>Update</button>
+                        <button type='button' onClick={() => cancel()}>
+                            Cancel
+                        </button>
+                    </div>
                 </div>
             </form>
+            {confirmDel && (
+                <div className='modal-container'>
+                    <div className='confirm-delete'>
+                        <h3>Delete "{goal.name}"?</h3>
+                        <p>
+                            Tap <span>Delete</span> to permanently remove this
+                            goal along with all steps and progress for this
+                            goal.
+                        </p>
+                        <div className='new-ws-btns'>
+                            <button onClick={() => removeGoal()}>Delete</button>
+                            <button
+                                type='button'
+                                onClick={() => setConfirmDel(false)}
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

@@ -17,7 +17,8 @@
     max-width: 15rem;
     max-height: 15rem;
 
-    margin: 7vw 0 0 7vw;
+    // margin: 7vw 0 0 7vw;
+    margin: 15px;
     padding: 3%;
     border-radius: 15px;
 
@@ -43,7 +44,7 @@
         }
         .add-ws-icon {
             // width: 100%;
-            font-size: 9rem;
+            font-size: 7rem;
             color: $dark;
             opacity: 0.5;
         }

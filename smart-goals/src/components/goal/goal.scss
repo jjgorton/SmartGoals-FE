@@ -12,15 +12,42 @@
 
     color: $dark;
 
-    .goal-title {
+    .goal-top-line {
         display: flex;
-        align-items: center;
-        font-size: 3rem;
-        margin: 5px;
-        // border: 1px solid red;
+        justify-content: space-between;
+        .goal-title {
+            display: flex;
+            align-items: center;
+            font-size: 3rem;
+            margin: 5px;
+            // border: 1px solid red;
 
-        h3 {
-            margin-left: 1.5rem;
+            h3 {
+                margin-left: 1.5rem;
+            }
+        }
+
+        .edit-icon {
+            font-size: 2rem;
+        }
+    }
+
+    .hide {
+        transform: scale(0);
+        opacity: 0;
+        transition: all 0.25s ease;
+    }
+    .error-container {
+        background: $light;
+        padding: 0.5rem;
+        border-radius: 5px;
+        transform: scale(1);
+        opacity: 1;
+        transition: all 0.25s ease;
+        .goal-error {
+            color: $mid-red;
+            font-size: 1.5rem;
+            font-weight: bold;
         }
     }
 

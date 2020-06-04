@@ -2,9 +2,10 @@
 
 .ws-list-container {
     margin: auto;
-    width: 100vw;
+    // width: 100vw;
     // height: 100vh;
     // border: 1px solid red;
+    width: 100%;
 
     .ws-list-title {
         font-size: 2rem;
@@ -16,8 +17,18 @@
         display: flex;
         flex-wrap: wrap;
         // min-height: 75%;
-        // justify-content: space-around;
+        justify-content: space-evenly;
         // align-content: space-around;
         // border: 1px solid red;
+    }
+    .ws-list-spacer {
+        width: 39.5vw;
+        height: 39.5vw;
+
+        max-width: 15rem;
+        max-height: 15rem;
+
+        margin: 30px;
+        // background-color: gray;
     }
 }

@@ -14,8 +14,8 @@ const StepForm = (props) => {
     const [stepObj, setStepObj] = useState({
         name: '',
         description: '',
-        est_time: null,
-        due: null,
+        start_time: null,
+        end_time: null,
         completed: false,
         goal_id: props.goalID,
     });
@@ -31,12 +31,13 @@ const StepForm = (props) => {
 
     const newStep = (e) => {
         e.preventDefault();
+        setShow(!show);
         dispatch(addStep(stepObj));
         setStepObj({
             name: '',
             description: '',
-            est_time: null,
-            due: null,
+            start_time: null,
+            end_time: null,
             completed: false,
             goal_id: props.goalID,
         });

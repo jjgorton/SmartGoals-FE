@@ -33,7 +33,6 @@ const Nav = ({ loggedIn, center, left, back }) => {
         }
     }, []);
 
-    console.log(user);
     return (
         <div className='nav'>
             <div className='left'>

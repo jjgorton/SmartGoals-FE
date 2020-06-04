@@ -44,6 +44,7 @@ const WorkspaceList = (props) => {
                         <WorkspaceCard key={i} ws={ws} />
                     ))}
                     <WorkspaceForm />
+                    <div className='ws-list-spacer'></div>
                 </div>
             </div>
         </>
