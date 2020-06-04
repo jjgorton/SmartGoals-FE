@@ -40,8 +40,7 @@ class Calendar extends Component {
     onClickDay = (day) => {
         const { startDate, endDate } = this.state;
         if (!startDate) this.update({ startDate: day });
-        else if (startDate && !endDate && this.props.range)
-            this.update(parseRange(startDate, day));
+        else if (startDate && !endDate) this.update(parseRange(startDate, day));
         else this.update({ startDate: day, endDate: null });
     };
 

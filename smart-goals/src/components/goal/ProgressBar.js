@@ -16,7 +16,7 @@ const ProgressBar = ({ goal }) => {
         } else if (!goal.completed) {
             setPercent(5);
         }
-    }, [goal.steps.length, goal.completed]);
+    }, [goal.steps, goal.steps.length, goal.completed]);
 
     return (
         <div className='progress-bar-container'>

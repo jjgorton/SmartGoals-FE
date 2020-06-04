@@ -120,12 +120,12 @@ const GoalForm = (props) => {
                         autoComplete='off'
                     />
                 </div>
-                <Calendar
+                {/* <Calendar
                     startDate={goalObj.start_time}
                     endDate={goalObj.end_time}
                     onChange={dateChange}
                     displayTime
-                />
+                /> */}
 
                 <div className='new-ws-btns'>
                     <button>Create</button>

@@ -28,6 +28,7 @@ const Goal = ({ goal }) => {
     const [edit, setEdit] = useState(false);
 
     useEffect(() => {
+        console.log('***', goal.steps);
         const allStepsDone =
             goal.steps.length && goal.steps.every((step) => step.completed);
         if (allStepsDone && !goal.completed) completed();
