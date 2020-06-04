@@ -1,0 +1,180 @@
+@import '../../utils/variables.scss';
+
+// .steps-container {
+//     font-size: 2rem;
+//     background: $mid-blue;
+//     padding: 1rem;
+//     margin-top: 1rem;
+//     border-radius: 10px;
+// }
+
+// .add-steps {
+//     display: flex;
+//     justify-content: flex-start;
+//     font-size: 2rem;
+//     color: $dark;
+//     // margin: 5px 0 0 15%;
+//     .add-step-icon {
+//         margin-right: 5px;
+//     }
+// }
+.edit-step-container {
+    .edit-step-form {
+        font-size: 2rem;
+        // background: $mid-blue;
+        margin-top: 1rem;
+        margin-bottom: 10px;
+        padding: 1rem 0;
+        color: $dark;
+        border-bottom: 1px solid $light;
+        .done-icon {
+            margin-right: 5px;
+        }
+        .step-input {
+            display: flex;
+
+            .input-container {
+                display: flex;
+                flex-direction: column;
+
+                label {
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                }
+
+                input {
+                    color: $dark;
+                    width: 60%;
+                    height: 2rem;
+                    font-size: 2rem;
+                    margin: 0.5rem 0 1rem 0;
+                    background: none;
+                    border: none;
+                    border-bottom: 1px solid $dark;
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+        }
+
+        .edit-step-bottom-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            align-items: baseline;
+            .delete-icon {
+                font-size: 2.2rem;
+                color: $dark;
+                margin: 1rem 0 0 0.5rem;
+            }
+            .screen-reader-only {
+                position: absolute;
+                left: -10000px;
+                top: auto;
+                width: 1px;
+                height: 1px;
+                overflow: hidden;
+            }
+
+            .btn-container {
+                display: flex;
+                justify-content: flex-end;
+                // width: 50%;
+                button {
+                    margin: 0.5rem;
+                    width: 8rem;
+                    height: 2.5rem;
+                    border-radius: 5px;
+                    font-size: 1.5rem;
+                    color: $dark;
+                    font-weight: bold;
+                }
+                button:first-child {
+                    background: $mid-green;
+                }
+                button:last-child {
+                    background: $mid-red;
+                }
+            }
+            // .new-ws-btns {
+            //     display: flex;
+            //     justify-content: flex-end;
+            //     button {
+            //         margin: 0.5rem;
+            //         // width: 23%;
+            //         height: 2.5rem;
+            //         border-radius: 5px;
+            //         font-size: 1.5rem;
+            //         color: $dark;
+            //         font-weight: bold;
+            //     }
+            //     button:first-child {
+            //         background: $mid-green;
+            //     }
+            //     button:last-child {
+            //         background: $mid-red;
+            //     }
+            // }
+        }
+    }
+
+    .modal-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 102vh;
+        background: rgba(0, 0, 0, 0.4);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+
+        .confirm-delete {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            width: 85vw;
+            height: 85vw;
+            background: $light;
+            border-radius: 15px;
+            padding: 1rem;
+            z-index: 3;
+            h3 {
+                font-size: 3rem;
+                color: $mid-red;
+            }
+            p {
+                font-size: 2rem;
+                color: $dark;
+                width: 90%;
+                span {
+                    color: $mid-red;
+                }
+            }
+            .new-ws-btns {
+                display: flex;
+                justify-content: space-around;
+                width: 100%;
+                button {
+                    margin: 0.5rem;
+                    width: 40%;
+                    // height: 2.5rem;
+                    padding: 1rem;
+                    border-radius: 10px;
+                    font-size: 2.5rem;
+                    color: $dark;
+                    font-weight: bold;
+                }
+                button:first-child {
+                    background: $mid-red;
+                }
+                button:last-child {
+                    background: $mid-green;
+                }
+            }
+        }
+    }
+}

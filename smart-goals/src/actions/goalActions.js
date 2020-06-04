@@ -92,6 +92,7 @@ export const updateGoal = (newInfo) => (dispatch) => {
 };
 
 export const updateStep = (newInfo) => (dispatch) => {
+    console.log('update step info', newInfo);
     dispatch({ type: UPDATE_STEP_START });
     return axiosWithAuth()
         .put(`${process.env.REACT_APP_BACK_END_URL}/goals/step`, newInfo)
@@ -102,6 +103,7 @@ export const updateStep = (newInfo) => (dispatch) => {
             });
         })
         .catch((err) => {
+            console.log('update step err', err.message);
             dispatch({ type: UPDATE_STEP_FAILURE, payload: err });
         });
 };
@@ -115,5 +117,19 @@ export const deleteGoal = (goalID) => (dispatch) => {
         })
         .catch((err) => {
             dispatch({ type: DELETE_GOAL_FAILURE, payload: err });
+        });
+};
+
+export const deleteStep = (goalID, stepID) => (dispatch) => {
+    dispatch({ type: DELETE_STEP_START });
+    return axiosWithAuth()
+        .delete(
+            `${process.env.REACT_APP_BACK_END_URL}/goals/${goalID}/${stepID}`
+        )
+        .then((res) => {
+            dispatch({ type: DELETE_STEP_SUCCESS, payload: res.data });
+        })
+        .catch((err) => {
+            dispatch({ type: DELETE_STEP_FAILURE, payload: err });
         });
 };

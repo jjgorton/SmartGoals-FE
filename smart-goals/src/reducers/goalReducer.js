@@ -158,6 +158,35 @@ export default (state = initialState, action) => {
                 loading: false,
                 error: action.payload,
             };
+        case DELETE_STEP_START:
+            return {
+                ...state,
+                loading: true,
+            };
+        case DELETE_STEP_SUCCESS:
+            //find goal with matching goalID
+            const modifiedGoal = state.list.filter((goal) => {
+                return goal.id == action.payload.goalID;
+            })[0];
+            //copy goal.steps array removing the step
+            modifiedGoal.steps = modifiedGoal.steps.filter((step) => {
+                return step.id !== parseInt(action.payload.stepID);
+            });
+            return {
+                ...state,
+                loading: false,
+                list: state.list.map((goal) => {
+                    return goal.id === action.payload.goalID
+                        ? modifiedGoal
+                        : goal;
+                }),
+            };
+        case DELETE_STEP_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            };
         default:
             return state;
     }

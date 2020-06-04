@@ -28,7 +28,6 @@ const Goal = ({ goal }) => {
     const [edit, setEdit] = useState(false);
 
     useEffect(() => {
-        console.log('steps change');
         const allStepsDone =
             goal.steps.length && goal.steps.every((step) => step.completed);
         if (allStepsDone && !goal.completed) completed();
@@ -101,7 +100,7 @@ const Goal = ({ goal }) => {
                     <StepForm goalID={goal.id} />
                 </div>
             )}
-            {showSteps && (
+            {showSteps && goal.steps.length > 0 && (
                 <div className='steps-container'>
                     {goal.steps.map((step) => (
                         <Step info={step} />

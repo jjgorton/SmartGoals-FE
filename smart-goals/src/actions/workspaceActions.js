@@ -38,14 +38,12 @@ export const addWorkspace = (wsInfo) => (dispatch) => {
             wsInfo
         )
         .then((res) => {
-            console.log('ADD_action', res);
             dispatch({
                 type: ADD_WORKSPACE_SUCCESS,
                 payload: res.data,
             });
         })
         .catch((err) => {
-            console.log('ADD_actio_ERR', err);
             dispatch({
                 type: ADD_WORKSPACE_FAILURE,
                 payload: err,
