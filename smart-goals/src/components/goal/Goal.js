@@ -7,6 +7,8 @@ import {
     faPlusSquare,
     faChevronUp,
     faChevronDown,
+    faPencilAlt,
+    faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { updateGoal, deleteGoal } from '../../actions/goalActions';
@@ -15,6 +17,7 @@ import './goal.scss';
 import StepForm from '../step/StepForm';
 import Step from '../step/Step';
 import ProgressBar from './ProgressBar';
+import GoalEdit from './GoalEdit';
 
 const Goal = ({ goal }) => {
     const dispatch = useDispatch();
@@ -22,6 +25,7 @@ const Goal = ({ goal }) => {
     const [noSteps, setNoSteps] = useState(false);
     const [showSteps, setShowSteps] = useState(false);
     const [error, setError] = useState('');
+    const [edit, setEdit] = useState(false);
 
     useEffect(() => {
         console.log('steps change');
@@ -59,19 +63,23 @@ const Goal = ({ goal }) => {
         }
     };
 
-    const removeGoal = () => {
-        dispatch(deleteGoal(goal.id));
-    };
-
+    if (edit) return <GoalEdit goal={goal} edit={edit} setEdit={setEdit} />;
     return (
         <div className='goal'>
-            <div className='goal-title'>
+            <div className='goal-top-line'>
+                <div className='goal-title'>
+                    <FontAwesomeIcon
+                        icon={goal.completed ? faCheckSquare : faSquare}
+                        className='done-icon'
+                        onClick={() => check()}
+                    />
+                    <h3>{goal.name}</h3>
+                </div>
                 <FontAwesomeIcon
-                    icon={goal.completed ? faCheckSquare : faSquare}
-                    className='done-icon'
-                    onClick={() => check()}
+                    icon={faPencilAlt}
+                    className='edit-icon'
+                    onClick={() => setEdit(true)}
                 />
-                <h3>{goal.name}</h3>
             </div>
             <div className={error ? 'error-container' : 'hide'}>
                 <p className='goal-error'>{error}</p>

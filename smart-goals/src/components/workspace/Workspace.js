@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+
 import GoalList from '../goal/GoalList';
 import GoalForm from '../goal/GoalForm';
 import Nav from '../nav/Nav';
