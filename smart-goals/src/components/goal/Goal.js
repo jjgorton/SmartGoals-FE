@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,6 +21,15 @@ const Goal = ({ goal }) => {
     const [newInfo, setNewInfo] = useState({});
     const [noSteps, setNoSteps] = useState(false);
     const [showSteps, setShowSteps] = useState(false);
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        console.log('steps change');
+        const allStepsDone =
+            goal.steps.length && goal.steps.every((step) => step.completed);
+        if (allStepsDone && !goal.completed) completed();
+        else if (!allStepsDone && goal.completed) completed();
+    }, [goal.steps, goal.steps.length]);
 
     const completed = () => {
         dispatch(
@@ -29,6 +38,25 @@ const Goal = ({ goal }) => {
                 completed: !goal.completed,
             })
         );
+    };
+
+    const check = () => {
+        if (goal.steps.length && !goal.steps.every((step) => step.completed)) {
+            setError('Please complete all steps.');
+            setShowSteps(true);
+            setTimeout(() => setError(''), 5000);
+        } else if (
+            goal.steps.length &&
+            goal.steps.every((step) => step.completed)
+        ) {
+            setError(
+                'All steps are complete.  You can add additional steps below.'
+            );
+            setShowSteps(true);
+            setTimeout(() => setError(''), 5000);
+        } else {
+            completed();
+        }
     };
 
     const removeGoal = () => {
@@ -41,12 +69,15 @@ const Goal = ({ goal }) => {
                 <FontAwesomeIcon
                     icon={goal.completed ? faCheckSquare : faSquare}
                     className='done-icon'
-                    onClick={() => completed()}
+                    onClick={() => check()}
                 />
                 <h3>{goal.name}</h3>
             </div>
+            <div className={error ? 'error-container' : 'hide'}>
+                <p className='goal-error'>{error}</p>
+            </div>
             <ProgressBar goal={goal} />
-            {goal.steps && goal.steps.length > 0 ? (
+            {goal.steps.length > 0 ? (
                 <div
                     className='show-steps'
                     onClick={() => setShowSteps(!showSteps)}

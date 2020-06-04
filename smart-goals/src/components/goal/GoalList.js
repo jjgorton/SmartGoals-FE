@@ -9,7 +9,7 @@ import './goalList.scss';
 const GoalList = () => {
     const goals = useSelector((state) => state.goals);
 
-    // console.log('listComp', goals);
+    console.log('listComp', goals);
 
     // if (!goals.list) {
     //     return <Loader type='Triangle' color='blue' height={50} width={50} />;
