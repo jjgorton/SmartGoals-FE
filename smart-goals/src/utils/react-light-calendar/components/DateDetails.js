@@ -17,9 +17,18 @@ class DateDetails extends Component {
             hours: formartTime(baseTwlv),
             minutes: formartTime(defaulTime.getUTCMinutes()),
             meridian: defaulTime.getUTCHours() < 11 ? 'AM' : 'PM',
-            test: defaulTime,
+            defaulTime: defaulTime,
         };
     }
+    componentDidMount = () => {
+        const { date, onTimeChange } = this.props;
+        onTimeChange(
+            t.set(date, {
+                hours: this.state.defaulTime.getUTCHours(),
+                minutes: this.state.defaulTime.getUTCMinutes(),
+            })
+        );
+    };
 
     onHoursChange = (e) => {
         const { date, onTimeChange } = this.props;
@@ -82,9 +91,6 @@ class DateDetails extends Component {
 
     render = () => {
         const { date, displayTime, dayLabels, monthLabels } = this.props;
-        const hours = t.getHours(date);
-        const minutes = t.getMinutes(date);
-        console.log(this.state.test);
 
         return (
             <div className='rlc-date-details-wrapper'>
@@ -104,33 +110,22 @@ class DateDetails extends Component {
                 </div>
                 {displayTime && (
                     <div className='rlc-date-time-selects'>
-                        {/* <select onChange={this.onHoursChange} value={hours}>{times(24).map(hour => <option value={formartTime(hour)} key={hour}>{formartTime(hour)}</option>)}</select> */}
                         <input
                             type='number'
                             name='hours'
                             value={this.state.hours}
-                            onFocus={() =>
+                            onClick={() =>
                                 this.setState({ ...this.state, hours: '' })
                             }
                             onChange={this.onHoursChange}
                             maxLength='2'
                         />
                         <span className='rlc-time-separator'>:</span>
-                        {/* <select onChange={this.onMinutesChange} value={minutes}>
-                            {times(60).map((minute) => (
-                                <option
-                                    value={formartTime(minute)}
-                                    key={minute}
-                                >
-                                    {formartTime(minute)}
-                                </option>
-                            ))}
-                        </select> */}
                         <input
                             type='number'
                             name='minutes'
                             value={this.state.minutes}
-                            onFocus={() =>
+                            onClick={() =>
                                 this.setState({ ...this.state, minutes: '' })
                             }
                             onChange={this.onMinutesChange}
@@ -144,12 +139,6 @@ class DateDetails extends Component {
                             <option value='AM'>AM</option>
                             <option value='PM'>PM</option>
                         </select>
-                        {/* <input
-                            type='time'
-                            name='time'
-                            // value={this.state.time}
-                            onChange={this.setTime}
-                        /> */}
                     </div>
                 )}
             </div>

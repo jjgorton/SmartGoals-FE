@@ -39,9 +39,20 @@ class Calendar extends Component {
 
     onClickDay = (day) => {
         const { startDate, endDate } = this.state;
+
+        const dayWithStartTime = t.set(day, {
+            hours: parseInt(t.getHours(startDate)),
+            minutes: parseInt(t.getMinutes(startDate)),
+        });
+        const dayWithEndTime = t.set(day, {
+            hours: parseInt(t.getHours(endDate)),
+            minutes: parseInt(t.getMinutes(endDate)),
+        });
+
         if (!startDate) this.update({ startDate: day });
-        else if (startDate && !endDate) this.update(parseRange(startDate, day));
-        else this.update({ startDate: day, endDate: null });
+        else if (startDate && !endDate)
+            this.update(parseRange(startDate, dayWithEndTime));
+        else this.update({ startDate: dayWithStartTime, endDate: null });
     };
 
     changeMonth = ({ yearOffset = 0, monthOffset = 0 }) => {
@@ -72,9 +83,13 @@ class Calendar extends Component {
                 ? markedDays.map(getDateWithoutTime).includes(day)
                 : false;
 
+        const time = new Date();
+        const tz = time.getTimezoneOffset() * 60 * 1000;
+        const localTimeStamp = time.getTime() - tz;
+
         const conditions = {
             'rlc-day-disabled': disableDates(day),
-            'rlc-day-today': day === getDateWithoutTime(new Date().getTime()),
+            'rlc-day-today': day === getDateWithoutTime(localTimeStamp),
             'rlc-day-inside-selection': dateIsBetween(day, sDate, eDate),
             'rlc-day-out-of-month': dateIsOut(day, firstMonthDay, lastMonthDay),
             'rlc-day-selected': !endDate && sDate === day,
