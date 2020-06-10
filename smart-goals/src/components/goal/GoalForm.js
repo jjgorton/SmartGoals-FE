@@ -40,7 +40,7 @@ const GoalForm = (props) => {
 
     const [show, setShow] = useState(false);
 
-    console.log('tx', tz);
+    // console.log('tx', tz);
 
     // const [time, setTime] = useState({
     //     start: goalObj.start_time.getTime() - tz,
@@ -72,7 +72,12 @@ const GoalForm = (props) => {
 
     const newGoal = (e) => {
         e.preventDefault();
-        dispatch(addGoal(goalObj));
+        const newGoalObj = {
+            ...goalObj,
+            start_time: goalObj.start_time + tz,
+            end_time: goalObj.end_time + tz,
+        };
+        dispatch(addGoal(newGoalObj));
         setShow(!show);
         setGoalObj({
             name: '',
