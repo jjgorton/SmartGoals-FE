@@ -18,6 +18,7 @@ import StepForm from '../step/StepForm';
 import Step from '../step/Step';
 import ProgressBar from './ProgressBar';
 import GoalEdit from './GoalEdit';
+import TimeLine from './TimeLine';
 
 const Goal = ({ goal }) => {
     const dispatch = useDispatch();
@@ -28,7 +29,6 @@ const Goal = ({ goal }) => {
     const [edit, setEdit] = useState(false);
 
     useEffect(() => {
-        console.log('***', goal.steps);
         const allStepsDone =
             goal.steps.length && goal.steps.every((step) => step.completed);
         if (allStepsDone && !goal.completed) completed();
@@ -85,6 +85,7 @@ const Goal = ({ goal }) => {
                 <p className='goal-error'>{error}</p>
             </div>
             <ProgressBar goal={goal} />
+            <TimeLine goal={goal} />
             {goal.steps.length > 0 ? (
                 <div
                     className='show-steps'
