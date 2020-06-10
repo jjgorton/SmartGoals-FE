@@ -136,6 +136,7 @@ class Calendar extends Component {
                             onTimeChange={(date) =>
                                 this.update({ startDate: date })
                             }
+                            key={sDate}
                         />
                     )}
                     {!!eDate && (
@@ -147,6 +148,7 @@ class Calendar extends Component {
                             onTimeChange={(date) =>
                                 this.update({ endDate: date })
                             }
+                            key={eDate}
                         />
                     )}
                 </div>

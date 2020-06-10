@@ -22,6 +22,7 @@ class DateDetails extends Component {
     }
     componentDidMount = () => {
         const { date, onTimeChange } = this.props;
+
         onTimeChange(
             t.set(date, {
                 hours: this.state.defaulTime.getUTCHours(),
