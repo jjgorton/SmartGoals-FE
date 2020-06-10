@@ -2,9 +2,12 @@
 @import '../../variables.scss';
 
 .rlc-calendar {
+    margin: 5px;
     font-family: 'Roboto', sans-serif;
-    width: 282px;
-    height: 282px;
+    // width: 100;
+    height: 100vw;
+    max-width: 500px;
+    max-height: 500px;
     border: 1px solid #e5e5e5;
     background: #fdfdfd;
     border-radius: 15px;
@@ -172,6 +175,18 @@
         // background: none;
         border: none;
         border-bottom: 2px solid $dark;
+
+        /* Chrome, Safari, Edge, Opera */
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        // input[type='number'] {
+        -moz-appearance: textfield;
+        // }
     }
 
     select {

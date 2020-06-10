@@ -15,25 +15,32 @@ import { faSquare } from '@fortawesome/free-regular-svg-icons';
 import './goalForm.scss';
 // import '../../utils/react-light-calendar/components/calendar.scss';
 
+import ProgressBar from './ProgressBar';
+
 const GoalForm = (props) => {
     const goals = useSelector((state) => state.goals);
     const dispatch = useDispatch();
     const time = new Date();
     const tz = time.getTimezoneOffset() * 60 * 1000;
     const localTimeStamp = time.getTime() - tz;
-
+    const defaultGoalDuration = 7 * 24 * 60 * 60 * 1000;
     const [goalObj, setGoalObj] = useState({
         name: '',
         description: '',
         start_time: localTimeStamp,
-        end_time: null,
+        end_time: localTimeStamp + defaultGoalDuration,
         completed: false,
         workspace_id: props.wsID,
     });
 
+    const [progrBarData, setProgrBarData] = useState({
+        ...goalObj,
+        steps: [],
+    });
+
     const [show, setShow] = useState(false);
 
-    console.log('tx', tz);
+    // console.log('tx', tz);
 
     // const [time, setTime] = useState({
     //     start: goalObj.start_time.getTime() - tz,
@@ -48,8 +55,8 @@ const GoalForm = (props) => {
     };
 
     const dateChange = (startDate, endDate) => {
-        const start = new Date(startDate);
-        const end = new Date(endDate);
+        const start = new Date(startDate + tz);
+        const end = new Date(endDate + tz);
         console.log({ start, end });
         // setTime({
         //     ...time,
@@ -65,13 +72,18 @@ const GoalForm = (props) => {
 
     const newGoal = (e) => {
         e.preventDefault();
-        dispatch(addGoal(goalObj));
+        const newGoalObj = {
+            ...goalObj,
+            start_time: goalObj.start_time + tz,
+            end_time: goalObj.end_time + tz,
+        };
+        dispatch(addGoal(newGoalObj));
         setShow(!show);
         setGoalObj({
             name: '',
             description: '',
-            est_time: null,
-            due: null,
+            start_time: localTimeStamp,
+            end_time: localTimeStamp + defaultGoalDuration,
             completed: false,
             workspace_id: props.wsID,
         });
@@ -82,8 +94,8 @@ const GoalForm = (props) => {
         setGoalObj({
             name: '',
             description: '',
-            est_time: null,
-            due: null,
+            start_time: localTimeStamp,
+            end_time: localTimeStamp + defaultGoalDuration,
             completed: false,
             workspace_id: props.wsID,
         });
@@ -120,12 +132,13 @@ const GoalForm = (props) => {
                         autoComplete='off'
                     />
                 </div>
-                {/* <Calendar
+                <ProgressBar goal={progrBarData} />
+                <Calendar
                     startDate={goalObj.start_time}
                     endDate={goalObj.end_time}
                     onChange={dateChange}
                     displayTime
-                /> */}
+                />
 
                 <div className='new-ws-btns'>
                     <button>Create</button>

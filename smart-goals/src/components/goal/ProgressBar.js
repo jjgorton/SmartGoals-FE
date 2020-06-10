@@ -26,11 +26,6 @@ const ProgressBar = ({ goal }) => {
                     style={{ transform: `scaleX(${percent})` }}
                 ></div>
             </div>
-            {/* <div className='timeline'>
-                <p className='start'>{goal.start}</p>
-                <div className='now'></div>
-                <p className='due'>{goal.due}</p>
-            </div> */}
         </div>
     );
 };
