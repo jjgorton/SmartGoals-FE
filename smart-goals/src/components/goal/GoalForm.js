@@ -15,20 +15,27 @@ import { faSquare } from '@fortawesome/free-regular-svg-icons';
 import './goalForm.scss';
 // import '../../utils/react-light-calendar/components/calendar.scss';
 
+import ProgressBar from './ProgressBar';
+
 const GoalForm = (props) => {
     const goals = useSelector((state) => state.goals);
     const dispatch = useDispatch();
     const time = new Date();
     const tz = time.getTimezoneOffset() * 60 * 1000;
     const localTimeStamp = time.getTime() - tz;
-
+    const defaultGoalDuration = 7 * 24 * 60 * 60 * 1000;
     const [goalObj, setGoalObj] = useState({
         name: '',
         description: '',
         start_time: localTimeStamp,
-        end_time: null,
+        end_time: localTimeStamp + defaultGoalDuration,
         completed: false,
         workspace_id: props.wsID,
+    });
+
+    const [progrBarData, setProgrBarData] = useState({
+        ...goalObj,
+        steps: [],
     });
 
     const [show, setShow] = useState(false);
@@ -70,8 +77,8 @@ const GoalForm = (props) => {
         setGoalObj({
             name: '',
             description: '',
-            start_time: null,
-            end_time: null,
+            start_time: localTimeStamp,
+            end_time: localTimeStamp + defaultGoalDuration,
             completed: false,
             workspace_id: props.wsID,
         });
@@ -82,8 +89,8 @@ const GoalForm = (props) => {
         setGoalObj({
             name: '',
             description: '',
-            start_time: null,
-            end_time: null,
+            start_time: localTimeStamp,
+            end_time: localTimeStamp + defaultGoalDuration,
             completed: false,
             workspace_id: props.wsID,
         });
@@ -120,6 +127,7 @@ const GoalForm = (props) => {
                         autoComplete='off'
                     />
                 </div>
+                <ProgressBar goal={progrBarData} />
                 <Calendar
                     startDate={goalObj.start_time}
                     endDate={goalObj.end_time}

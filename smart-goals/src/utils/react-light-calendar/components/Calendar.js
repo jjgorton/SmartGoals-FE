@@ -49,7 +49,7 @@ class Calendar extends Component {
             minutes: parseInt(t.getMinutes(endDate)),
         });
 
-        if (!startDate) this.update({ startDate: day });
+        if (!startDate) this.update({ startDate: dayWithStartTime });
         else if (startDate && !endDate)
             this.update(parseRange(startDate, dayWithEndTime));
         else this.update({ startDate: dayWithStartTime, endDate: null });
