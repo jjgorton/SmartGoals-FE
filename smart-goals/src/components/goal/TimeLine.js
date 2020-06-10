@@ -4,6 +4,8 @@ import './timeLine.scss';
 const TimeLine = ({ goal }) => {
     const start = new Date(goal.start_time);
     const end = new Date(goal.end_time);
+    // const start = goal.start_time;
+    // const end = goal.end_time;
 
     const year = (date) => date.getFullYear();
 
