@@ -74,8 +74,8 @@ const GoalForm = (props) => {
         e.preventDefault();
         const newGoalObj = {
             ...goalObj,
-            start_time: goalObj.start_time + tz,
-            end_time: goalObj.end_time + tz,
+            start_time: new Date(goalObj.start_time + tz),
+            end_time: new Date(goalObj.end_time + tz),
         };
         dispatch(addGoal(newGoalObj));
         setShow(!show);
