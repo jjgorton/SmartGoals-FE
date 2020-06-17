@@ -119,6 +119,7 @@ class DateDetails extends Component {
                             }
                             onChange={this.onHoursChange}
                             maxLength='2'
+                            required
                         />
                         <span className='rlc-time-separator'>:</span>
                         <input
@@ -129,8 +130,8 @@ class DateDetails extends Component {
                                 this.setState({ ...this.state, minutes: '' })
                             }
                             onChange={this.onMinutesChange}
-                            onBlur={this.onMinutesChange}
                             maxLength='2'
+                            required
                         />
                         <select
                             name='meridian'
