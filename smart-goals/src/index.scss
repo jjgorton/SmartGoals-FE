@@ -3,4 +3,24 @@
 body {
     background: $light;
     padding-bottom: 20px;
+
+    .spinner-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        // background: $dark;
+        opacity: 0;
+        transition: opacity 500ms ease-in;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: -1;
+    }
+
+    .true {
+        opacity: 1;
+        z-index: 2;
+    }
 }

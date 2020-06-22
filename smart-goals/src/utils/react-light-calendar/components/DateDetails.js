@@ -7,16 +7,15 @@ import t from 'timestamp-utils';
 class DateDetails extends Component {
     constructor(props) {
         super(props);
-        const { date } = this.props;
-        const defaulTime = new Date(date);
-        const hours = defaulTime.getUTCHours();
+        const defaulTime = new Date();
+        const hours = defaulTime.getHours();
         let baseTwlv = hours < 13 ? hours : hours - 12;
         baseTwlv = hours === 0 ? 12 : baseTwlv;
 
         this.state = {
             hours: formartTime(baseTwlv),
-            minutes: formartTime(defaulTime.getUTCMinutes()),
-            meridian: defaulTime.getUTCHours() < 11 ? 'AM' : 'PM',
+            minutes: formartTime(defaulTime.getMinutes()),
+            meridian: defaulTime.getHours() < 11 ? 'AM' : 'PM',
             defaulTime: defaulTime,
         };
     }
@@ -25,8 +24,8 @@ class DateDetails extends Component {
 
         onTimeChange(
             t.set(date, {
-                hours: this.state.defaulTime.getUTCHours(),
-                minutes: this.state.defaulTime.getUTCMinutes(),
+                hours: this.state.defaulTime.getHours(),
+                minutes: this.state.defaulTime.getMinutes(),
             })
         );
     };
@@ -120,6 +119,7 @@ class DateDetails extends Component {
                             }
                             onChange={this.onHoursChange}
                             maxLength='2'
+                            required
                         />
                         <span className='rlc-time-separator'>:</span>
                         <input
@@ -131,6 +131,7 @@ class DateDetails extends Component {
                             }
                             onChange={this.onMinutesChange}
                             maxLength='2'
+                            required
                         />
                         <select
                             name='meridian'

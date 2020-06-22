@@ -26,7 +26,7 @@ const TimeLine = ({ goal }) => {
 
     const minutes = (date) => `0${date.getMinutes()}`.slice(-2);
 
-    const meridian = (date) => (date.getHours < 11 ? 'AM' : 'PM');
+    const meridian = (date) => (date.getHours() < 11 ? 'AM' : 'PM');
 
     return (
         <div className='timeline'>

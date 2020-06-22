@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+
 import { register } from '../../actions/authActions';
 
 import Nav from '../nav/Nav';
@@ -42,6 +45,15 @@ const Register = (props) => {
 
     return (
         <>
+            <div className={`spinner-container ${state.loading}`}>
+                <Loader
+                    className='spinner'
+                    type='Triangle'
+                    color='#5da2d5'
+                    height={100}
+                    width={100}
+                />
+            </div>
             <Nav loggedIn={false} />
             <div className='auth-container'>
                 <h2>Register</h2>
