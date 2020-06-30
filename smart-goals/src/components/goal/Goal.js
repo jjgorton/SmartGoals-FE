@@ -31,8 +31,10 @@ const Goal = ({ goal }) => {
     useEffect(() => {
         const allStepsDone =
             goal.steps.length && goal.steps.every((step) => step.completed);
+        console.log('allStepsDone', allStepsDone);
         if (allStepsDone && !goal.completed) completed();
-        else if (!allStepsDone && goal.completed) completed();
+        else if (!allStepsDone && allStepsDone !== 0 && goal.completed)
+            completed();
     }, [goal.steps, goal.steps.length]);
 
     const completed = () => {
