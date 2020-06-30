@@ -21,7 +21,8 @@ const TimeLine = ({ goal }) => {
         const hour = date.getHours();
         let baseTwlv = hour < 13 ? hour : hour - 12;
         baseTwlv = hour === 0 ? 12 : baseTwlv;
-        return `0${baseTwlv}`.slice(-2);
+        //return `0${baseTwlv}`.slice(-2);
+        return baseTwlv;
     };
 
     const minutes = (date) => `0${date.getMinutes()}`.slice(-2);
