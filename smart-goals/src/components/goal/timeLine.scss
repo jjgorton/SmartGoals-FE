@@ -11,31 +11,36 @@
         // flex-direction: column;
         // justify-content: center;
         // align-items: center;
+
         .date {
-            display: flex;
+            font-size: 1.5rem;
             margin: 0.5rem 0;
-            .day {
-                font-size: 4rem;
-                margin-right: 0.2rem;
-            }
-            .weekday {
-                font-size: 1.5rem;
-                margin-bottom: 0.2rem;
-            }
-            .right-bottom-date-container {
-                display: flex;
-                font-size: 1.5rem;
-                .month {
-                    margin-right: 0.2rem;
-                }
-            }
         }
+        // .date {
+        //     display: flex;
+        //     margin: 0.5rem 0;
+        //     .day {
+        //         font-size: 4rem;
+        //         margin-right: 0.2rem;
+        //     }
+        //     .weekday {
+        //         font-size: 1.5rem;
+        //         margin-bottom: 0.2rem;
+        //     }
+        //     .right-bottom-date-container {
+        //         display: flex;
+        //         font-size: 1.5rem;
+        //         .month {
+        //             margin-right: 0.2rem;
+        //         }
+        //     }
+        // }
 
         .time {
             display: flex;
             font-size: 2rem;
             font-weight: bold;
-            margin-left: 0.25rem;
+            // margin-left: 0.25rem;
             span {
                 line-height: 1.7rem;
                 margin: 0 0.2rem;
