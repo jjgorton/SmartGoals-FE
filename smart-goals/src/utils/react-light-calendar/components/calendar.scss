@@ -140,14 +140,22 @@
 }
 
 .rlc-date-details-wrapper {
-    flex-grow: 1;
-    margin: 5px 0px;
+    // flex-grow: 1;
+    margin: 5px;
 }
 
 .rlc-date-details {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
+    // display: flex;
+    // flex-direction: column;
+    padding: 0 5px;
+
+    .weekDay,
+    .dateFormat {
+        font-size: 1.5rem;
+        margin: 0.5rem 0;
+    }
+
+    // flex-grow: 1;
 }
 
 .rlc-date-number {
@@ -168,7 +176,7 @@
 }
 
 .rlc-date-time-selects {
-    padding: 0px 10px;
+    // padding: 0px 10px;
     input {
         width: 3rem;
         font-size: 2rem;

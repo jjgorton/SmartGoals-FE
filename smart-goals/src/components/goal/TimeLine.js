@@ -13,7 +13,7 @@ const TimeLine = ({ goal }) => {
         new Intl.DateTimeFormat('en-US', { month: 'short' }).format(date);
 
     const weekDay = (date) =>
-        new Intl.DateTimeFormat('en-US', { weekday: 'short' }).format(date);
+        new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(date);
 
     const day = (date) => `0${date.getDate()}`.slice(-2);
 
@@ -21,7 +21,8 @@ const TimeLine = ({ goal }) => {
         const hour = date.getHours();
         let baseTwlv = hour < 13 ? hour : hour - 12;
         baseTwlv = hour === 0 ? 12 : baseTwlv;
-        return `0${baseTwlv}`.slice(-2);
+        //return `0${baseTwlv}`.slice(-2);
+        return baseTwlv;
     };
 
     const minutes = (date) => `0${date.getMinutes()}`.slice(-2);
@@ -31,7 +32,9 @@ const TimeLine = ({ goal }) => {
     return (
         <div className='timeline'>
             <div className='start date-time'>
-                <div className='date'>
+                <p className='date'>{weekDay(start)}</p>
+                <p className='date'>{start.toDateString().slice(3)}</p>
+                {/* <div className='date'>
                     <p className='day'>{day(start)}</p>
                     <div className='right-date-container'>
                         <p className='weekday'>{weekDay(start)}</p>
@@ -40,7 +43,7 @@ const TimeLine = ({ goal }) => {
                             <p className='year'>{year(start)}</p>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div className='time'>
                     <p className='digit hour'>{hours(start)}</p>
                     <span>:</span>
@@ -50,7 +53,9 @@ const TimeLine = ({ goal }) => {
             </div>
             <div className='now'></div>
             <div className='end date-time'>
-                <div className='date'>
+                <p className='date'>{weekDay(end)}</p>
+                <p className='date'>{end.toDateString().slice(3)}</p>
+                {/* <div className='date'>
                     <p className='day'>{day(end)}</p>
                     <div className='right-date-container'>
                         <p className='weekday'>{weekDay(end)}</p>
@@ -59,7 +64,7 @@ const TimeLine = ({ goal }) => {
                             <p className='year'>{year(end)}</p>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div className='time'>
                     <p className='digit hour'>{hours(end)}</p>
                     <span>:</span>

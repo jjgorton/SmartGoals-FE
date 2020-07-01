@@ -89,13 +89,22 @@ class DateDetails extends Component {
             );
     };
 
+    weekDay = (date) =>
+        new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(date);
+
     render = () => {
         const { date, displayTime, dayLabels, monthLabels } = this.props;
+
+        const dateObj = new Date(date);
 
         return (
             <div className='rlc-date-details-wrapper'>
                 <div className='rlc-date-details'>
-                    <div className='rlc-date-number'>{t.getDay(date)}</div>
+                    <p className='weekDay'>{this.weekDay(dateObj)}</p>
+                    <p className='dateFormat'>
+                        {dateObj.toDateString().slice(3)}
+                    </p>
+                    {/* <div className='rlc-date-number'>{t.getDay(date)}</div>
                     <div className='rlc-date-day-month-year'>
                         <div className='rlc-detail-day'>
                             {dayLabels[t.getWeekDay(date)]}
@@ -106,7 +115,7 @@ class DateDetails extends Component {
                                 {t.getYear(date)}
                             </span>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
                 {displayTime && (
                     <div className='rlc-date-time-selects'>
