@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // import Calendar from '@lls/react-light-calendar';
@@ -39,6 +39,15 @@ const GoalForm = (props) => {
     });
 
     const [show, setShow] = useState(false);
+
+    const useFocus = () => {
+        const elRef = useRef(null);
+        const setFocus = () => elRef.current && elRef.current.focus();
+        console.log('focus hook called for', elRef);
+        return [elRef, setFocus];
+    };
+
+    const [inputRef, setInputFocus] = useFocus();
 
     // console.log('tx', tz);
 
@@ -105,7 +114,12 @@ const GoalForm = (props) => {
         <div className='new-goal'>
             <div
                 className={!show ? 'new-goal-button' : 'hide'}
-                onClick={() => setShow(!show)}
+                onClick={() => {
+                    setShow(!show);
+                    setInputFocus();
+                    console.log('onclick called');
+                }}
+                // onClick={setInputFocus}
             >
                 <FontAwesomeIcon
                     icon={faPlusSquare}
@@ -114,7 +128,7 @@ const GoalForm = (props) => {
                 <p>Start a new Goal</p>
             </div>
             <form
-                className={show ? 'goal-form show' : 'goal-form hide'}
+                className={show ? 'goal-form show' : 'goal-form show'}
                 onSubmit={newGoal}
             >
                 {/* <label htmlFor='name'>Goal Title: </label> */}
@@ -127,7 +141,7 @@ const GoalForm = (props) => {
                         value={goalObj.name}
                         onChange={handleChanges}
                         required
-                        autoFocus
+                        ref={inputRef}
                         maxLength='20'
                         autoComplete='off'
                     />
