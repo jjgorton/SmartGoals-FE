@@ -9,7 +9,10 @@
     width: 90%;
     background: $dark-blue;
     border-radius: 10px;
-    height: 14vw;
+    // height: 14vw;
+    // height: fit-content;
+    min-height: 6rem;
+    max-height: 6rem;
     // transform: scaleY(0.2);
     overflow: hidden;
     transition: all 1s ease;
@@ -92,9 +95,10 @@
         }
     }
 }
-.hide {
+.grow {
     // display: none;
-    height: 138vw;
+    // height: 138vw;
+    // height: fit-content;
     max-height: 64rem;
     // transform: scaleY(1);
     transition: all 1s ease;

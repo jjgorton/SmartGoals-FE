@@ -111,7 +111,7 @@ const GoalForm = (props) => {
     };
 
     return (
-        <div className={show ? 'new-goal hide' : 'new-goal'}>
+        <div className={show ? 'new-goal grow' : 'new-goal'}>
             {!show && (
                 <div
                     className='new-goal-button'
