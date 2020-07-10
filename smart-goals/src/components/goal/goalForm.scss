@@ -5,11 +5,17 @@
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     align-items: flex-start;
     width: 90%;
     background: $dark-blue;
     border-radius: 10px;
+    // height: 14vw;
+    // height: fit-content;
+    min-height: 6rem;
+    max-height: 6rem;
+    // transform: scaleY(0.2);
+    overflow: hidden;
+    transition: all 1s ease;
 
     .new-goal-button {
         display: flex;
@@ -33,9 +39,13 @@
     }
 
     .goal-form {
+        position: relative;
+        top: 1px;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
+        // transform: scaleY(1);
+        // transition: all 1s ease;
         // width: 90%;
         // border: 1px solid blue;
         // margin: 1rem;
@@ -84,8 +94,12 @@
             }
         }
     }
-
-    .hide {
-        display: none;
-    }
+}
+.grow {
+    // display: none;
+    // height: 138vw;
+    // height: fit-content;
+    max-height: 64rem;
+    // transform: scaleY(1);
+    transition: all 1s ease;
 }

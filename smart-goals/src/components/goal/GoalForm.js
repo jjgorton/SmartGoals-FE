@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // import Calendar from '@lls/react-light-calendar';
@@ -39,6 +39,15 @@ const GoalForm = (props) => {
     });
 
     const [show, setShow] = useState(false);
+
+    const useFocus = () => {
+        const elRef = useRef(null);
+        const setFocus = () => elRef.current && elRef.current.focus();
+        console.log('focus hook called for', elRef);
+        return [elRef, setFocus];
+    };
+
+    const [inputRef, setInputFocus] = useFocus();
 
     // console.log('tx', tz);
 
@@ -102,51 +111,61 @@ const GoalForm = (props) => {
     };
 
     return (
-        <div className='new-goal'>
-            <div
-                className={!show ? 'new-goal-button' : 'hide'}
-                onClick={() => setShow(!show)}
-            >
-                <FontAwesomeIcon
-                    icon={faPlusSquare}
-                    className='add-goal-icon'
-                />
-                <p>Start a new Goal</p>
-            </div>
-            <form
-                className={show ? 'goal-form show' : 'goal-form hide'}
-                onSubmit={newGoal}
-            >
-                {/* <label htmlFor='name'>Goal Title: </label> */}
-                <div className='goal-title'>
-                    <FontAwesomeIcon icon={faSquare} className='goal-icon' />
-                    <input
-                        type='text'
-                        id='name'
-                        name='name'
-                        value={goalObj.name}
-                        onChange={handleChanges}
-                        required
-                        autoFocus
-                        maxLength='20'
-                        autoComplete='off'
+        <div className={show ? 'new-goal grow' : 'new-goal'}>
+            {!show && (
+                <div
+                    className='new-goal-button'
+                    onClick={() => {
+                        setShow(!show);
+                        setInputFocus();
+                        console.log('onclick called');
+                    }}
+                    // onClick={setInputFocus}
+                >
+                    <FontAwesomeIcon
+                        icon={faPlusSquare}
+                        className='add-goal-icon'
                     />
+                    <p>Start a new Goal</p>
                 </div>
-                <ProgressBar goal={progrBarData} />
-                <Calendar
-                    startDate={goalObj.start_time}
-                    endDate={goalObj.end_time}
-                    onChange={dateChange}
-                    displayTime
-                />
+            )}
+            {show && (
+                <form className='goal-form' onSubmit={newGoal}>
+                    {/* <label htmlFor='name'>Goal Title: </label> */}
+                    <div className='goal-title'>
+                        <FontAwesomeIcon
+                            icon={faSquare}
+                            className='goal-icon'
+                        />
+                        <input
+                            type='text'
+                            id='name'
+                            name='name'
+                            value={goalObj.name}
+                            onChange={handleChanges}
+                            required
+                            // ref={inputRef}
+                            autoFocus
+                            maxLength='20'
+                            autoComplete='off'
+                        />
+                    </div>
+                    <ProgressBar goal={progrBarData} />
+                    <Calendar
+                        startDate={goalObj.start_time}
+                        endDate={goalObj.end_time}
+                        onChange={dateChange}
+                        displayTime
+                    />
 
-                <div className='new-ws-btns'>
-                    <button>Create</button>
-                    <button type='button' onClick={() => cancel()}>
-                        Cancel
-                    </button>
-                </div>
-            </form>
+                    <div className='new-ws-btns'>
+                        <button>Create</button>
+                        <button type='button' onClick={() => cancel()}>
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            )}
         </div>
     );
 };
