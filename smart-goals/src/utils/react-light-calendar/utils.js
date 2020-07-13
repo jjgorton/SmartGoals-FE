@@ -18,7 +18,9 @@ export const initMonth = (timestamp) => {
         MONTHS_LENGHT[month - 1] || (isLeapYear(year) ? 29 : 28);
     const lastMonthDay = t.addDays(firstMonthDay, monthLenght - 1);
     const firstMonthDayNumber = t.getWeekDay(firstMonthDay);
-    const firstDayToDisplay = t.addDays(firstMonthDay, -firstMonthDayNumber);
+    // const firstDayToDisplay = t.addDays(firstMonthDay, -firstMonthDayNumber);
+    const sundayFirst = firstMonthDayNumber === 6 ? 0 : firstMonthDayNumber + 1;
+    const firstDayToDisplay = t.addDays(firstMonthDay, -sundayFirst);
 
     return {
         firstMonthDay,

@@ -193,13 +193,13 @@ Calendar.defaultProps = {
     displayTime: false,
     range: true,
     dayLabels: [
+        'Sunday',
         'Monday',
         'Tuesday',
         'Wednesday',
         'Thursday',
         'Friday',
         'Saturday',
-        'Sunday',
     ],
     monthLabels: [
         'January',
