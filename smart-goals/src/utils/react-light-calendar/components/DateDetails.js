@@ -7,6 +7,8 @@ import t from 'timestamp-utils';
 class DateDetails extends Component {
     constructor(props) {
         super(props);
+        this.minuteInput = React.createRef();
+        this.meridianInput = React.createRef();
         const defaulTime = new Date();
         const hours = defaulTime.getHours();
         let baseTwlv = hours < 13 ? hours : hours - 12;
@@ -34,7 +36,9 @@ class DateDetails extends Component {
         const { date, onTimeChange } = this.props;
 
         let val = formartTime(e.target.value);
-        val = parseInt(val) > 12 ? '' : val;
+        val = parseInt(val) > 12 ? `0${val.slice(-1)}` : val;
+
+        if (val > 1) this.minuteInput.current.focus();
 
         this.setState({
             ...this.state,
@@ -55,7 +59,8 @@ class DateDetails extends Component {
         const { date, onTimeChange } = this.props;
 
         let val = formartTime(e.target.value);
-        val = parseInt(val) > 59 ? '' : val;
+
+        if (val > 5) this.meridianInput.current.focus();
 
         this.setState({
             ...this.state,
@@ -141,11 +146,13 @@ class DateDetails extends Component {
                             onChange={this.onMinutesChange}
                             maxLength='2'
                             required
+                            ref={this.minuteInput}
                         />
                         <select
                             name='meridian'
                             value={this.state.meridian}
                             onChange={this.onMeridianChange}
+                            ref={this.meridianInput}
                         >
                             <option value='AM'>AM</option>
                             <option value='PM'>PM</option>
