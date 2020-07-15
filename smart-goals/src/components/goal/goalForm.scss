@@ -75,6 +75,25 @@
             }
         }
 
+        .goal-desc {
+            padding: 1rem;
+            margin: 0.5rem;
+            background: $light;
+            color: $dark;
+            resize: none;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.7rem;
+            font-family: 'Roboto', sans-serif;
+            // transform: scaleY(0);
+            // transition: all 1s ease;
+        }
+
+        // .expand {
+        //     transform: scaleY(1);
+        //     transition: all 1s ease;
+        // }
+
         .new-ws-btns {
             display: flex;
             justify-content: flex-end;

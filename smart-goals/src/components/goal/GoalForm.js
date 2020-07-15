@@ -39,6 +39,7 @@ const GoalForm = (props) => {
     });
 
     const [show, setShow] = useState(false);
+    const [addDesc, setAddDesc] = useState(false);
 
     const useFocus = () => {
         const elRef = useRef(null);
@@ -150,6 +151,27 @@ const GoalForm = (props) => {
                         />
                     </div>
                 )}
+                {/* <p onClick={() => setAddDesc(!addDesc)}>
+                    {!addDesc ? 'Add a descripton' : "Don't add a description"}
+                </p>
+                <textarea
+                    id='desc'
+                    name='description'
+                    placeholder='describe your goal here...'
+                    value={goalObj.description}
+                    onChange={handleChanges}
+                    maxLength='500'
+                    className={!addDesc ? 'goal-desc' : 'goal-desc expand'}
+                /> */}
+                <textarea
+                    id='desc'
+                    name='description'
+                    placeholder='describe your goal here...'
+                    value={goalObj.description}
+                    onChange={handleChanges}
+                    maxLength='500'
+                    className='goal-desc'
+                />
                 <ProgressBar goal={progrBarData} />
                 <Calendar
                     startDate={goalObj.start_time}

@@ -51,6 +51,15 @@
         }
     }
 
+    .goal-desc {
+        font-size: 1.7rem;
+        padding: 0.5rem 1rem;
+    }
+    .show-desc {
+        margin: 1rem;
+        text-decoration: underline;
+    }
+
     .show-steps {
         display: flex;
         font-size: 1.5rem;

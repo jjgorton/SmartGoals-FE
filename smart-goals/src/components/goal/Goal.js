@@ -25,6 +25,7 @@ const Goal = ({ goal }) => {
     const [newInfo, setNewInfo] = useState({});
     const [noSteps, setNoSteps] = useState(false);
     const [showSteps, setShowSteps] = useState(false);
+    const [showDesc, setShowDesc] = useState(false);
     const [error, setError] = useState('');
     const [edit, setEdit] = useState(false);
 
@@ -65,6 +66,18 @@ const Goal = ({ goal }) => {
         }
     };
 
+    //adjust displayed length of description
+    const desc = () => {
+        if (goal.description) {
+            let description =
+                goal.description.length > 62 && !showDesc
+                    ? goal.description.slice(0, 62) + '...'
+                    : goal.description;
+
+            return description;
+        }
+    };
+
     if (edit) return <GoalEdit goal={goal} edit={edit} setEdit={setEdit} />;
     return (
         <div className='goal'>
@@ -86,6 +99,19 @@ const Goal = ({ goal }) => {
             <div className={error ? 'error-container' : 'hide'}>
                 <p className='goal-error'>{error}</p>
             </div>
+            <p className='goal-desc'>
+                {desc()}
+                <span
+                    className='show-desc'
+                    onClick={() => setShowDesc(!showDesc)}
+                >
+                    {goal.description && goal.description.length > 62
+                        ? showDesc
+                            ? 'show less'
+                            : 'show all'
+                        : null}
+                </span>
+            </p>
             <ProgressBar goal={goal} />
             <TimeLine goal={goal} />
             {goal.steps.length > 0 ? (
