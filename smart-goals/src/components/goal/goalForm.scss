@@ -11,11 +11,11 @@
     border-radius: 10px;
     // height: 14vw;
     // height: fit-content;
-    min-height: 6rem;
+    min-height: 0;
     max-height: 6rem;
     // transform: scaleY(0.2);
     overflow: hidden;
-    transition: all 1s ease;
+    transition: all 0.5s ease;
 
     .new-goal-button {
         display: flex;
@@ -24,6 +24,7 @@
         color: $dark;
         margin: 5px;
         width: 100%;
+        padding-bottom: 1rem;
         // align-items: baseline;
         // width: 90%;
         // padding: 1rem;
@@ -74,6 +75,25 @@
             }
         }
 
+        .goal-desc {
+            padding: 1rem;
+            margin: 0.5rem;
+            background: $light;
+            color: $dark;
+            resize: none;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.7rem;
+            font-family: 'Roboto', sans-serif;
+            // transform: scaleY(0);
+            // transition: all 1s ease;
+        }
+
+        // .expand {
+        //     transform: scaleY(1);
+        //     transition: all 1s ease;
+        // }
+
         .new-ws-btns {
             display: flex;
             justify-content: flex-end;
@@ -99,7 +119,8 @@
     // display: none;
     // height: 138vw;
     // height: fit-content;
+    min-height: 1;
     max-height: 64rem;
     // transform: scaleY(1);
-    transition: all 1s ease;
+    transition: all 0.5s ease;
 }

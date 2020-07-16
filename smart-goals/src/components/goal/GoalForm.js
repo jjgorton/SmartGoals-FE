@@ -39,6 +39,7 @@ const GoalForm = (props) => {
     });
 
     const [show, setShow] = useState(false);
+    const [addDesc, setAddDesc] = useState(false);
 
     const useFocus = () => {
         const elRef = useRef(null);
@@ -112,26 +113,25 @@ const GoalForm = (props) => {
 
     return (
         <div className={show ? 'new-goal grow' : 'new-goal'}>
-            {!show && (
-                <div
-                    className='new-goal-button'
-                    onClick={() => {
-                        setShow(!show);
-                        setInputFocus();
-                        console.log('onclick called');
-                    }}
-                    // onClick={setInputFocus}
-                >
-                    <FontAwesomeIcon
-                        icon={faPlusSquare}
-                        className='add-goal-icon'
-                    />
-                    <p>Start a new Goal</p>
-                </div>
-            )}
-            {show && (
-                <form className='goal-form' onSubmit={newGoal}>
-                    {/* <label htmlFor='name'>Goal Title: </label> */}
+            <form className='goal-form' onSubmit={newGoal}>
+                {!show && (
+                    <div
+                        className='new-goal-button'
+                        onClick={() => {
+                            setShow(!show);
+                            setInputFocus();
+                            console.log('onclick called');
+                        }}
+                        // onClick={setInputFocus}
+                    >
+                        <FontAwesomeIcon
+                            icon={faPlusSquare}
+                            className='add-goal-icon'
+                        />
+                        <p>Start a new Goal</p>
+                    </div>
+                )}
+                {show && (
                     <div className='goal-title'>
                         <FontAwesomeIcon
                             icon={faSquare}
@@ -150,22 +150,43 @@ const GoalForm = (props) => {
                             autoComplete='off'
                         />
                     </div>
-                    <ProgressBar goal={progrBarData} />
-                    <Calendar
-                        startDate={goalObj.start_time}
-                        endDate={goalObj.end_time}
-                        onChange={dateChange}
-                        displayTime
-                    />
+                )}
+                {/* <p onClick={() => setAddDesc(!addDesc)}>
+                    {!addDesc ? 'Add a descripton' : "Don't add a description"}
+                </p>
+                <textarea
+                    id='desc'
+                    name='description'
+                    placeholder='describe your goal here...'
+                    value={goalObj.description}
+                    onChange={handleChanges}
+                    maxLength='500'
+                    className={!addDesc ? 'goal-desc' : 'goal-desc expand'}
+                /> */}
+                <textarea
+                    id='desc'
+                    name='description'
+                    placeholder='describe your goal here...'
+                    value={goalObj.description}
+                    onChange={handleChanges}
+                    maxLength='500'
+                    className='goal-desc'
+                />
+                <ProgressBar goal={progrBarData} />
+                <Calendar
+                    startDate={goalObj.start_time}
+                    endDate={goalObj.end_time}
+                    onChange={dateChange}
+                    displayTime
+                />
 
-                    <div className='new-ws-btns'>
-                        <button>Create</button>
-                        <button type='button' onClick={() => cancel()}>
-                            Cancel
-                        </button>
-                    </div>
-                </form>
-            )}
+                <div className='new-ws-btns'>
+                    <button>Create</button>
+                    <button type='button' onClick={() => cancel()}>
+                        Cancel
+                    </button>
+                </div>
+            </form>
         </div>
     );
 };
