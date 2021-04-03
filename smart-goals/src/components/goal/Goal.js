@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { Draggable } from 'react-beautiful-dnd';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquare, faCheckSquare } from '@fortawesome/free-regular-svg-icons';
 import {
@@ -20,7 +22,7 @@ import ProgressBar from './ProgressBar';
 import GoalEdit from './GoalEdit';
 import TimeLine from './TimeLine';
 
-const Goal = ({ goal }) => {
+const Goal = ({ goal, index }) => {
     const dispatch = useDispatch();
     const [newInfo, setNewInfo] = useState({});
     const [noSteps, setNoSteps] = useState(false);
@@ -80,65 +82,71 @@ const Goal = ({ goal }) => {
 
     if (edit) return <GoalEdit goal={goal} edit={edit} setEdit={setEdit} />;
     return (
-        <div className='goal'>
-            <div className='goal-top-line'>
-                <div className='goal-title'>
-                    <FontAwesomeIcon
-                        icon={goal.completed ? faCheckSquare : faSquare}
-                        className='done-icon'
-                        onClick={() => check()}
-                    />
-                    <h3>{goal.name}</h3>
-                </div>
-                <FontAwesomeIcon
-                    icon={faPencilAlt}
-                    className='edit-icon'
-                    onClick={() => setEdit(true)}
-                />
-            </div>
-            <div className={error ? 'error-container' : 'hide'}>
-                <p className='goal-error'>{error}</p>
-            </div>
-            <p className='goal-desc'>
-                {desc()}
-                <span
-                    className='show-desc'
-                    onClick={() => setShowDesc(!showDesc)}
-                >
-                    {goal.description && goal.description.length > 62
-                        ? showDesc
-                            ? 'show less'
-                            : 'show all'
-                        : null}
-                </span>
-            </p>
-            <ProgressBar goal={goal} />
-            <TimeLine goal={goal} />
-            {goal.steps.length > 0 ? (
+        <Draggable draggableId={`${goal.id}`} index={index}>
+            {(provided) => (
                 <div
-                    className='show-steps'
-                    onClick={() => setShowSteps(!showSteps)}
-                >
-                    <p>{showSteps ? 'Hide Steps' : 'Show Steps'}</p>
-                    <FontAwesomeIcon
-                        icon={showSteps ? faChevronUp : faChevronDown}
-                        className='show-steps-icon'
-                    />
-                </div>
-            ) : (
-                <div className='steps-container'>
-                    <StepForm goalID={goal.id} />
+                    className='goal'
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}>
+                    <div className='goal-top-line'>
+                        <div className='goal-title'>
+                            <FontAwesomeIcon
+                                icon={goal.completed ? faCheckSquare : faSquare}
+                                className='done-icon'
+                                onClick={() => check()}
+                            />
+                            <h3>{goal.name}</h3>
+                        </div>
+                        <FontAwesomeIcon
+                            icon={faPencilAlt}
+                            className='edit-icon'
+                            onClick={() => setEdit(true)}
+                        />
+                    </div>
+                    <div className={error ? 'error-container' : 'hide'}>
+                        <p className='goal-error'>{error}</p>
+                    </div>
+                    <p className='goal-desc'>
+                        {desc()}
+                        <span
+                            className='show-desc'
+                            onClick={() => setShowDesc(!showDesc)}>
+                            {goal.description && goal.description.length > 62
+                                ? showDesc
+                                    ? 'show less'
+                                    : 'show all'
+                                : null}
+                        </span>
+                    </p>
+                    <ProgressBar goal={goal} />
+                    <TimeLine goal={goal} />
+                    {goal.steps.length > 0 ? (
+                        <div
+                            className='show-steps'
+                            onClick={() => setShowSteps(!showSteps)}>
+                            <p>{showSteps ? 'Hide Steps' : 'Show Steps'}</p>
+                            <FontAwesomeIcon
+                                icon={showSteps ? faChevronUp : faChevronDown}
+                                className='show-steps-icon'
+                            />
+                        </div>
+                    ) : (
+                        <div className='steps-container'>
+                            <StepForm goalID={goal.id} />
+                        </div>
+                    )}
+                    {showSteps && goal.steps.length > 0 && (
+                        <div className='steps-container'>
+                            {goal.steps.map((step) => (
+                                <Step key={step.id} info={step} />
+                            ))}
+                            <StepForm goalID={goal.id} />
+                        </div>
+                    )}
                 </div>
             )}
-            {showSteps && goal.steps.length > 0 && (
-                <div className='steps-container'>
-                    {goal.steps.map((step) => (
-                        <Step info={step} />
-                    ))}
-                    <StepForm goalID={goal.id} />
-                </div>
-            )}
-        </div>
+        </Draggable>
     );
 };
 

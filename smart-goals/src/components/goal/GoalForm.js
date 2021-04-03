@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 // import '@lls/react-light-calendar/dist/index.css';
 
 import Calendar from '../../utils/react-light-calendar/components/Calendar';
+import normalizeRank from '../../utils/normalizeRank/';
 
-import { addGoal } from '../../actions/goalActions';
+import { addGoal, updateGoal } from '../../actions/goalActions';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
@@ -87,7 +88,23 @@ const GoalForm = (props) => {
             start_time: new Date(goalObj.start_time + tz),
             end_time: new Date(goalObj.end_time + tz),
         };
-        dispatch(addGoal(newGoalObj));
+
+        //add new goal ranked at end of list, if normalization was needed, then update all with new ranks
+        const ranked = normalizeRank(
+            [...goals.list, newGoalObj],
+            goals.list.length
+        );
+
+        Promise.all(
+            ranked.map((obj, i) => {
+                if (ranked.length > 1 && i !== ranked.length - 1) {
+                    return dispatch(updateGoal(obj));
+                }
+
+                return dispatch(addGoal(obj));
+            })
+        );
+
         setShow(!show);
         setGoalObj({
             name: '',

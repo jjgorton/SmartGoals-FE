@@ -48,13 +48,11 @@ const WorkspaceForm = () => {
             <div
                 className={
                     show ? 'ws-form-container show' : 'ws-form-container hide'
-                }
-            >
+                }>
                 <form
                     className={show ? 'ws-form show' : 'ws-form hide'}
                     onSubmit={addWS}
-                    autocomplete='off'
-                >
+                    autoComplete='off'>
                     <div className='input-container'>
                         <label htmlFor='name'>Workspace Name:</label>
                         <input
@@ -79,8 +77,8 @@ const WorkspaceForm = () => {
                                 onChange={handleChanges}
                                 maxLength='150'
                             />
-                            {[...Array(5)].map((l) => (
-                                <div className='line'></div>
+                            {[...Array(5)].map((l, i) => (
+                                <div key={i} className='line'></div>
                             ))}
                         </div>
                     </div>

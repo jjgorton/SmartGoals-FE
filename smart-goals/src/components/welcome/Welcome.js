@@ -15,7 +15,7 @@ const Welcome = () => {
                     Smart Goals!
                 </h2>
                 <p className='instructions'>
-                    <Link class='link' to='/login'>
+                    <Link className='link' to='/login'>
                         Login
                     </Link>{' '}
                     and create a new workspace to start achieving your goals, or
@@ -23,7 +23,7 @@ const Welcome = () => {
                 </p>
                 <p className='instructions'>
                     Don't have an account yet?{' '}
-                    <Link class='link' to='/register'>
+                    <Link className='link' to='/register'>
                         Register
                     </Link>{' '}
                     to create a new one.

@@ -69,6 +69,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 loading: true,
+                list: state.list.map((goal) => {
+                    return goal.id === action.payload.id
+                        ? Object.assign(goal, action.payload)
+                        : goal;
+                }),
             };
         case UPDATE_GOAL_SUCCESS:
             return {
