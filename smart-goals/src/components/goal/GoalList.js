@@ -44,7 +44,7 @@ const GoalList = () => {
                         {goals.list
                             .sort((a, b) => a.rank - b.rank)
                             .map((goal, i) => (
-                                <Goal key={i} goal={goal} index={i} />
+                                <Goal key={goal.id} goal={goal} index={i} />
                             ))}
                         {provided.placeholder}
                     </div>
