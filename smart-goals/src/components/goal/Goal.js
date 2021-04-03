@@ -139,7 +139,7 @@ const Goal = ({ goal, index }) => {
                     {showSteps && goal.steps.length > 0 && (
                         <div className='steps-container'>
                             {goal.steps.map((step) => (
-                                <Step info={step} />
+                                <Step key={step.id} info={step} />
                             ))}
                             <StepForm goalID={goal.id} />
                         </div>
