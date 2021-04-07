@@ -22,10 +22,11 @@ import ProgressBar from './ProgressBar';
 import GoalEdit from './GoalEdit';
 import TimeLine from './TimeLine';
 
+import { Droppable } from 'react-beautiful-dnd';
+
 const Goal = ({ goal, index }) => {
     const dispatch = useDispatch();
-    const [newInfo, setNewInfo] = useState({});
-    const [noSteps, setNoSteps] = useState(false);
+    const [checkProgress, setCheckProgress] = useState(false);
     const [showSteps, setShowSteps] = useState(false);
     const [showDesc, setShowDesc] = useState(false);
     const [error, setError] = useState('');
@@ -34,11 +35,10 @@ const Goal = ({ goal, index }) => {
     useEffect(() => {
         const allStepsDone =
             goal.steps.length && goal.steps.every((step) => step.completed);
-        console.log('allStepsDone', allStepsDone);
         if (allStepsDone && !goal.completed) completed();
         else if (!allStepsDone && allStepsDone !== 0 && goal.completed)
             completed();
-    }, [goal.steps, goal.steps.length]);
+    }, [checkProgress, goal.steps, goal.steps.length]);
 
     const completed = () => {
         dispatch(
@@ -83,44 +83,55 @@ const Goal = ({ goal, index }) => {
     if (edit) return <GoalEdit goal={goal} edit={edit} setEdit={setEdit} />;
     return (
         <Draggable draggableId={`${goal.id}`} index={index}>
-            {(provided) => (
+            {(provided, snapshot) => (
                 <div
                     className='goal'
                     ref={provided.innerRef}
                     {...provided.draggableProps}
-                    {...provided.dragHandleProps}>
-                    <div className='goal-top-line'>
-                        <div className='goal-title'>
+                    // {...provided.dragHandleProps}
+                >
+                    <div {...provided.dragHandleProps}>
+                        <div className='goal-top-line'>
+                            <div className='goal-title'>
+                                <FontAwesomeIcon
+                                    icon={
+                                        goal.completed
+                                            ? faCheckSquare
+                                            : faSquare
+                                    }
+                                    className='done-icon'
+                                    onClick={() => check()}
+                                />
+                                <h3>{goal.name}</h3>
+                            </div>
                             <FontAwesomeIcon
-                                icon={goal.completed ? faCheckSquare : faSquare}
-                                className='done-icon'
-                                onClick={() => check()}
+                                icon={faPencilAlt}
+                                className='edit-icon'
+                                onClick={() => setEdit(true)}
                             />
-                            <h3>{goal.name}</h3>
                         </div>
-                        <FontAwesomeIcon
-                            icon={faPencilAlt}
-                            className='edit-icon'
-                            onClick={() => setEdit(true)}
+                        <div className={error ? 'error-container' : 'hide'}>
+                            <p className='goal-error'>{error}</p>
+                        </div>
+                        <p className='goal-desc'>
+                            {desc()}
+                            <span
+                                className='show-desc'
+                                onClick={() => setShowDesc(!showDesc)}>
+                                {goal.description &&
+                                goal.description.length > 62
+                                    ? showDesc
+                                        ? 'show less'
+                                        : 'show all'
+                                    : null}
+                            </span>
+                        </p>
+                        <ProgressBar
+                            goal={goal}
+                            checkProgress={checkProgress}
                         />
+                        <TimeLine goal={goal} />
                     </div>
-                    <div className={error ? 'error-container' : 'hide'}>
-                        <p className='goal-error'>{error}</p>
-                    </div>
-                    <p className='goal-desc'>
-                        {desc()}
-                        <span
-                            className='show-desc'
-                            onClick={() => setShowDesc(!showDesc)}>
-                            {goal.description && goal.description.length > 62
-                                ? showDesc
-                                    ? 'show less'
-                                    : 'show all'
-                                : null}
-                        </span>
-                    </p>
-                    <ProgressBar goal={goal} />
-                    <TimeLine goal={goal} />
                     {goal.steps.length > 0 ? (
                         <div
                             className='show-steps'
@@ -137,12 +148,31 @@ const Goal = ({ goal, index }) => {
                         </div>
                     )}
                     {showSteps && goal.steps.length > 0 && (
-                        <div className='steps-container'>
-                            {goal.steps.map((step) => (
-                                <Step key={step.id} info={step} />
-                            ))}
-                            <StepForm goalID={goal.id} />
-                        </div>
+                        <Droppable
+                            droppableId={`${goal.id}steps`}
+                            type={`${index}steps`}>
+                            {(provided, snapshot) => (
+                                <div
+                                    className='steps-container'
+                                    ref={provided.innerRef}>
+                                    {goal.steps
+                                        .sort((a, b) => a.rank - b.rank)
+                                        .map((step, i) => (
+                                            <Step
+                                                key={step.id}
+                                                index={i}
+                                                step={step}
+                                                checkProgress={checkProgress}
+                                                setCheckProgress={
+                                                    setCheckProgress
+                                                }
+                                            />
+                                        ))}
+                                    {provided.placeholder}
+                                    <StepForm goalID={goal.id} goal={goal} />
+                                </div>
+                            )}
+                        </Droppable>
                     )}
                 </div>
             )}

@@ -133,6 +133,16 @@ export default (state = initialState, action) => {
                 error: action.payload,
             };
         case UPDATE_STEP_START:
+            //find goal with matching goalID
+            const initialUpdatedGoal = state.list.filter((goal) => {
+                return goal.id === action.payload.goal_id;
+            })[0];
+            //mutate goal.steps array replacing the updated step
+            initialUpdatedGoal.steps.map((step) => {
+                return step.id === action.payload.id
+                    ? Object.assign(step, action.payload)
+                    : step;
+            });
             return {
                 ...state,
                 loading: true,
@@ -142,8 +152,8 @@ export default (state = initialState, action) => {
             const updatedGoal = state.list.filter((goal) => {
                 return goal.id === action.payload.goal_id;
             })[0];
-            //copy goal.steps array replacing the updated step
-            updatedGoal.steps = updatedGoal.steps.map((step) => {
+            //mutate goal.steps array replacing the updated step
+            updatedGoal.steps.map((step) => {
                 return step.id === action.payload.id
                     ? Object.assign(step, action.payload)
                     : step;
@@ -151,11 +161,6 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                list: state.list.map((goal) => {
-                    return goal.id === action.payload.goal_id
-                        ? updatedGoal
-                        : goal;
-                }),
             };
         case UPDATE_STEP_FAILURE:
             return {

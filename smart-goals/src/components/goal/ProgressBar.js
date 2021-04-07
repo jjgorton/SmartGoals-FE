@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import './progressBar.scss';
 
-const ProgressBar = ({ goal }) => {
+const ProgressBar = ({ goal, checkProgress }) => {
     const [percent, setPercent] = useState(5);
     useEffect(() => {
         if (goal.steps.length) {
@@ -16,15 +16,14 @@ const ProgressBar = ({ goal }) => {
         } else if (!goal.completed) {
             setPercent(5);
         }
-    }, [goal.steps, goal.steps.length, goal.completed]);
+    }, [checkProgress, goal.steps, goal.steps.length, goal.completed]);
 
     return (
         <div className='progress-bar-container'>
             <div className='bar'>
                 <div
                     className='progress'
-                    style={{ transform: `scaleX(${percent})` }}
-                ></div>
+                    style={{ transform: `scaleX(${percent})` }}></div>
             </div>
         </div>
     );

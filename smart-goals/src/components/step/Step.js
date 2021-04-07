@@ -9,8 +9,9 @@ import './step.scss';
 
 import { updateStep } from '../../actions/goalActions';
 import StepEdit from './StepEdit';
+import { Draggable } from 'react-beautiful-dnd';
 
-const Step = ({ info }) => {
+const Step = ({ step, index, checkProgress, setCheckProgress }) => {
     const dispatch = useDispatch();
     const [newInfo, setNewInfo] = useState({});
     const [edit, setEdit] = useState(false);
@@ -18,30 +19,42 @@ const Step = ({ info }) => {
     const completed = () => {
         dispatch(
             updateStep({
-                id: info.id,
-                completed: !info.completed,
-                goal_id: info.goal_id,
+                id: step.id,
+                completed: !step.completed,
+                goal_id: step.goal_id,
             })
         );
+        setCheckProgress(!checkProgress);
     };
 
-    if (edit) return <StepEdit step={info} edit={edit} setEdit={setEdit} />;
+    if (edit) return <StepEdit step={step} edit={edit} setEdit={setEdit} />;
     return (
-        <div className='step-container'>
-            <div className='step'>
-                <FontAwesomeIcon
-                    icon={info.completed ? faCheckSquare : faSquare}
-                    className='done-icon'
-                    onClick={() => completed()}
-                />
-                <p>{info.name}</p>
-            </div>
-            <FontAwesomeIcon
-                icon={faPencilAlt}
-                className='edit-icon'
-                onClick={() => setEdit(true)}
-            />
-        </div>
+        <Draggable draggableId={`${step.id}step`} index={index}>
+            {(provided, snapshot) => (
+                <div>
+                    <div
+                        className='step-container'
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}>
+                        <div className='step'>
+                            <FontAwesomeIcon
+                                icon={step.completed ? faCheckSquare : faSquare}
+                                className='done-icon'
+                                onClick={() => completed()}
+                            />
+                            <p>{step.name}</p>
+                        </div>
+                        <FontAwesomeIcon
+                            icon={faPencilAlt}
+                            className='edit-icon'
+                            onClick={() => setEdit(true)}
+                        />
+                    </div>
+                    {provided.placeholder}
+                </div>
+            )}
+        </Draggable>
     );
 };
 
