@@ -93,7 +93,7 @@ export const updateGoal = (newInfo) => (dispatch) => {
 
 export const updateStep = (newInfo) => (dispatch) => {
     console.log('update step info', newInfo);
-    dispatch({ type: UPDATE_STEP_START });
+    dispatch({ type: UPDATE_STEP_START, payload: newInfo });
     return axiosWithAuth()
         .put(`${process.env.REACT_APP_BACK_END_URL}/goals/step`, newInfo)
         .then((res) => {
