@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
@@ -13,24 +13,7 @@ const GoalList = () => {
     const goals = useSelector((state) => state.goals);
     const dispatch = useDispatch();
 
-    const [sortedGoals, setSortedGoals] = useState([]);
-
-    useEffect(
-        () => setSortedGoals(goals.list.sort((a, b) => a.rank - b.rank)),
-        [goals]
-    );
-
-    // console.log('listComp', goals);
-
     const handleOnDragEnd = ({ source, destination, type }) => {
-        console.log(
-            'source:\n',
-            source,
-            '\n\ndestination\n',
-            destination,
-            '\n\ntype\n',
-            type
-        );
         if (!destination) return;
 
         if (type === 'goals') {
@@ -46,13 +29,15 @@ const GoalList = () => {
 
             Promise.all(ranked.map((obj) => dispatch(updateGoal(obj))));
         } else {
-            console.log('else', type.slice(0, -5));
-            const goalIndex = type.slice(0, -5);
-
             // only need id, rank, and goal_id for the copied list
-            const stepListCopy = sortedGoals[goalIndex].steps.map((obj) => {
-                return { id: obj.id, rank: obj.rank, goal_id: obj.goal_id };
-            });
+            const dropGoalId = Number(destination.droppableId.slice(0, -5));
+
+            const stepListCopy = goals.list
+                .find((goal) => goal.id === dropGoalId)
+                .steps.map((obj) => {
+                    return { id: obj.id, rank: obj.rank, goal_id: obj.goal_id };
+                });
+
             const [draggedStep] = stepListCopy.splice(source.index, 1);
             stepListCopy.splice(destination.index, 0, draggedStep);
 
@@ -75,9 +60,11 @@ const GoalList = () => {
                         className='goal-list'
                         {...provided.droppableProps}
                         ref={provided.innerRef}>
-                        {sortedGoals.map((goal, i) => (
-                            <Goal key={goal.id} goal={goal} index={i} />
-                        ))}
+                        {goals.list
+                            .sort((a, b) => a.rank - b.rank)
+                            .map((goal, i) => (
+                                <Goal key={goal.id} goal={goal} index={i} />
+                            ))}
                         {provided.placeholder}
                     </div>
                 )}
