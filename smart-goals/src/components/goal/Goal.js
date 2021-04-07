@@ -13,7 +13,7 @@ import {
     faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { updateGoal, deleteGoal, updateStep } from '../../actions/goalActions';
+import { updateGoal, deleteGoal } from '../../actions/goalActions';
 
 import './goal.scss';
 import StepForm from '../step/StepForm';
@@ -22,13 +22,11 @@ import ProgressBar from './ProgressBar';
 import GoalEdit from './GoalEdit';
 import TimeLine from './TimeLine';
 
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import normalizeRank from '../../utils/normalizeRank/';
+import { Droppable } from 'react-beautiful-dnd';
 
 const Goal = ({ goal, index }) => {
     const dispatch = useDispatch();
-    const [newInfo, setNewInfo] = useState({});
-    const [noSteps, setNoSteps] = useState(false);
+    const [checkProgress, setCheckProgress] = useState(false);
     const [showSteps, setShowSteps] = useState(false);
     const [showDesc, setShowDesc] = useState(false);
     const [error, setError] = useState('');
@@ -37,11 +35,10 @@ const Goal = ({ goal, index }) => {
     useEffect(() => {
         const allStepsDone =
             goal.steps.length && goal.steps.every((step) => step.completed);
-        console.log('allStepsDone', allStepsDone);
         if (allStepsDone && !goal.completed) completed();
         else if (!allStepsDone && allStepsDone !== 0 && goal.completed)
             completed();
-    }, [goal.steps, goal.steps.length]);
+    }, [checkProgress, goal.steps, goal.steps.length]);
 
     const completed = () => {
         dispatch(
@@ -69,22 +66,6 @@ const Goal = ({ goal, index }) => {
         } else {
             completed();
         }
-    };
-
-    const handleOnDragEnd = ({ source, destination }) => {
-        if (!destination) return;
-
-        // only need id and rank for the copied list
-        const stepListCopy = goal.steps.map((obj) => {
-            return { id: obj.id, rank: obj.rank };
-        });
-        const [draggedStep] = stepListCopy.splice(source.index, 1);
-        stepListCopy.splice(destination.index, 0, draggedStep);
-
-        //if normalization was needed, then update all with new ranks
-        const ranked = normalizeRank(stepListCopy, destination.index);
-
-        Promise.all(ranked.map((obj) => dispatch(updateStep(obj))));
     };
 
     //adjust displayed length of description
@@ -145,7 +126,10 @@ const Goal = ({ goal, index }) => {
                                     : null}
                             </span>
                         </p>
-                        <ProgressBar goal={goal} />
+                        <ProgressBar
+                            goal={goal}
+                            checkProgress={checkProgress}
+                        />
                         <TimeLine goal={goal} />
                     </div>
                     {goal.steps.length > 0 ? (
@@ -170,7 +154,6 @@ const Goal = ({ goal, index }) => {
                             {(provided, snapshot) => (
                                 <div
                                     className='steps-container'
-                                    // {...provided.droppableProps}
                                     ref={provided.innerRef}>
                                     {goal.steps
                                         .sort((a, b) => a.rank - b.rank)
@@ -179,10 +162,14 @@ const Goal = ({ goal, index }) => {
                                                 key={step.id}
                                                 index={i}
                                                 step={step}
+                                                checkProgress={checkProgress}
+                                                setCheckProgress={
+                                                    setCheckProgress
+                                                }
                                             />
                                         ))}
                                     {provided.placeholder}
-                                    <StepForm goalID={goal.id} />
+                                    <StepForm goalID={goal.id} goal={goal} />
                                 </div>
                             )}
                         </Droppable>

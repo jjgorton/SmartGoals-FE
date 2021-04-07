@@ -11,7 +11,7 @@ import { updateStep } from '../../actions/goalActions';
 import StepEdit from './StepEdit';
 import { Draggable } from 'react-beautiful-dnd';
 
-const Step = ({ step, index }) => {
+const Step = ({ step, index, checkProgress, setCheckProgress }) => {
     const dispatch = useDispatch();
     const [newInfo, setNewInfo] = useState({});
     const [edit, setEdit] = useState(false);
@@ -24,6 +24,7 @@ const Step = ({ step, index }) => {
                 goal_id: step.goal_id,
             })
         );
+        setCheckProgress(!checkProgress);
     };
 
     if (edit) return <StepEdit step={step} edit={edit} setEdit={setEdit} />;
@@ -44,11 +45,11 @@ const Step = ({ step, index }) => {
                             />
                             <p>{step.name}</p>
                         </div>
-                        {/* <FontAwesomeIcon
-                        icon={faPencilAlt}
-                        className='edit-icon'
-                        onClick={() => setEdit(true)}
-                    /> */}
+                        <FontAwesomeIcon
+                            icon={faPencilAlt}
+                            className='edit-icon'
+                            onClick={() => setEdit(true)}
+                        />
                     </div>
                     {provided.placeholder}
                 </div>

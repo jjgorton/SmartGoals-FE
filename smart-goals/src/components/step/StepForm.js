@@ -7,7 +7,8 @@ import { faSquare } from '@fortawesome/free-regular-svg-icons';
 
 import './stepForm.scss';
 
-import { addStep } from '../../actions/goalActions';
+import { addStep, updateStep } from '../../actions/goalActions';
+import normalizeRank from '../../utils/normalizeRank/';
 
 const StepForm = (props) => {
     const dispatch = useDispatch();
@@ -32,7 +33,23 @@ const StepForm = (props) => {
     const newStep = (e) => {
         e.preventDefault();
         setShow(!show);
-        dispatch(addStep(stepObj));
+
+        //add new step ranked at end of list, if normalization was needed, then update all with new ranks
+        const ranked = normalizeRank(
+            [...props.goal.steps, stepObj],
+            props.goal.steps.length
+        );
+
+        Promise.all(
+            ranked.map((obj, i) => {
+                if (ranked.length > 1 && i !== ranked.length - 1) {
+                    return dispatch(updateStep(obj));
+                }
+
+                return dispatch(addStep(obj));
+            })
+        );
+
         setStepObj({
             name: '',
             description: '',
