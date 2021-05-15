@@ -89,8 +89,7 @@ const Workspace = (props) => {
                             {desc()}
                             <span
                                 className='show-desc'
-                                onClick={() => setShowDesc(!showDesc)}
-                            >
+                                onClick={() => setShowDesc(!showDesc)}>
                                 {ws.description && ws.description.length > 62
                                     ? showDesc
                                         ? 'show less'
