@@ -33,6 +33,7 @@ const StepForm = (props) => {
     const newStep = (e) => {
         e.preventDefault();
         setShow(!show);
+        props.setShowSteps(true);
 
         //add new step ranked at end of list, if normalization was needed, then update all with new ranks
         const ranked = normalizeRank(
@@ -88,7 +89,7 @@ const StepForm = (props) => {
                                 required
                                 autoFocus
                                 maxLength='30'
-                                autocomplete='off'
+                                autoComplete='off'
                             />
                         </div>
                     </div>

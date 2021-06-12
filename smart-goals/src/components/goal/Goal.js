@@ -144,7 +144,11 @@ const Goal = ({ goal, index }) => {
                         </div>
                     ) : (
                         <div className='steps-container'>
-                            <StepForm goalID={goal.id} />
+                            <StepForm
+                                goalID={goal.id}
+                                goal={goal}
+                                setShowSteps={setShowSteps}
+                            />
                         </div>
                     )}
                     {showSteps && goal.steps.length > 0 && (
