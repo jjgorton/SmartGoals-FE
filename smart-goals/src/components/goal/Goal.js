@@ -173,7 +173,11 @@ const Goal = ({ goal, index }) => {
                                             />
                                         ))}
                                     {provided.placeholder}
-                                    <StepForm goalID={goal.id} goal={goal} />
+                                    <StepForm
+                                        goalID={goal.id}
+                                        goal={goal}
+                                        setShowSteps={setShowSteps}
+                                    />
                                 </div>
                             )}
                         </Droppable>
